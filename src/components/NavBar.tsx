@@ -2,31 +2,37 @@
 import * as React from "react";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
-import Box from "@mui/material/Box";
 import Avatar from "@mui/material/Avatar";
 import Menu from "@mui/material/Menu";
-import MenuItem from "@mui/material/MenuItem";
-import ListItemIcon from "@mui/material/ListItemIcon";
 import Divider from "@mui/material/Divider";
 import IconButton from "@mui/material/IconButton";
-import Typography from "@mui/material/Typography";
 import Tooltip from "@mui/material/Tooltip";
-import PersonAdd from "@mui/icons-material/PersonAdd";
-import Settings from "@mui/icons-material/Settings";
-import Logout from "@mui/icons-material/Logout";
 import { SvgPeople } from "@/utils/svgList";
 import { Button } from "@mui/material";
 import Link from "next/link";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "@/redux/types";
+import { setAccessToken } from "@/redux/slices/auth";
+import { useRouter } from "next/navigation";
 
 export default function NavBar() {
   const pathname = usePathname();
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
+  const { currentUser } = useSelector((state: RootState) => state.auth);
+  const dispatch = useDispatch();
+  const router = useRouter();
+
   const open = Boolean(anchorEl);
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
   };
   const handleClose = () => {
     setAnchorEl(null);
+  };
+
+  const handleSignOut = () => {
+    dispatch(setAccessToken(null));
+    router.push("/login");
   };
 
   return (
@@ -37,7 +43,7 @@ export default function NavBar() {
     >
       <Image src="/assets/login/mci-logo.png" alt="logo mci telecom" width={100} height={100} className="ml-5" />
       <div className="mr-5">
-        Bienvenido Matias
+        Bienvenido {currentUser?.first_name}
         <Tooltip title="Account settings">
           <IconButton
             onClick={handleClick}
@@ -47,7 +53,7 @@ export default function NavBar() {
             aria-haspopup="true"
             aria-expanded={open ? "true" : undefined}
           >
-            <Avatar sx={{ width: 32, height: 32 }}>M</Avatar>
+            <Avatar sx={{ width: 32, height: 32 }}>{currentUser?.first_name.slice(0, 1)}</Avatar>
           </IconButton>
         </Tooltip>
         <Menu
@@ -94,7 +100,7 @@ export default function NavBar() {
             </div>
             <div className="pl-5">
               <div className="text-[12px]">Empresa</div>
-              <div className="font-bold">We Are Lömo</div>
+              <div className="font-bold">{currentUser?.companyName}</div>
             </div>
             <Link href="/profile" onClick={handleClose} className="pl-5 flex gap-2 text-[12px] cursor-pointer">
               <SvgPeople fill="#24A2CE" /> Ir a mi Perfil
@@ -109,7 +115,7 @@ export default function NavBar() {
                   localStorage.setItem("userAuth", "false");
                 }}
               >
-                <Link href="/login">Cerrar Sesión</Link>
+                <div onClick={handleSignOut}>Cerrar Sesión</div>
               </Button>
             </div>
           </div>

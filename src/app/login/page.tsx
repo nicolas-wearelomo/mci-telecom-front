@@ -13,6 +13,9 @@ import Alert from "@mui/material/Alert";
 import { Button, TextField } from "@mui/material";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import signUser from "../../utils/signUser";
+import { useDispatch, useSelector } from "react-redux";
+import { setAccessToken } from "@/redux/slices/auth";
 
 export default function Page() {
   const [showPassword, setShowPassword] = React.useState(false);
@@ -20,6 +23,7 @@ export default function Page() {
   const [mail, setMail] = React.useState<string>("");
   const [error, setError] = React.useState<boolean>(false);
   const router = useRouter();
+  const dispatch = useDispatch();
 
   const handleClickShowPassword = () => setShowPassword((show) => !show);
 
@@ -31,19 +35,34 @@ export default function Page() {
     setPassword(event.target.value);
   };
 
-  const mailTest = "admin@wearelomo.com";
-  const passTest = "password";
-
-  const loginFunction: React.FormEventHandler<HTMLFormElement> = (e) => {
+  const loginFunction: React.FormEventHandler<HTMLFormElement> = async (e) => {
     e.preventDefault();
-    if (mailTest !== mail || passTest !== password) {
+
+    setError(false);
+
+    const response = await signUser({ email: mail, password: password });
+    if (response?.error) {
       setError(true);
     } else {
-      setError(false);
-      localStorage.setItem("userAuth", "true");
+      dispatch(setAccessToken(response));
       router.push("/home");
     }
+
+    // localStorage.setItem("userAuth", "true");
+    // router.push("/home");
   };
+  // const loginFunction: React.FormEventHandler<HTMLFormElement> = async (e) => {
+  //   e.preventDefault();
+  //   if (mailTest !== mail || passTest !== password) {
+  //     setError(true);
+  //   } else {
+  //     setError(false);
+  //     const user = await axiosInstance.post("/login", { email: mail });
+  //     console.log(user);
+  //     // localStorage.setItem("userAuth", "true");
+  //     // router.push("/home");
+  //   }
+  // };
 
   const handleMailChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setMail(event.target.value);
@@ -97,13 +116,13 @@ export default function Page() {
                 label="Contraseña"
               />
             </FormControl>
-            <Alert
+            {/* <Alert
               severity="error"
               sx={{ paddingY: 0, width: "328px", fontSize: "12px" }}
               className={`${error ? "flex" : "hidden"}`}
             >
               Correo electrónico o contraseña incorrecto
-            </Alert>
+            </Alert> */}
             <Button
               variant="contained"
               type="submit"

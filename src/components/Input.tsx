@@ -36,7 +36,7 @@ export default function Input({
       <Controller
         name={name}
         control={control}
-        rules={{ required: true, maxLength: maxlength }}
+        rules={{ required: false, maxLength: maxlength }}
         render={({ field: { onChange, value } }) => (
           <TextField
             type={type}

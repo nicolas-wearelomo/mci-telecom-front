@@ -3,6 +3,7 @@ import { Inter, Open_Sans } from "next/font/google";
 import "./globals.css";
 import NavBar from "@/components/NavBar";
 import SideBar from "@/components/SideBar/SideBar";
+import ProviderRedux from "../components/ProviderRedux";
 
 const open_sans = Open_Sans({ subsets: ["latin"] });
 
@@ -17,14 +18,16 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className={open_sans.className}>
-        <NavBar />
-        <div className="flex">
-          <SideBar />
-          <div className="w-full">{children}</div>
-        </div>
-      </body>
-    </html>
+    <ProviderRedux>
+      <html lang="en">
+        <body className={open_sans.className}>
+          <NavBar />
+          <div className="flex">
+            <SideBar />
+            <div className="w-full">{children}</div>
+          </div>
+        </body>
+      </html>
+    </ProviderRedux>
   );
 }

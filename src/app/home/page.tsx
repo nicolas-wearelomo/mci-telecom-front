@@ -5,6 +5,7 @@ import FiberManualRecordIcon from "@mui/icons-material/FiberManualRecord";
 import CustomTable from "@/components/CustomTable";
 import { ModelTable } from "@/models/modelTable";
 import Link from "next/link";
+import HomeContainer from "@/containers/Home/HomeContainer";
 
 export default function Home() {
   const data = [
@@ -78,56 +79,58 @@ export default function Home() {
   };
 
   return (
-    <div className="overflow-y-auto h-[85vh]">
-      <div>
-        <div className="p-5 flex justify-around border-solid border-2 border-[#d6d6d6] rounded-[32px] mb-7">
-          <Link className="bg-[#24A2CE] text-white py-2 px-5 flex rounded-[16px]" href="/home/pooles">
-            Pooles
-          </Link>
-          <Link className="bg-[#24A2CE] text-white py-2 px-5 flex rounded-[16px]" href="/home/operation">
-            Operacion
-          </Link>
-          <Link className="bg-[#24A2CE] text-white py-2 px-5 flex rounded-[16px]" href="/home/business">
-            Negocio
-          </Link>
-          <div className="bg-[#24A2CE] text-white py-2 px-5 flex rounded-[16px] cursor-pointer">INFORMACIÓN</div>
-        </div>
-      </div>
-      <div className="grid grid-cols-3 mr-5 gap-7">
-        <div className=" border-solid border-2 border-[#d6d6d6] rounded-[32px] flex justify-center items-center">
-          <Image src="/assets/home/map.jpg" alt="Ámerica del Sur" width={400} height={400} />
-        </div>
-        <div className=" col-span-2 border-solid border-2 border-[#d6d6d6] rounded-[32px] grid grid-rows-2">
-          <div className="p-10 pb-0">
-            <h2 className="text-[#24A2CE] text-xl font-bold ">Top 10 de fabricantes/modelos</h2>
-            <p className="text-sm mb-5">Última Actualización: 27-02-2024 23:07:12</p>
-            <div className="max-h-[80%] min-h-[80%] h-[80%] grid grid-cols-2 gap-5">
-              <ResponsiveContainer>
-                <BarChart width={200} height={200} data={data}>
-                  <CartesianGrid strokeDasharray="3 3" />
-                  {/* <XAxis dataKey="name" /> */}
-                  <YAxis />
-                  <Tooltip />
-                  {/* <Legend /> */}
-                  {/* <Bar data"#8884d8" /> */}
-                  <Bar dataKey="uv" />
-                </BarChart>
-              </ResponsiveContainer>
-              <div className="flex flex-col justify-between">
-                {data?.map((el, idx) => (
-                  <div className="flex" key={idx}>
-                    <FiberManualRecordIcon sx={{ color: el.fill, width: 10, marginRight: 2 }} />
-                    <p style={{ color: el.fill }}>{el.name} </p>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-          <div className="mt-10 flex justify-between flex-col">
-            <CustomTable dataTable={homeTableData} />
-          </div>
-        </div>
-      </div>
-    </div>
+    <HomeContainer />
+
+    // <div className="overflow-y-auto h-[85vh]">
+    //   <div>
+    //     <div className="p-5 flex justify-around border-solid border-2 border-[#d6d6d6] rounded-[32px] mb-7">
+    //       <Link className="bg-[#24A2CE] text-white py-2 px-5 flex rounded-[16px]" href="/home/pooles">
+    //         Pooles
+    //       </Link>
+    //       <Link className="bg-[#24A2CE] text-white py-2 px-5 flex rounded-[16px]" href="/home/operation">
+    //         Operacion
+    //       </Link>
+    //       <Link className="bg-[#24A2CE] text-white py-2 px-5 flex rounded-[16px]" href="/home/business">
+    //         Negocio
+    //       </Link>
+    //       <div className="bg-[#24A2CE] text-white py-2 px-5 flex rounded-[16px] cursor-pointer">INFORMACIÓN</div>
+    //     </div>
+    //   </div>
+    //   <div className="grid grid-cols-3 mr-5 gap-7">
+    //     <div className=" border-solid border-2 border-[#d6d6d6] rounded-[32px] flex justify-center items-center">
+    //       <Image src="/assets/home/map.jpg" alt="Ámerica del Sur" width={400} height={400} />
+    //     </div>
+    //     <div className=" col-span-2 border-solid border-2 border-[#d6d6d6] rounded-[32px] grid grid-rows-2">
+    //       <div className="p-10 pb-0">
+    //         <h2 className="text-[#24A2CE] text-xl font-bold ">Top 10 de fabricantes/modelos</h2>
+    //         <p className="text-sm mb-5">Última Actualización: 27-02-2024 23:07:12</p>
+    //         <div className="max-h-[80%] min-h-[80%] h-[80%] grid grid-cols-2 gap-5">
+    //           <ResponsiveContainer>
+    //             <BarChart width={200} height={200} data={data}>
+    //               <CartesianGrid strokeDasharray="3 3" />
+    //               {/* <XAxis dataKey="name" /> */}
+    //               <YAxis />
+    //               <Tooltip />
+    //               {/* <Legend /> */}
+    //               {/* <Bar data"#8884d8" /> */}
+    //               <Bar dataKey="uv" />
+    //             </BarChart>
+    //           </ResponsiveContainer>
+    //           <div className="flex flex-col justify-between">
+    //             {data?.map((el, idx) => (
+    //               <div className="flex" key={idx}>
+    //                 <FiberManualRecordIcon sx={{ color: el.fill, width: 10, marginRight: 2 }} />
+    //                 <p style={{ color: el.fill }}>{el.name} </p>
+    //               </div>
+    //             ))}
+    //           </div>
+    //         </div>
+    //       </div>
+    //       <div className="mt-10 flex justify-between flex-col">
+    //         <CustomTable dataTable={homeTableData} />
+    //       </div>
+    //     </div>
+    //   </div>
+    // </div>
   );
 }
