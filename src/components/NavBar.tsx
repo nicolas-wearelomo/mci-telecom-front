@@ -38,7 +38,8 @@ export default function NavBar() {
   return (
     <div
       className={`max-h-[75px] min-h-[75px] flex items-center mb-4 justify-between ${
-        (pathname === "/login" || pathname === "/login/forgot-password") && "hidden"
+        (pathname === "/login" || pathname === "/login/forgot-password" || pathname === "/login/reset-password") &&
+        "hidden"
       }`}
     >
       <Image src="/assets/login/mci-logo.png" alt="logo mci telecom" width={100} height={100} className="ml-5" />

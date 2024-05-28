@@ -12,7 +12,7 @@ export default function PrivateRoute({ children }) {
   const router = useRouter();
   useEffect(() => {
     const verify = async () => {
-      if (!accessToken) {
+      if (!accessToken && pathname !== "/login/forgot-password" && pathname !== "/login/reset-password") {
         router.push("/login");
       }
       try {

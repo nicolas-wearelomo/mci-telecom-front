@@ -8,22 +8,21 @@ import InputAdornment from "@mui/material/InputAdornment";
 import FormControl from "@mui/material/FormControl";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
-import MailOutlineIcon from "@mui/icons-material/MailOutline";
 import Alert from "@mui/material/Alert";
-import { Button, TextField } from "@mui/material";
-import Link from "next/link";
-import { useRouter } from "next/navigation";
-import signUser from "../../utils/signUser";
-import { useDispatch } from "react-redux";
-import { setAccessToken } from "@/redux/slices/auth";
+import { Button } from "@mui/material";
+import { useRouter, useSearchParams } from "next/navigation";
+import axios from "axios";
 
 export default function Page() {
   const [showPassword, setShowPassword] = React.useState(false);
+  const [showPasswordConfirm, setShowPasswordConfirm] = React.useState(false);
   const [password, setPassword] = React.useState<string>("");
-  const [mail, setMail] = React.useState<string>("");
-  const [error, setError] = React.useState<boolean>(false);
+  const [passwordConfirm, setPasswordConfirm] = React.useState<string>("");
+  const [error, setError] = React.useState<string>("");
+  const searchParams = useSearchParams();
   const router = useRouter();
-  const dispatch = useDispatch();
+
+  const token = searchParams.get("token");
 
   const handleClickShowPassword = () => setShowPassword((show) => !show);
 
@@ -31,30 +30,37 @@ export default function Page() {
     event.preventDefault();
   };
 
+  const handleClickShowPasswordConfirm = () => setShowPasswordConfirm((show) => !show);
+
+  const handleMouseDownPasswordConfirm = (event: React.MouseEvent<HTMLButtonElement>) => {
+    event.preventDefault();
+  };
+
   const handlePasswordChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setPassword(event.target.value);
   };
 
-  const loginFunction: React.FormEventHandler<HTMLFormElement> = async (e) => {
-    e.preventDefault();
-
-    setError(false);
-
-    const response = await signUser({ email: mail, password: password });
-
-    if (response?.error) {
-      setError(true);
-    } else {
-      dispatch(setAccessToken(response));
-      router.push("/home");
-    }
-
-    // localStorage.setItem("userAuth", "true");
-    // router.push("/home");
+  const handlePasswordConfirmChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setPasswordConfirm(event.target.value);
   };
 
-  const handleMailChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setMail(event.target.value);
+  const resetPasswordFunction: React.FormEventHandler<HTMLFormElement> = async (e) => {
+    e.preventDefault();
+    if (password !== passwordConfirm) {
+      setError("Las contraseñas no cohinciden");
+    } else {
+      if (token) {
+        try {
+          const response = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/login/reset-password?token=${token}`, {
+            password,
+          });
+          router.push("/login");
+        } catch (error) {
+          setError("El token ha caducado");
+          console.log(error);
+        }
+      }
+    }
   };
 
   return (
@@ -69,24 +75,9 @@ export default function Page() {
         </div>
         <div className="bg-white m-6 ml-3 w-[50%] rounded-[32px] flex flex-col justify-center items-center gap-8">
           <Image src="/assets/login/mci-logo.png" alt="mci logo" width={150} height={150} className="mb-10" />
-          {/* <h2 className="text-[25px] font-semibold w-[328px]">Ingresa</h2> */}
-          <form className="flex flex-col gap-3" onSubmit={loginFunction}>
-            <TextField
-              sx={{ width: "328px" }}
-              label="Correo Electrónico"
-              id="standard-size-small"
-              variant="outlined"
-              onChange={handleMailChange}
-              InputProps={{
-                endAdornment: (
-                  <InputAdornment position="end">
-                    <MailOutlineIcon />
-                  </InputAdornment>
-                ),
-              }}
-            />
+          <form className="flex flex-col gap-3" onSubmit={resetPasswordFunction}>
             <FormControl sx={{ width: "328px" }} variant="outlined" onChange={handlePasswordChange}>
-              <InputLabel htmlFor="outlined-adornment-password">Contraseña</InputLabel>
+              <InputLabel htmlFor="outlined-adornment-password">Nueva Contraseña</InputLabel>
               <OutlinedInput
                 id="outlined-adornment-password"
                 type={showPassword ? "text" : "password"}
@@ -102,7 +93,27 @@ export default function Page() {
                     </IconButton>
                   </InputAdornment>
                 }
-                label="Contraseña"
+                label="Nueva contraseña"
+              />
+            </FormControl>
+            <FormControl sx={{ width: "328px" }} variant="outlined" onChange={handlePasswordConfirmChange}>
+              <InputLabel htmlFor="outlined-adornment-password">Confirmar Contraseña</InputLabel>
+              <OutlinedInput
+                id="outlined-adornment-password"
+                type={showPasswordConfirm ? "text" : "password"}
+                endAdornment={
+                  <InputAdornment position="end">
+                    <IconButton
+                      aria-label="toggle password visibility"
+                      onClick={handleClickShowPasswordConfirm}
+                      onMouseDown={handleMouseDownPasswordConfirm}
+                      edge="end"
+                    >
+                      {showPasswordConfirm ? <VisibilityOff /> : <Visibility />}
+                    </IconButton>
+                  </InputAdornment>
+                }
+                label="Confirmar contraseña"
               />
             </FormControl>
             {error && (
@@ -111,7 +122,7 @@ export default function Page() {
                 sx={{ paddingY: 0, width: "328px", fontSize: "12px" }}
                 className={`${error ? "flex" : "hidden"}`}
               >
-                Correo electrónico o contraseña incorrecto
+                {error}
               </Alert>
             )}
             <Button
@@ -119,12 +130,9 @@ export default function Page() {
               type="submit"
               sx={{ height: "56px", backgroundColor: "#0E2E4F", fontWeight: "bold", fontSize: "14px", display: "flex" }}
             >
-              Ingresar
+              RESTAURAR
             </Button>
           </form>
-          <Link href={"/login/forgot-password"} className="text-[#24A2CE] cursor-pointer">
-            ¿Has olvidado tu contraseña?
-          </Link>
         </div>
       </div>
     </div>

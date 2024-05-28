@@ -18,7 +18,8 @@ export default function SideBar() {
     <div
       // className={`h-[calc(100vh-180px)] w-[100px] border-solid border-2 border-[#d6d6d6] mx-5 rounded-full flex flex-col items-center  ${
       className={`h-[85vh] w-[100px] border-solid border-2 border-[#d6d6d6] mx-5 rounded-full flex flex-col items-center min-w-[80´x] ${
-        (pathname === "/login" || pathname === "/login/forgot-password") && "hidden"
+        (pathname === "/login" || pathname === "/login/forgot-password" || pathname === "/login/reset-password") &&
+        "hidden"
       }`}
     >
       <div className={`mt-7 rounded-full p-3 ${pathname === "/home" && "bg-[#8BD4E8]"}`}>

@@ -12,6 +12,7 @@ import MailOutlineIcon from "@mui/icons-material/MailOutline";
 import Alert from "@mui/material/Alert";
 import { Button, TextField } from "@mui/material";
 import Link from "next/link";
+import axios from "axios";
 
 export default function Page() {
   const [mail, setMail] = React.useState<string>("");
@@ -22,24 +23,30 @@ export default function Page() {
     event.preventDefault();
   };
 
-  const mailTest = "admin@wearelomo.com";
-
-  const loginFunction: React.FormEventHandler<HTMLFormElement> = (e) => {
+  const loginFunction: React.FormEventHandler<HTMLFormElement> = async (e) => {
     e.preventDefault();
-    if (mailTest !== mail) {
-      setError(true);
-      setNotification(false);
-    } else {
+    try {
+      const response = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/login/forgot-password`, { mail });
+      console.log(response, "try");
       setError(false);
       setNotification(true);
+    } catch (error) {
+      console.log(error, "catch");
+      setError(true);
+      setNotification(false);
     }
+    // if (mailTest !== mail) {
+    //   setError(true);
+    //   setNotification(false);
+    // } else {
+    //   setError(false);
+    //   setNotification(true);
+    // }
   };
 
   const handleMailChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setMail(event.target.value);
   };
-
-  console.log(notification);
 
   return (
     <div className="w-full min-h-[100vh] flex justify-center items-center ">
@@ -77,14 +84,15 @@ export default function Page() {
                     ),
                   }}
                 />
-
-                <Alert
-                  severity="error"
-                  sx={{ paddingY: 0, width: "328px", fontSize: "12px" }}
-                  className={`${error ? "flex" : "hidden"}`}
-                >
-                  Correo electrónico no existe en sistema
-                </Alert>
+                {error && (
+                  <Alert
+                    severity="error"
+                    sx={{ paddingY: 0, width: "328px", fontSize: "12px" }}
+                    className={`${error ? "flex" : "hidden"}`}
+                  >
+                    Correo electrónico no existe en sistema
+                  </Alert>
+                )}
                 <Button
                   variant="contained"
                   type="submit"
