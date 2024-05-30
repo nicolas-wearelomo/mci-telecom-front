@@ -10,7 +10,7 @@ const HomeContainer = () => {
 
   useEffect(() => {
     callback();
-  }, []);
+  }, [callback]);
 
   return (
     <>

@@ -10,10 +10,10 @@ import { useEffect } from "react";
 const ProfileContainer = () => {
   const { loading, data, callback } = useUpdateProfileUser();
   const { currentUser } = useSelector((state: RootState) => state.auth);
+
   useEffect(() => {
     const response = async () => {
       const res = await axiosInstance.get("/sims/manufactures");
-      console.log(res);
     };
     response();
   }, []);

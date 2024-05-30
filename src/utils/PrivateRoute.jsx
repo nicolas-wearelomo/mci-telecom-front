@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { usePathname, useRouter } from "next/navigation";
 import { useDispatch, useSelector } from "react-redux";
 import axiosInstance from "./axiosInstance";
-import { clearAccessToken, setCurrentUser } from "@/redux/slices/auth";
+import { clearAccessToken, setCurrentUser, setIsAuth } from "@/redux/slices/auth";
 
 export default function PrivateRoute({ children }) {
   const { accessToken, currentUser } = useSelector((state) => state.auth);
@@ -23,9 +23,11 @@ export default function PrivateRoute({ children }) {
         }
       } catch (error) {
         dispatch(clearAccessToken());
+      } finally {
+        dispatch(setIsAuth(true));
       }
     };
     verify();
-  }, [pathname]);
+  }, [pathname, currentUser]);
   return <>{children}</>;
 }

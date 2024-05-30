@@ -23,7 +23,7 @@ const storage = typeof window !== "undefined" ? createWebStorage("local") : crea
 const persistAuthConfig = {
   key: "auth",
   storage,
-  whitelist: ["accessToken"],
+  whitelist: ["accessToken", "currentUser"],
 };
 
 const store = configureStore({
