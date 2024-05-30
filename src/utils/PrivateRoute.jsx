@@ -16,6 +16,7 @@ export default function PrivateRoute({ children }) {
         router.push("/login");
       }
       try {
+        console.log(currentUser);
         axiosInstance.defaults.headers.common["Authorization"] = `Bearer ${accessToken}`;
         const user = await axiosInstance.get(`/auth/verify?id=${currentUser?.id}`);
         if (!currentUser) {
