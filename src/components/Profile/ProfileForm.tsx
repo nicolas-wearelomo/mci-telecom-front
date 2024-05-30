@@ -88,7 +88,7 @@ const ProfileForm = ({ loading, callback, currentUser }: ModelProfileFormProps) 
             <Button variant="outlined" sx={{ height: "56px", borderRadius: "15px" }}>
               NO GURADAR
             </Button>
-            <Button variant="contained" sx={{ height: "56px", borderRadius: "15px", bgcolor: "#1152A1" }}>
+            <Button variant="contained" sx={{ height: "56px", borderRadius: "15px", bgcolor: "#1152A1" }} disabled>
               GUARDAR CAMBIOS
             </Button>
           </div>
