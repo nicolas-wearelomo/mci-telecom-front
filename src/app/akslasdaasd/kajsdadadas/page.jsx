@@ -4,11 +4,11 @@ import ShareButton from "./component/ShareButton";
 export const metadata = {
   title: "test de prueba metadata",
   description: "Summary",
-  images: "https://ammper-lomo-images.s3.us-east-2.amazonaws.com/imagenes/alcance3.png",
+  images: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRvITHDJLczJs9Xi2iHkFulnuTxOzVoKEnysQ&s",
   openGraph: {
     title: "test de prueba opengraph",
     description: "Summary",
-    images: "https://ammper-lomo-images.s3.us-east-2.amazonaws.com/imagenes/alcance3.png",
+    images: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRvITHDJLczJs9Xi2iHkFulnuTxOzVoKEnysQ&s",
     url: "http://ec2-3-17-135-121.us-east-2.compute.amazonaws.com/akslasdaasd/kajsdadadas",
     type: "article",
   },
@@ -16,7 +16,7 @@ export const metadata = {
     card: "summary_large_image",
     title: "test de prueba twitter",
     description: "Summary",
-    images: ["https://ammper-lomo-images.s3.us-east-2.amazonaws.com/imagenes/alcance3.png"],
+    images: ["https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRvITHDJLczJs9Xi2iHkFulnuTxOzVoKEnysQ&s"],
   },
 };
 
@@ -25,7 +25,7 @@ const BlogPost = () => {
     id: 1,
     title: "test de prueba blog",
     summary: "Summary",
-    image: "https://ammper-lomo-images.s3.us-east-2.amazonaws.com/imagenes/alcance3.png",
+    image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRvITHDJLczJs9Xi2iHkFulnuTxOzVoKEnysQ&s",
   };
 
   const pageUrl = `http://ec2-3-17-135-121.us-east-2.compute.amazonaws.com/akslasdaasd/kajsdadadas`;
