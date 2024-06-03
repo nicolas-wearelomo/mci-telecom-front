@@ -4,11 +4,13 @@ import ShareButton from "./component/ShareButton";
 export const metadata = {
   title: "test de prueba metadata",
   description: "Summary",
-  images: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRvITHDJLczJs9Xi2iHkFulnuTxOzVoKEnysQ&s",
+  images:
+    "https://images.unsplash.com/photo-1621970170600-a76a83bb34d9?q=80&w=1000&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxleHBsb3JlLWZlZWR8MTF8fHxlbnwwfHx8fHw%3D",
   openGraph: {
     title: "test de prueba opengraph",
     description: "Summary",
-    images: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRvITHDJLczJs9Xi2iHkFulnuTxOzVoKEnysQ&s",
+    images:
+      "https://images.unsplash.com/photo-1621970170600-a76a83bb34d9?q=80&w=1000&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxleHBsb3JlLWZlZWR8MTF8fHxlbnwwfHx8fHw%3D",
     url: "http://ec2-3-17-135-121.us-east-2.compute.amazonaws.com/akslasdaasd/kajsdadadas",
     type: "article",
   },
@@ -16,7 +18,9 @@ export const metadata = {
     card: "summary_large_image",
     title: "test de prueba twitter",
     description: "Summary",
-    images: ["https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRvITHDJLczJs9Xi2iHkFulnuTxOzVoKEnysQ&s"],
+    images: [
+      "https://images.unsplash.com/photo-1621970170600-a76a83bb34d9?q=80&w=1000&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxleHBsb3JlLWZlZWR8MTF8fHxlbnwwfHx8fHw%3D",
+    ],
   },
 };
 
@@ -25,7 +29,8 @@ const BlogPost = () => {
     id: 1,
     title: "test de prueba blog",
     summary: "Summary",
-    image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRvITHDJLczJs9Xi2iHkFulnuTxOzVoKEnysQ&s",
+    image:
+      "https://images.unsplash.com/photo-1621970170600-a76a83bb34d9?q=80&w=1000&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxleHBsb3JlLWZlZWR8MTF8fHxlbnwwfHx8fHw%3D",
   };
 
   const pageUrl = `http://ec2-3-17-135-121.us-east-2.compute.amazonaws.com/akslasdaasd/kajsdadadas`;
