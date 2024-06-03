@@ -1,3 +1,4 @@
+"use client";
 import Head from "next/head";
 import ShareButton from "./component/ShareButton";
 
