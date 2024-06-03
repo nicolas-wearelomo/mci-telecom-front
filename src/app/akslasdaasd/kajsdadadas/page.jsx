@@ -67,19 +67,11 @@ const BlogPost = () => {
           </a>
         </div>
 
-        <div className="linkedin-share-button" style={{ display: "inline-block", marginLeft: "10px" }}>
-          <a
-            target="_blank"
-            href={`https://www.linkedin.com/shareArticle?mini=true&url=${encodeURIComponent(
-              pageUrl
-            )}&title=${encodeURIComponent(post.title)}&summary=${encodeURIComponent(
-              post.summary
-            )}&source=${encodeURIComponent(pageUrl)}`}
-            className="linkedin-xfbml-parse-ignore"
-          >
-            Compartir en LinkedIn
-          </a>
-        </div>
+        <button
+          onClick={() => window.open(`https://www.linkedin.com/sharing/share-offsite/?url=${shareUrl}`, "_blank")}
+        >
+          Share on LinkedIn
+        </button>
       </div>
     </div>
   );
