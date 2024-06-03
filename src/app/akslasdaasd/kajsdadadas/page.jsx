@@ -14,14 +14,6 @@ export const metadata = {
     url: "http://ec2-3-17-135-121.us-east-2.compute.amazonaws.com/akslasdaasd/kajsdadadas",
     type: "article",
   },
-  twitter: {
-    card: "summary_large_image",
-    title: "test de prueba twitter",
-    description: "Summary",
-    images: [
-      "https://images.unsplash.com/photo-1621970170600-a76a83bb34d9?q=80&w=1000&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxleHBsb3JlLWZlZWR8MTF8fHxlbnwwfHx8fHw%3D",
-    ],
-  },
 };
 
 const BlogPost = () => {
@@ -75,7 +67,19 @@ const BlogPost = () => {
           </a>
         </div>
 
-        <ShareButton platform="linkedin" url={pageUrl} title={post.title} image={post.image} />
+        <div className="linkedin-share-button" style={{ display: "inline-block", marginLeft: "10px" }}>
+          <a
+            target="_blank"
+            href={`https://www.linkedin.com/shareArticle?mini=true&url=${encodeURIComponent(
+              pageUrl
+            )}&title=${encodeURIComponent(post.title)}&summary=${encodeURIComponent(
+              post.summary
+            )}&source=${encodeURIComponent(pageUrl)}`}
+            className="linkedin-xfbml-parse-ignore"
+          >
+            Compartir en LinkedIn
+          </a>
+        </div>
       </div>
     </div>
   );
