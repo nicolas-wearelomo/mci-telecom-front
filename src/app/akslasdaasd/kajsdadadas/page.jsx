@@ -23,7 +23,7 @@ export const metadata = {
 const BlogPost = () => {
   const post = {
     id: 1,
-    title: "test de prueba",
+    title: "test de prueba blog",
     summary: "Summary",
     image: "https://ammper-lomo-images.s3.us-east-2.amazonaws.com/imagenes/alcance3.png",
   };
