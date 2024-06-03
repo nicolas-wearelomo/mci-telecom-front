@@ -39,6 +39,7 @@ export default function SmartTable({ columns, rows }: CustomTableOrderProps) {
                 className={`min-w-[${el.width}px] ${index / 2 === 0 ? "bg-[#C3F2FE]" : "bg-[#E7FAFF]"}  ${
                   index === 0 && "rounded-tl-xl"
                 }  ${columns.orderColumns.length === index - 1 && "rounded-tl-xl"} text-center py-2`}
+                key={index}
               >
                 {el.name.replaceAll("_", " ")}
               </div>
