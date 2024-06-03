@@ -5,12 +5,12 @@ export const metadata = {
   title: "test de prueba metadata",
   description: "Summary",
   images:
-    "https://images.unsplash.com/photo-1621970170600-a76a83bb34d9?q=80&w=1000&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxleHBsb3JlLWZlZWR8MTF8fHxlbnwwfHx8fHw%3D",
+    "https://staticfiles.warthunder.com/upload/image/0_Wallpaper_Renders/Other/1920x1080_lunar_newyear_2024_logo_901c70c0a6b0973136cc7a9ba1a00111.jpg",
   openGraph: {
     title: "test de prueba opengraph",
     description: "Summary",
     images:
-      "https://images.unsplash.com/photo-1621970170600-a76a83bb34d9?q=80&w=1000&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxleHBsb3JlLWZlZWR8MTF8fHxlbnwwfHx8fHw%3D",
+      "https://staticfiles.warthunder.com/upload/image/0_Wallpaper_Renders/Other/1920x1080_lunar_newyear_2024_logo_901c70c0a6b0973136cc7a9ba1a00111.jpg",
     url: "http://ec2-3-17-135-121.us-east-2.compute.amazonaws.com/akslasdaasd/kajsdadadas",
     type: "article",
   },
@@ -22,7 +22,7 @@ const BlogPost = () => {
     title: "test de prueba blog",
     summary: "Summary",
     image:
-      "https://images.unsplash.com/photo-1621970170600-a76a83bb34d9?q=80&w=1000&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxleHBsb3JlLWZlZWR8MTF8fHxlbnwwfHx8fHw%3D",
+      "https://staticfiles.warthunder.com/upload/image/0_Wallpaper_Renders/Other/1920x1080_lunar_newyear_2024_logo_901c70c0a6b0973136cc7a9ba1a00111.jpg",
   };
 
   const pageUrl = `http://ec2-3-17-135-121.us-east-2.compute.amazonaws.com/akslasdaasd/kajsdadadas`;
