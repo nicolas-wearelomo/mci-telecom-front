@@ -1,29 +1,41 @@
 "use client";
-import React from "react";
 
-const ShareButton = ({ platform, url, title, image }) => {
-  const shareUrls = {
-    facebook: `https://www.facebook.com/sharer/sharer.php?u=${url}&quote=${title}`,
-    linkedin: `https://www.linkedin.com/shareArticle?mini=true&url=${url}&title=${title}&summary=${title}&source=LinkedIn`,
-  };
-
-  const handleClick = (platform) => {
-    const shareUrl = shareUrls[platform];
-    window.open(shareUrl, "popup", "width=600,height=600");
-  };
+const ShareButtons = ({ url, title }: { url: string, title: string }) => {
+  const shareUrl = encodeURIComponent(url);
+  const shareText = encodeURIComponent(title);
 
   return (
-    <button
-      onClick={() =>
-        window.open(
-          `https://www.linkedin.com/sharing/share-offsite/?url=http://ec2-3-17-135-121.us-east-2.compute.amazonaws.com/akslasdaasd/kajsdadadas`,
-          "_blank"
-        )
-      }
-    >
-      Share on LinkedIn
-    </button>
+    <div className="share-buttons">
+      <button onClick={() => window.open(`https://www.facebook.com/sharer/sharer.php?u=${shareUrl}`, "_blank")}>
+        Share on Facebook
+      </button>
+      <button
+        onClick={() => window.open(`https://twitter.com/intent/tweet?url=${shareUrl}&text=${shareText}`, "_blank")}
+      >
+        Share on Twitter
+      </button>
+      <button onClick={() => window.open(`https://www.linkedin.com/sharing/share-offsite/?url=${shareUrl}`, "_blank")}>
+        Share on LinkedIn
+      </button>
+      <style jsx>{`
+        .share-buttons {
+          margin-top: 20px;
+        }
+        .share-buttons button {
+          margin-right: 10px;
+          padding: 10px 20px;
+          background-color: #0070f3;
+          color: white;
+          border: none;
+          border-radius: 5px;
+          cursor: pointer;
+        }
+        .share-buttons button:hover {
+          background-color: #005bb5;
+        }
+      `}</style>
+    </div>
   );
 };
 
-export default ShareButton;
+export default ShareButtons;

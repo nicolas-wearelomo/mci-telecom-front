@@ -67,7 +67,7 @@ const BlogPost = () => {
           </a>
         </div>
 
-        <ShareButton></ShareButton>
+        <ShareButton title="test" url={pageUrl} />
       </div>
     </div>
   );
