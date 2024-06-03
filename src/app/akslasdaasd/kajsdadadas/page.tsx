@@ -7,7 +7,7 @@ export const metadata = {
   openGraph: {
     title: "test de prueba",
     description: "Summary",
-    image: "https://ammper-lomo-images.s3.us-east-2.amazonaws.com/imagenes/alcance3.png",
+    images: "https://ammper-lomo-images.s3.us-east-2.amazonaws.com/imagenes/alcance3.png",
 
     url: "http://ec2-3-17-135-121.us-east-2.compute.amazonaws.com/akslasdaasd/kajsdadadas",
     type: "article",
