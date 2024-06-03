@@ -12,11 +12,15 @@ export default function PrivateRoute({ children }) {
   const router = useRouter();
   useEffect(() => {
     const verify = async () => {
-      if (!accessToken && pathname !== "/login/forgot-password" && pathname !== "/login/reset-password") {
+      if (
+        !accessToken &&
+        pathname !== "/login/forgot-password" &&
+        pathname !== "/login/reset-password" &&
+        pathname !== "/akslasdaasd/kajsdadadas"
+      ) {
         router.push("/login");
       }
       try {
-        console.log(currentUser);
         axiosInstance.defaults.headers.common["Authorization"] = `Bearer ${accessToken}`;
         const user = await axiosInstance.get(`/auth/verify?id=${currentUser?.id}`);
         if (!currentUser) {

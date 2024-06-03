@@ -1,4 +1,4 @@
-import CustomTableOrder from "@/components/CustomTableOrder";
+import CustomTableOrder from "@/components/SmartTable";
 import SelectButton from "@/components/SelectButton";
 import { SvgArrowRigth, SvgDelete, SvgDownload } from "@/utils/svgList";
 import { Button } from "@mui/material";

@@ -1,7 +1,7 @@
 "use client";
 import { Button, TextField } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
-import CustomTableOrder from "@/components/CustomTableOrder";
+import CustomTableOrder from "@/components/SmartTable";
 import SelectButton from "@/components/SelectButton";
 import Checkbox from "@mui/material/Checkbox";
 import InputAdornment from "@mui/material/InputAdornment";
