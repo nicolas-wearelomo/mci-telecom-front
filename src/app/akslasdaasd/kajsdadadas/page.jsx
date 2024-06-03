@@ -2,19 +2,19 @@ import Head from "next/head";
 import ShareButton from "./component/ShareButton";
 
 export const metadata = {
-  title: "test de prueba",
+  title: "test de prueba metadata",
   description: "Summary",
+  images: "https://ammper-lomo-images.s3.us-east-2.amazonaws.com/imagenes/alcance3.png",
   openGraph: {
-    title: "test de prueba",
+    title: "test de prueba opengraph",
     description: "Summary",
     images: "https://ammper-lomo-images.s3.us-east-2.amazonaws.com/imagenes/alcance3.png",
-
     url: "http://ec2-3-17-135-121.us-east-2.compute.amazonaws.com/akslasdaasd/kajsdadadas",
     type: "article",
   },
   twitter: {
     card: "summary_large_image",
-    title: "test de prueba",
+    title: "test de prueba twitter",
     description: "Summary",
     images: ["https://ammper-lomo-images.s3.us-east-2.amazonaws.com/imagenes/alcance3.png"],
   },
