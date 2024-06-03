@@ -1,4 +1,3 @@
-"use client";
 import Head from "next/head";
 import ShareButton from "./component/ShareButton";
 
@@ -68,11 +67,7 @@ const BlogPost = () => {
           </a>
         </div>
 
-        <button
-          onClick={() => window.open(`https://www.linkedin.com/sharing/share-offsite/?url=${shareUrl}`, "_blank")}
-        >
-          Share on LinkedIn
-        </button>
+        <ShareButton></ShareButton>
       </div>
     </div>
   );

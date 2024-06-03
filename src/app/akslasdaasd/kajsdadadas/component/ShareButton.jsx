@@ -13,8 +13,15 @@ const ShareButton = ({ platform, url, title, image }) => {
   };
 
   return (
-    <button onClick={() => handleClick(platform)}>
-      {`Share on ${platform.charAt(0).toUpperCase() + platform.slice(1)}`}
+    <button
+      onClick={() =>
+        window.open(
+          `https://www.linkedin.com/sharing/share-offsite/?url=http://ec2-3-17-135-121.us-east-2.compute.amazonaws.com/akslasdaasd/kajsdadadas`,
+          "_blank"
+        )
+      }
+    >
+      Share on LinkedIn
     </button>
   );
 };
