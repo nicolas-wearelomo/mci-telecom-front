@@ -23,7 +23,9 @@ const SmartMovistarContainer = () => {
   return (
     <div>
       <SmartMovistarFilters />
-      {/* <SmartTable columns={columns} rows={data} cols={5} title="asd" /> */}
+      <div className="">
+        <SmartTable columns={columns} rows={data} />
+      </div>
       {/* <SmartMovistarTable /> */}
     </div>
   );
