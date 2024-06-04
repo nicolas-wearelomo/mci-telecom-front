@@ -64,9 +64,9 @@ export default function SmartTable({ columns, rows }: CustomTableOrderProps) {
             );
           })}
         </div>
-        {rows.map((row: any) => {
+        {rows.map((row: any, index: any) => {
           return (
-            <div className="flex">
+            <div className="flex" key={index}>
               {columns.orderColumns.map((columnName: any, index: any) => {
                 return columns[columnName.name].map((subColumnName: any, index: any) => {
                   return (
