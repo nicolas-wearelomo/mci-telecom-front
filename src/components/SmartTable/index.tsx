@@ -49,12 +49,16 @@ export default function SmartTable({ columns, rows }: CustomTableOrderProps) {
           })}
         </div>
         <div className="flex">
-          {columns.orderColumns.map((columnName: any) => {
+          {columns.orderColumns.map((columnName: any, index: any) => {
             return (
-              <div className="flex">
-                {columns[columnName.name].map((subColumnName: any) => {
+              <div className="flex" key={index}>
+                {columns[columnName.name].map((subColumnName: any, index: any) => {
                   console.log(subColumnName.width);
-                  return <div style={{ minWidth: subColumnName.width }}>{subColumnName?.label || "S/D"}</div>;
+                  return (
+                    <div style={{ minWidth: subColumnName.width }} key={index}>
+                      {subColumnName?.label || "S/D"}
+                    </div>
+                  );
                 })}
               </div>
             );
@@ -63,9 +67,13 @@ export default function SmartTable({ columns, rows }: CustomTableOrderProps) {
         {rows.map((row: any) => {
           return (
             <div className="flex">
-              {columns.orderColumns.map((columnName: any) => {
-                return columns[columnName.name].map((subColumnName: any) => {
-                  return <div style={{ minWidth: subColumnName.width }}>{row[subColumnName.key] || "S/D"}</div>;
+              {columns.orderColumns.map((columnName: any, index: any) => {
+                return columns[columnName.name].map((subColumnName: any, index: any) => {
+                  return (
+                    <div style={{ minWidth: subColumnName.width }} key={index}>
+                      {row[subColumnName.key] || "S/D"}
+                    </div>
+                  );
                 });
               })}
             </div>
