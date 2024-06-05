@@ -1,13 +1,19 @@
 "use client";
 import { useEffect, useState } from "react";
 import { CustomTableOrderProps } from "./models";
-import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
-import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import BasicModal from "../BasicModal";
+import { TextField } from "@mui/material";
+import SettingsIcon from "@mui/icons-material/Settings";
 
 export default function SmartTable({ columns, rows }: CustomTableOrderProps) {
+  interface FiltersProps {
+    key: string;
+    value: string;
+  }
+
   const [columnSelected, setColumnSelected] = useState<string>("");
   const [orderRows, setOrderRows] = useState<any[]>(rows);
+  const [filterValue, setFilterValue] = useState<FiltersProps>({ key: "", value: "" });
 
   useEffect(() => {
     setOrderRows(rows);
@@ -16,7 +22,7 @@ export default function SmartTable({ columns, rows }: CustomTableOrderProps) {
   const orderFunction = (key: string) => {
     setColumnSelected(key);
     setOrderRows(
-      rows.sort(function (a: any, b: any) {
+      rows.slice().sort((a, b) => {
         if (a[key] > b[key]) {
           return 1;
         }
@@ -28,57 +34,69 @@ export default function SmartTable({ columns, rows }: CustomTableOrderProps) {
     );
   };
 
+  const handleChangeFilters = (e: any, subColumnName: string) => {
+    setFilterValue({ key: subColumnName, value: e.target.value });
+  };
+
+  useEffect(() => {
+    if (filterValue.key && filterValue.value) {
+      const filtered = rows.filter((el: any) => {
+        return el[filterValue.key]?.toLowerCase().includes(filterValue.value.toLowerCase());
+      });
+      console.log(filtered);
+      setOrderRows(filtered);
+    } else {
+      setOrderRows(rows);
+    }
+  }, [filterValue, rows]);
+
   return (
-    <div className=" w-[95%]">
+    <div className="w-[95%]">
       <div className={`max-h-[70vh] overflow-auto`}>
         <div className="flex">
-          {columns.orderColumns.map((el: any, index: any) => {
-            return (
-              <>
-                <div
-                  className={`${index % 2 === 0 ? "bg-[#C3F2FE]" : "bg-[#E7FAFF]"}  ${
-                    index === 0 && "rounded-tl-xl"
-                  }  ${columns.orderColumns.length === index - 1 && "rounded-tl-xl"} text-center py-2`}
-                  style={{ minWidth: el.width }}
-                  key={index}
-                >
-                  {el.name.replaceAll("_", " ")}
-                </div>
-              </>
-            );
-          })}
+          {columns.orderColumns.map((el: any, index: any) => (
+            <div
+              className={`${index % 2 === 0 ? "bg-[#C3F2FE]" : "bg-[#E7FAFF]"} ${index === 0 && "rounded-tl-xl"} ${
+                columns.orderColumns.length === index - 1 && "rounded-tl-xl"
+              } text-center py-2`}
+              style={{ minWidth: el.width }}
+              key={index}
+            >
+              {el.name.replaceAll("_", " ")}
+            </div>
+          ))}
         </div>
         <div className="flex">
-          {columns.orderColumns.map((columnName: any, index: any) => {
-            return (
-              <div className="flex" key={index}>
-                {columns[columnName.name].map((subColumnName: any, index: any) => {
-                  console.log(subColumnName.width);
-                  return (
-                    <div style={{ minWidth: subColumnName.width }} key={index}>
-                      {subColumnName?.label || "S/D"}
-                    </div>
-                  );
-                })}
-              </div>
-            );
-          })}
-        </div>
-        {rows.map((row: any, index: any) => {
-          return (
-            <div className="flex" key={index}>
-              {columns.orderColumns.map((columnName: any, index: any) => {
-                return columns[columnName.name].map((subColumnName: any, index: any) => {
-                  return (
-                    <div style={{ minWidth: subColumnName.width }} key={index}>
-                      {row[subColumnName.key] || "S/D"}
-                    </div>
-                  );
-                });
-              })}
+          {columns.orderColumns.map((columnName: any, index: any) => (
+            <div className="flex h-[80px] items-center bg-[#F2F2F2]" key={index}>
+              {columns[columnName.name].map((subColumnName: any, subIndex: any) => (
+                <div style={{ minWidth: subColumnName.width, paddingLeft: "10px" }} key={subIndex}>
+                  {subColumnName?.label || "S/D"}
+                  <div className="">
+                    <TextField
+                      size="small"
+                      className="w-[80%]"
+                      value={filterValue.key === subColumnName.key ? filterValue.value : ""}
+                      onChange={(e) => handleChangeFilters(e, subColumnName.key)}
+                    />
+                  </div>
+                </div>
+              ))}
             </div>
-          );
-        })}
+          ))}
+        </div>
+        {orderRows.map((row: any, rowIndex: any) => (
+          <div className="flex text-[#333333]" key={rowIndex}>
+            <SettingsIcon sx={{ marginTop: "16px", padding: "2px" }} />
+            {columns.orderColumns.map((columnName: any, colIndex: any) =>
+              columns[columnName.name].map((subColumnName: any, subIndex: any) => (
+                <div style={{ minWidth: subColumnName.width, paddingTop: "16px", paddingLeft: "10px" }} key={subIndex}>
+                  {row[subColumnName.key] || "S/D"}
+                </div>
+              ))
+            )}
+          </div>
+        ))}
       </div>
       <BasicModal />
     </div>
