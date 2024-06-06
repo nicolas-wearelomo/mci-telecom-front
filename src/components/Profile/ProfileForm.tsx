@@ -47,8 +47,8 @@ const ProfileForm = ({ loading, callback, currentUser }: ModelProfileFormProps) 
             <Input control={control} errors={errors} name="first_name" label="Nombre de usuario" />
             <Input control={control} errors={errors} name="last_name" label="Apellido de usuario" />
           </div>
-          <div className="grid grid-cols-2 gap-4 ">
-            <Input control={control} errors={errors} name="profileName" label="Nombre de perfil" />
+          <div className="">
+            {/* <Input control={control} errors={errors} name="profileName" label="Nombre de perfil" /> */}
             <Input control={control} errors={errors} name="companyName" label="Nombre de empresa" disabled />
           </div>
           <div className="">
