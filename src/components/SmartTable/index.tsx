@@ -14,6 +14,8 @@ export default function SmartTable({ columns, rows }: CustomTableOrderProps) {
   const [columnSelected, setColumnSelected] = useState<string>("");
   const [orderRows, setOrderRows] = useState<any[]>(rows);
   const [filterValue, setFilterValue] = useState<FiltersProps>({ key: "", value: "" });
+  const [open, setOpen] = useState<boolean>(true);
+  const [rowData, setRowData] = useState({});
 
   useEffect(() => {
     setOrderRows(rows);
@@ -49,6 +51,11 @@ export default function SmartTable({ columns, rows }: CustomTableOrderProps) {
       setOrderRows(rows);
     }
   }, [filterValue, rows]);
+
+  const handleModalOpen = (data: any) => {
+    setOpen(true);
+    setRowData(data);
+  };
 
   return (
     <div className="w-[95%]">
@@ -87,7 +94,11 @@ export default function SmartTable({ columns, rows }: CustomTableOrderProps) {
         </div>
         {orderRows.map((row: any, rowIndex: any) => (
           <div className="flex text-[#333333]" key={rowIndex}>
-            <SettingsIcon sx={{ marginTop: "16px", padding: "2px" }} />
+            <SettingsIcon
+              sx={{ marginTop: "16px", padding: "2px" }}
+              className="cursor-pointer"
+              onClick={() => handleModalOpen(row)}
+            />
             {columns.orderColumns.map((columnName: any, colIndex: any) =>
               columns[columnName.name].map((subColumnName: any, subIndex: any) => (
                 <div style={{ minWidth: subColumnName.width, paddingTop: "16px", paddingLeft: "10px" }} key={subIndex}>
@@ -98,7 +109,7 @@ export default function SmartTable({ columns, rows }: CustomTableOrderProps) {
           </div>
         ))}
       </div>
-      <BasicModal />
+      <BasicModal setOpen={setOpen} open={open} data={rowData} />
     </div>
   );
 }

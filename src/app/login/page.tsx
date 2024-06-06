@@ -60,15 +60,19 @@ export default function Page() {
   return (
     <div className="w-full min-h-[100vh] flex justify-center items-center ">
       <div className="bg-[#8BD4E8] w-[60vw] min-h-[80vh] max-h-[95vh] flex justify-center rounded-[32px]">
-        <div className="bg-white m-6 mr-3 w-[50%] rounded-[32px]">
+        <div className="bg-white m-6 mr-3 w-[50%] rounded-[32px] relative">
           <img
             src="/assets/login/login.png"
             alt="Imagen de fondo Login"
-            className="object-cover w-full h-full rounded-[32px]"
+            className="object-cover w-full h-full rounded-[32px] z-20"
           />
+          <p className="text-white z-50 absolute top-[100px] left-[70px] text-lg">
+            Conectividad celular global para dispositivos IoT
+          </p>
         </div>
         <div className="bg-white m-6 ml-3 w-[50%] rounded-[32px] flex flex-col justify-center items-center gap-8">
-          <Image src="/assets/login/mci-logo.png" alt="mci logo" width={150} height={150} className="mb-10" />
+          <Image src="/assets/login/mci-logo.png" alt="mci logo" width={150} height={150} className="mb-0" />
+          <p className="text-[#24A2CE]">Conectividad celular global para dispositivos IoT</p>
           {/* <h2 className="text-[25px] font-semibold w-[328px]">Ingresa</h2> */}
           <form className="flex flex-col gap-3" onSubmit={loginFunction}>
             <TextField
