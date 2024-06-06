@@ -21,7 +21,7 @@ const SmartMovistarContainer = () => {
   }, [callback]);
 
   return (
-    <div>
+    <div className="pr-5">
       <SmartMovistarFilters />
       <div className="">
         <SmartTable columns={columns} rows={data} />

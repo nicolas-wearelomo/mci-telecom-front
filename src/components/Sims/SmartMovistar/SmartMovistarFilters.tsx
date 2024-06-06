@@ -13,7 +13,7 @@ const SmartMovistarFilters = () => {
   ];
 
   return (
-    <div className="p-5">
+    <div className="p-5 mr-14">
       <div className="flex justify-between">
         <h4 className="text-[#24A2CE] text-3xl font-bold">SIMs Movistar</h4>
         <div className="flex gap-5 pr-5">

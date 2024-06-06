@@ -114,7 +114,7 @@ export default function Page() {
               </div>
               <div className="col-span-2">
                 <p className="text-[#24A2CE] font-bold mb-5">Grupo de subscripción</p>
-                <div className="w-[50%]">
+                <div className="w-[50%] h-16">
                   <SelectButton
                     label={"Seleccionar Grupo de Subscripción"}
                     options={cofiguration}
