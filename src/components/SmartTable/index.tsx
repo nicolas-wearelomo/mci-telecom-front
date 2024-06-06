@@ -14,7 +14,7 @@ export default function SmartTable({ columns, rows }: CustomTableOrderProps) {
   const [columnSelected, setColumnSelected] = useState<string>("");
   const [orderRows, setOrderRows] = useState<any[]>(rows);
   const [filterValue, setFilterValue] = useState<FiltersProps>({ key: "", value: "" });
-  const [open, setOpen] = useState<boolean>(true);
+  const [open, setOpen] = useState<boolean>(false);
   const [rowData, setRowData] = useState({});
 
   useEffect(() => {
