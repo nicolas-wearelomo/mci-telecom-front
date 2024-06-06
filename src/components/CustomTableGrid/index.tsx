@@ -6,6 +6,7 @@ import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import BasicModal from "../BasicModal";
 
 export default function CustomTableGrid({ columns, rows, cols }: CustomTableGridProps) {
+  const [open, setOpen] = useState<boolean>(true);
   const [columnSelected, setColumnSelected] = useState<string>("");
   const [orderRows, setOrderRows] = useState<any[]>(rows);
   const [templateRows, setTemplateRows] = useState<string>("grid-cols-8");
@@ -46,7 +47,7 @@ export default function CustomTableGrid({ columns, rows, cols }: CustomTableGrid
           </div>
         ))}
       </div>
-      <BasicModal />
+      <BasicModal setOpen={setOpen} open={open} data={{}} />
     </div>
   );
 }
