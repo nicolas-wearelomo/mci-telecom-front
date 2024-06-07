@@ -4,6 +4,7 @@ import { CustomTableOrderProps } from "./models";
 import BasicModal from "../BasicModal";
 import { TextField } from "@mui/material";
 import SettingsIcon from "@mui/icons-material/Settings";
+import Pagination from "@mui/material/Pagination";
 
 export default function SmartTable({ columns, rows }: CustomTableOrderProps) {
   interface FiltersProps {
@@ -13,13 +14,22 @@ export default function SmartTable({ columns, rows }: CustomTableOrderProps) {
 
   const [columnSelected, setColumnSelected] = useState<string>("");
   const [orderRows, setOrderRows] = useState<any[]>(rows);
+  const [orderRowsPagination, setOrderRowsPagination] = useState<any[]>([]);
   const [filterValue, setFilterValue] = useState<FiltersProps>({ key: "", value: "" });
   const [open, setOpen] = useState<boolean>(false);
   const [rowData, setRowData] = useState({});
+  const [page, setPage] = useState(1);
+  const rowsPerPage = 25;
 
   useEffect(() => {
     setOrderRows(rows);
   }, [rows]);
+
+  useEffect(() => {
+    const startIndex = (page - 1) * rowsPerPage;
+    const endIndex = startIndex + rowsPerPage;
+    setOrderRowsPagination(orderRows.slice(startIndex, endIndex));
+  }, [orderRows, page]);
 
   const orderFunction = (key: string) => {
     setColumnSelected(key);
@@ -45,11 +55,11 @@ export default function SmartTable({ columns, rows }: CustomTableOrderProps) {
       const filtered = rows.filter((el: any) => {
         return el[filterValue.key]?.toLowerCase().includes(filterValue.value.toLowerCase());
       });
-      console.log(filtered);
       setOrderRows(filtered);
     } else {
       setOrderRows(rows);
     }
+    setPage(1); // Reset to first page after filter change
   }, [filterValue, rows]);
 
   const handleModalOpen = (data: any) => {
@@ -57,9 +67,13 @@ export default function SmartTable({ columns, rows }: CustomTableOrderProps) {
     setRowData(data);
   };
 
+  const handleChange = (event: React.ChangeEvent<unknown>, value: number) => {
+    setPage(value);
+  };
+
   return (
     <div className="w-[95%]">
-      <div className={`max-h-[70vh] overflow-auto`}>
+      <div className={`max-h-[70vh] min-h-[70vh] overflow-auto`}>
         <div className="flex">
           {columns.orderColumns.map((el: any, index: any) => (
             <div
@@ -92,7 +106,7 @@ export default function SmartTable({ columns, rows }: CustomTableOrderProps) {
             </div>
           ))}
         </div>
-        {orderRows.map((row: any, rowIndex: any) => (
+        {orderRowsPagination.map((row: any, rowIndex: any) => (
           <div className="flex text-[#333333]" key={rowIndex}>
             <SettingsIcon
               sx={{ marginTop: "16px", padding: "2px" }}
@@ -109,6 +123,23 @@ export default function SmartTable({ columns, rows }: CustomTableOrderProps) {
           </div>
         ))}
       </div>
+      <div className="flex justify-center">
+        <Pagination
+          count={Math.ceil(orderRows.length / rowsPerPage)}
+          page={page}
+          onChange={handleChange}
+          color="secondary"
+          sx={{
+            "& .css-19micn4-MuiButtonBase-root-MuiPaginationItem-root.Mui-selected": {
+              backgroundColor: "#24A2CE",
+            },
+            "& .css-19micn4-MuiButtonBase-root-MuiPaginationItem-root.Mui-selected:hover": {
+              backgroundColor: "#24A2CE",
+            },
+          }}
+        />
+      </div>
+
       <BasicModal setOpen={setOpen} open={open} data={rowData} />
     </div>
   );
