@@ -4,7 +4,7 @@ import { SvgDownload, SvgEye } from "@/utils/svgList";
 import { Button } from "@mui/material";
 import Link from "next/link";
 
-const SmartMovistarFilters = () => {
+const SmartMovistarFilters = ({ title }: { title: string }) => {
   const configOptions = [
     { value: "overconsumption", label: "Sobreconsumo", link: "/sims/smart-movistar/overconsumption" },
     { value: "imei", label: "Cambio de IMEI", link: "/sims/smart-movistar/change-imei" },
@@ -15,7 +15,7 @@ const SmartMovistarFilters = () => {
   return (
     <div className="p-5 mr-14">
       <div className="flex justify-between">
-        <h4 className="text-[#24A2CE] text-3xl font-bold">SIMs Movistar</h4>
+        <h4 className="text-[#24A2CE] text-3xl font-bold">{title}</h4>
         <div className="flex gap-5 pr-5">
           <Link
             href={"/sims/smart-movistar/consumption"}

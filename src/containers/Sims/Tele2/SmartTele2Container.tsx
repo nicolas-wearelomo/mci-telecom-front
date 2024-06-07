@@ -8,11 +8,11 @@ import useGetAllMovistarSims from "@/services/sims/movistar/useGetAllMovistarSim
 import { useEffect } from "react";
 import { useSelector } from "react-redux";
 
-const SmartMovistarContainer = () => {
+const SmartTele2Container = () => {
   const { currentUser } = useSelector((state: RootState) => state.auth);
   const { callback, data, loading } = useGetAllMovistarSims({
     company: currentUser?.company,
-    service_provider: "Movistar",
+    service_provider: "Tele2",
   });
   const columns = useSmartMovistarColumn();
 
@@ -22,7 +22,7 @@ const SmartMovistarContainer = () => {
 
   return (
     <div className="pr-5">
-      <SmartMovistarFilters title="SIMs Movistar" />
+      <SmartMovistarFilters title="SIMs Tele2" />
       <div className="">
         <SmartTable columns={columns} rows={data} />
       </div>
@@ -30,4 +30,4 @@ const SmartMovistarContainer = () => {
   );
 };
 
-export default SmartMovistarContainer;
+export default SmartTele2Container;
