@@ -95,7 +95,7 @@ export default function MenuSidebar({ links, menuName }: MenuSidebarProps) {
                   <div className="py-2 mx-5 text-[#24A2CE] font-bold">{menuName}</div>
                   <Divider />
                   {links.map((el, index) => (
-                    <div key={index}>
+                    <div key={index} className="z-999">
                       <div className="py-2 mx-5 flex gap-4">
                         <SvgSims fill="#24A2CE" size={25} />
                         <Link href={el.path} onClick={() => setOpen(false)}>

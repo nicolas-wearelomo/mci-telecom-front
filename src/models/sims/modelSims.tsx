@@ -1,4 +1,15 @@
+import { Dayjs } from "dayjs";
+
 export interface ModelSmartSims {
   company: string;
   service_provider: string;
+}
+
+export interface ModelLegacySim {
+  company: string;
+}
+export interface ModelSimsDetail {
+  serial_number: string | null;
+  from: Dayjs | null;
+  to: Dayjs | null;
 }

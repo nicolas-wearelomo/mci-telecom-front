@@ -5,6 +5,7 @@ import BasicModal from "../BasicModal";
 import { TextField } from "@mui/material";
 import SettingsIcon from "@mui/icons-material/Settings";
 import Pagination from "@mui/material/Pagination";
+import AliasModal from "./modals/AliasModal";
 
 export default function SmartTable({ columns, rows }: CustomTableOrderProps) {
   interface FiltersProps {
@@ -17,6 +18,7 @@ export default function SmartTable({ columns, rows }: CustomTableOrderProps) {
   const [orderRowsPagination, setOrderRowsPagination] = useState<any[]>([]);
   const [filterValue, setFilterValue] = useState<FiltersProps>({ key: "", value: "" });
   const [open, setOpen] = useState<boolean>(false);
+  const [openAlias, setOpenAlias] = useState<boolean>(false);
   const [rowData, setRowData] = useState({});
   const [page, setPage] = useState(1);
   const rowsPerPage = 25;
@@ -64,6 +66,11 @@ export default function SmartTable({ columns, rows }: CustomTableOrderProps) {
 
   const handleModalOpen = (data: any) => {
     setOpen(true);
+    setRowData(data);
+  };
+
+  const handleAliasModalOpen = (data: any) => {
+    setOpenAlias(true);
     setRowData(data);
   };
 
@@ -116,7 +123,13 @@ export default function SmartTable({ columns, rows }: CustomTableOrderProps) {
             {columns.orderColumns.map((columnName: any, colIndex: any) =>
               columns[columnName.name].map((subColumnName: any, subIndex: any) => (
                 <div style={{ minWidth: subColumnName.width, paddingTop: "16px", paddingLeft: "10px" }} key={subIndex}>
-                  {row[subColumnName.key] || "S/D"}
+                  {subColumnName.key === "alias_sim" ? (
+                    <span onClick={() => handleAliasModalOpen(row)} className="cursor-pointer text-[#24A2CE]">
+                      {row[subColumnName.key] || "Sin alias"}
+                    </span>
+                  ) : (
+                    row[subColumnName.key] || "S/D"
+                  )}
                 </div>
               ))
             )}
@@ -128,7 +141,7 @@ export default function SmartTable({ columns, rows }: CustomTableOrderProps) {
           count={Math.ceil(orderRows.length / rowsPerPage)}
           page={page}
           onChange={handleChange}
-          color="secondary"
+          color="primary"
           sx={{
             "& .css-19micn4-MuiButtonBase-root-MuiPaginationItem-root.Mui-selected": {
               backgroundColor: "#24A2CE",
@@ -139,8 +152,8 @@ export default function SmartTable({ columns, rows }: CustomTableOrderProps) {
           }}
         />
       </div>
-
       <BasicModal setOpen={setOpen} open={open} data={rowData} />
+      <AliasModal setOpen={setOpenAlias} open={openAlias} data={rowData} />
     </div>
   );
 }

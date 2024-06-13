@@ -4,6 +4,7 @@ import FormControlLabel from "@mui/material/FormControlLabel";
 import Switch from "@mui/material/Switch";
 import Modal from "@mui/material/Modal";
 import { MenuItem, TextField } from "@mui/material";
+import Link from "next/link";
 
 const style = {
   position: "absolute" as "absolute",
@@ -22,8 +23,6 @@ export default function BasicModal({ open, setOpen, data }: { open: boolean; set
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
   const [step, setStep] = React.useState(1);
-
-  console.log(data);
 
   return (
     <div>
@@ -113,10 +112,12 @@ export default function BasicModal({ open, setOpen, data }: { open: boolean; set
                 </div>
               </div>
               <div className="flex justify-between text-[#777777] text-xs mt-4">
-                <p>Ver historial de consumo y ciclo de vida para esta SIM</p>
+                <Link href={`/sims/view-detail/${data.serial_number}`}>
+                  Ver historial de consumo y ciclo de vida para esta SIM
+                </Link>
               </div>
               <div className="flex justify-between text-[#777777] text-xs mt-4">
-                <p>Enviar SMS a esta SIM</p>
+                <Link href={`/sims/send-sms/${data.serial_number}`}>Enviar SMS a esta SIM</Link>
               </div>
             </>
           )}
