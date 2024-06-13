@@ -2,13 +2,13 @@
 import RangeFilters from "@/components/Sims/Filters/RangeFilters";
 import useGetSimsDatails from "@/services/sims/useGetSimsDatails";
 import dayjs, { Dayjs } from "dayjs";
-import { usePathname, useRouter } from "next/navigation";
+import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import DataGraphic from "./Charts/DataGraphic";
 
 const SimsDetailContainer = () => {
   const pathName = usePathname();
-  const serial_number = pathName.split("/").pop() || null; // Convertir undefined a null
+  const serial_number = pathName.split("/").pop() || null;
   const [from, setFrom] = useState<Dayjs | null>(dayjs());
   const [to, setTo] = useState<Dayjs | null>(dayjs());
   const { callback, data, loading } = useGetSimsDatails();
