@@ -56,14 +56,14 @@ export default function ConsumptionFilters({ month, setMonth, year, setYear, cal
         <div className="flex gap-2">
           <TextField select label="Mes" size="small" sx={{ width: "200px" }} defaultValue={month}>
             {mesOption.map((mes) => (
-              <MenuItem value={mes.value} onClick={() => setMonth(mes.value)}>
+              <MenuItem value={mes.value} key={mes} onClick={() => setMonth(mes.value)}>
                 {mes.label}
               </MenuItem>
             ))}
           </TextField>
           <TextField select label="Año" size="small" sx={{ width: "200px" }} defaultValue={year}>
             {añoOption.map((año) => (
-              <MenuItem value={año.value} onClick={() => setYear(año.value)}>
+              <MenuItem value={año.value} key={año.value} onClick={() => setYear(año.value)}>
                 {año.label}
               </MenuItem>
             ))}
@@ -75,7 +75,9 @@ export default function ConsumptionFilters({ month, setMonth, year, setYear, cal
           </TextField>
           <TextField select label="Filtrar por operador" size="small" sx={{ width: "200px" }} defaultValue={"movistar"}>
             {operatorFilter.map((operator) => (
-              <MenuItem value={operator.value}>{operator.label}</MenuItem>
+              <MenuItem key={operator} value={operator.value}>
+                {operator.label}
+              </MenuItem>
             ))}
           </TextField>
           <Button
