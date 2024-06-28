@@ -106,6 +106,10 @@ export default function NavBar() {
             <Link href="/profile" onClick={handleClose} className="pl-5 flex gap-2 text-[12px] cursor-pointer">
               <SvgPeople fill="#24A2CE" /> Ir a mi Perfil
             </Link>
+            <Link href="/orders" onClick={handleClose} className="pl-5 flex gap-2 text-[12px] cursor-pointer">
+              Ordenes
+            </Link>
+
             <Divider />
             <div className="mx-5">
               <Button

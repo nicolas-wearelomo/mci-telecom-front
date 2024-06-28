@@ -51,6 +51,7 @@ export default function RangeFilters({ setFrom, from, setTo, to, callback }: Ran
           border: "2px solid #1454a4",
           color: "#FFFFFF",
           bgcolor: "#1454a4",
+          ":hover": { bgcolor: "#1454a4" },
         }}
         endIcon={<SvgArrowRigth fill="#24A2CE" />}
       >

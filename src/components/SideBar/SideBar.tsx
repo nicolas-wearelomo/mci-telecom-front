@@ -10,17 +10,20 @@ export default function SideBar() {
     { name: "Smart Entel", path: "/sims/smart-entel" },
     { name: "Smart Tele2", path: "/sims/smart-tele2" },
     { name: "Legacy", path: "/sims/legacy" },
-    { name: "Orders", path: "/sims/orders" },
   ];
 
   const pathname = usePathname();
   return (
     <div
       // className={`h-[calc(100vh-180px)] w-[100px] border-solid border-2 border-[#d6d6d6] mx-5 rounded-full flex flex-col items-center  ${
-      className={`h-[85vh] w-[100px] border-solid border-2 border-[#d6d6d6] mx-5 rounded-full flex flex-col items-center min-w-[80´x] ${
+      // className={`h-[85vh] w-[100px] border-solid border-2 border-[#d6d6d6] mx-5 rounded-full flex flex-col items-center min-w-[80´x] ${
+      //   (pathname === "/login" || pathname === "/login/forgot-password" || pathname === "/login/reset-password") &&
+      //   "hidden"
+      // } bg-white`}
+      className={`h-[calc(100vh-120px)] w-[100px] border-solid border-[1px] border-[#d6d6d6] mx-5 rounded-full flex flex-col items-center min-w-[80´x] ${
         (pathname === "/login" || pathname === "/login/forgot-password" || pathname === "/login/reset-password") &&
         "hidden"
-      }`}
+      } bg-white`}
     >
       <div className={`mt-7 rounded-full p-3 ${pathname === "/home" && "bg-[#8BD4E8]"}`}>
         <SvgHome fill={`${pathname === "/home" ? "#000000" : "#24A2CE"} `} href="/home" />

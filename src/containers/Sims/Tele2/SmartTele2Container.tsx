@@ -5,11 +5,12 @@ import SmartTable from "@/components/SmartTable";
 import useSmartMovistarColumn from "@/components/SmartTable/columns/useSmartMovistarColumns";
 import { RootState } from "@/redux/types";
 import useGetAllMovistarSims from "@/services/sims/movistar/useGetAllMovistarSims";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 
 const SmartTele2Container = () => {
   const { currentUser } = useSelector((state: RootState) => state.auth);
+  const [dataToRender, setDataToRender] = useState([]);
   const { callback, data, loading } = useGetAllMovistarSims({
     company: currentUser?.company,
     service_provider: "Tele2",
@@ -20,12 +21,16 @@ const SmartTele2Container = () => {
     callback();
   }, [callback]);
 
+  useEffect(() => {
+    setDataToRender(data);
+  }, [data]);
+
   return (
-    <div className="pr-5">
-      <SmartMovistarFilters title="SIMs Tele2" />
-      <div className="">
-        <SmartTable columns={columns} rows={data} />
+    <div className="container">
+      <div className="mr-20">
+        <SmartMovistarFilters title="SIMs Tele2" data={data} setData={setDataToRender} />
       </div>
+      <SmartTable columns={columns} rows={data} />
     </div>
   );
 };

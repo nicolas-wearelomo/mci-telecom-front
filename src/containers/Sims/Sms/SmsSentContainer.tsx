@@ -61,6 +61,7 @@ const SmsSentContainer = () => {
               border: "2px solid #1454a4",
               color: "#FFFFFF",
               bgcolor: "#1454a4",
+              ":hover": { bgcolor: "#1454a4" },
             }}
             endIcon={<SendIcon />}
           >

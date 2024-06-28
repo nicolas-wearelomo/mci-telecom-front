@@ -72,7 +72,7 @@ export default function Page() {
         </div>
         <div className="bg-white m-6 ml-3 w-[50%] rounded-[32px] flex flex-col justify-center items-center gap-8">
           <Image src="/assets/login/mci-logo.png" alt="mci logo" width={150} height={150} className="mb-0" />
-          <p className="text-[#24A2CE]">Conectividad celular global para dispositivos IoT</p>
+          {/* <p className="text-[#24A2CE]">Conectividad celular global para dispositivos IoT</p> */}
           {/* <h2 className="text-[25px] font-semibold w-[328px]">Ingresa</h2> */}
           <form className="flex flex-col gap-3" onSubmit={loginFunction}>
             <TextField

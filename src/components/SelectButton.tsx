@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import Link from "next/link";
@@ -18,13 +18,25 @@ interface OptionsButton {
   openModal?: () => void;
 }
 
-console.log();
-
 export default function SelectButton({ label, options, color, fullWidth }: SelectButtonProps) {
   const [open, setOpen] = useState<boolean>(false);
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  const handleClickOutside = (event: MouseEvent) => {
+    if (containerRef.current && !containerRef.current.contains(event.target as Node)) {
+      setOpen(false);
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
 
   return (
-    <div className="relative">
+    <div ref={containerRef} className="relative">
       <button
         className={`border-solid border-2 ${
           color === "secondary" ? "border-gray-200" : "border-[#24A2CE]"
@@ -54,7 +66,9 @@ export default function SelectButton({ label, options, color, fullWidth }: Selec
                   {el.label}
                 </div>
               ) : (
-                <div className=" px-5 ">{el.label}</div>
+                <div className=" px-5 " onClick={() => setOpen(!open)}>
+                  {el.label}
+                </div>
               )}
             </div>
           ))}

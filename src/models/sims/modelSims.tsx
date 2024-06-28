@@ -13,3 +13,7 @@ export interface ModelSimsDetail {
   from: Dayjs | null;
   to: Dayjs | null;
 }
+export interface ModelSimsConsumptions {
+  month: string | null;
+  year: string | null;
+}

@@ -13,7 +13,7 @@ const useGetHistorySms = () => {
 
   const getHistorySms = useCallback(async () => {
     if (!isAuth) return;
-    setLoading(true); // Asegurarse de que loading se establece a true al iniciar la solicitud
+    setLoading(true);
     try {
       const response = await axiosInstance.get(`/sms/history`);
 
@@ -21,7 +21,7 @@ const useGetHistorySms = () => {
     } catch (error) {
       console.log(error);
     } finally {
-      setLoading(false); // Asegurarse de que loading se establece a false al finalizar la solicitud
+      setLoading(false);
     }
   }, [isAuth]);
 

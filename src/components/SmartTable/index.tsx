@@ -82,7 +82,7 @@ export default function SmartTable({ columns, rows }: CustomTableOrderProps) {
     <div className="w-[95%]">
       <div className={`max-h-[70vh] min-h-[70vh] overflow-auto`}>
         <div className="flex">
-          {columns.orderColumns.map((el: any, index: any) => (
+          {columns?.orderColumns?.map((el: any, index: any) => (
             <div
               className={`${index % 2 === 0 ? "bg-[#C3F2FE]" : "bg-[#E7FAFF]"} ${index === 0 && "rounded-tl-xl"} ${
                 columns.orderColumns.length === index - 1 && "rounded-tl-xl"
@@ -96,18 +96,18 @@ export default function SmartTable({ columns, rows }: CustomTableOrderProps) {
         </div>
         <div className="flex">
           {columns.orderColumns.map((columnName: any, index: any) => (
-            <div className="flex h-[80px] items-center bg-[#F2F2F2]" key={index}>
+            <div className="flex h-[40px] items-center bg-[#F2F2F2]" key={index}>
               {columns[columnName.name].map((subColumnName: any, subIndex: any) => (
-                <div style={{ minWidth: subColumnName.width, paddingLeft: "10px" }} key={subIndex}>
+                <div style={{ minWidth: subColumnName.width, paddingLeft: "35px" }} key={subIndex}>
                   {subColumnName?.label || "S/D"}
-                  <div className="">
+                  {/* <div className="">
                     <TextField
                       size="small"
                       className="w-[80%]"
                       value={filterValue.key === subColumnName.key ? filterValue.value : ""}
                       onChange={(e) => handleChangeFilters(e, subColumnName.key)}
                     />
-                  </div>
+                  </div> */}
                 </div>
               ))}
             </div>

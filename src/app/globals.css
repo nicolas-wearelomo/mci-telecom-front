@@ -22,12 +22,8 @@ html, body, #root {
 
 body {
   color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+  background-color: #FAFAFA  ;
+ 
 }
 
 @layer utilities {
@@ -40,4 +36,17 @@ h3 {
   font-size: 24px;
   color: #24A2CE;
   font-weight: 500;
+}
+
+.container {
+  height: calc(100vh - 120px);
+  min-width: calc(100% - 20px);
+  max-width: calc(100% - 20px);
+  overflow-y: auto;
+  border-style: solid;
+  border-width: 1px;
+  border-color: #d6d6d6;
+  border-radius: 40px;
+  background-color: white;
+  padding: 30px;
 }
