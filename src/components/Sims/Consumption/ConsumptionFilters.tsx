@@ -70,7 +70,9 @@ export default function ConsumptionFilters({ month, setMonth, year, setYear, cal
           </TextField>
           <TextField select label="Filtrar por" size="small" sx={{ width: "200px" }} defaultValue={"todos"}>
             {filter.map((filterBy) => (
-              <MenuItem value={filterBy.value}>{filterBy.label}</MenuItem>
+              <MenuItem value={filterBy.value} key={filterBy.value}>
+                {filterBy.label}
+              </MenuItem>
             ))}
           </TextField>
           <TextField select label="Filtrar por operador" size="small" sx={{ width: "200px" }} defaultValue={"movistar"}>

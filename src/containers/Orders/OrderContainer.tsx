@@ -117,7 +117,7 @@ const OrderContainer = () => {
                         </div>
                         <p>
                           {dataToRender.ordersData.map((el: any) => (
-                            <div className="grid grid-cols-4">
+                            <div className="grid grid-cols-4" key={el.id}>
                               <div className="col-span-2">
                                 {el.opertor_sim} de {el.name}
                               </div>
