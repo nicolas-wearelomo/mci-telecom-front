@@ -3,8 +3,9 @@ import ConsumptionFilters from "@/components/Sims/Consumption/ConsumptionFilters
 import useConsumptionColumn from "@/components/Sims/Consumption/useConsumptionColumns";
 import SmartTable from "@/components/SmartTable";
 import useGetSimsConsumptions from "@/services/sims/useGetSimsConsumptions";
+import { CircularProgress } from "@mui/material";
 import { useEffect, useState } from "react";
-import { PieChart, Pie, Cell } from "recharts";
+import { PieChart, Pie, Cell, Legend, Label } from "recharts";
 
 const SimsConsumptionContainer = () => {
   const [month, setMonth] = useState<string>("06");
@@ -17,30 +18,36 @@ const SimsConsumptionContainer = () => {
   }, [callback, month, year]);
 
   const graph1 = [
-    { name: "Group A", value: data[0]?.total_sims },
-    { name: "Group B", value: 1500 },
+    { name: "Desactivado", value: data?.status?.local.inactive_local },
+    { name: "Activado", value: data?.status?.local.active_local },
+    { name: "Lista para activación", value: data?.status?.local.activation_ready_local },
+    { name: "Test", value: data?.status?.local.test_local },
   ];
   const graph2 = [
-    { name: "Group A", value: data[2]?.total_sims },
-    { name: "Group B", value: 1500 },
+    { name: "Desactivado", value: data?.status?.global.inactive_global },
+    { name: "Activado", value: data?.status?.global.active_global },
+    { name: "Lista para activación", value: data?.status?.global.activation_ready_global },
+    { name: "Test", value: data?.status?.global.test_global },
   ];
 
+  const COLORS = ["#f05c5c", "#24A2CE", "#82ca9d", "#ffbb28"];
+
+  console.log(data);
   return (
-    <div className="pr-5 overflow-auto max-h-[800px]">
+    <div className="containerSmart">
       <h2 className="text-[#24A2CE] text-3xl mb-5">Detalle planes contratados</h2>
       <ConsumptionFilters month={month} setMonth={setMonth} year={year} setYear={setYear} callback={callback} />
-
-      <>
-        <SmartTable columns={columns} rows={data} />
-        <div className="mt-10 flex w-full">
-          <div className="flex w-full justify-around">
-            <div>
+      {!loading ? (
+        <>
+          <SmartTable columns={columns} rows={data?.data} />
+          <div className="mt-10 flex w-full justify-around">
+            <div className="flex flex-col items-center">
               <div>Distribución SIMs locales</div>
-              <div className="relative w-[250px] h-[250px]">
-                <PieChart width={250} height={250}>
+              <div>
+                <PieChart width={400} height={250}>
                   <Pie
                     data={graph1}
-                    cx="50%"
+                    cx="40%"
                     cy="50%"
                     innerRadius={60}
                     outerRadius={90}
@@ -49,22 +56,25 @@ const SimsConsumptionContainer = () => {
                     dataKey="value"
                   >
                     {graph1.map((entry, index) => (
-                      <Cell key={`cell-${index}`} fill={index === 0 ? "#f05c5c" : "#24A2CE"} />
+                      <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
                     ))}
+                    <Label
+                      value={`Total: ${data?.status?.local.total_local}`}
+                      position="center"
+                      style={{ textAnchor: "middle", fontSize: "16px", fontWeight: "bold" }}
+                    />
                   </Pie>
+                  <Legend layout="vertical" verticalAlign="middle" align="right" />
                 </PieChart>
-                <div className="absolute inset-0 flex items-center justify-center z-20">
-                  <div className="text-gray-500 text-sm font-bold">Total SIMS 58</div>
-                </div>
               </div>
             </div>
-            <div>
+            <div className="flex flex-col items-center">
               <div>Distribución SIMs globales</div>
-              <div className="relative w-[250px] h-[250px]">
-                <PieChart width={250} height={250}>
+              <div>
+                <PieChart width={400} height={250}>
                   <Pie
                     data={graph2}
-                    cx="50%"
+                    cx="40%"
                     cy="50%"
                     innerRadius={60}
                     outerRadius={90}
@@ -72,19 +82,26 @@ const SimsConsumptionContainer = () => {
                     paddingAngle={5}
                     dataKey="value"
                   >
-                    {graph1.map((entry, index) => (
-                      <Cell key={`cell-${index}`} fill={index === 0 ? "#f05c5c" : "#24A2CE"} />
+                    {graph2.map((entry, index) => (
+                      <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
                     ))}
+                    <Label
+                      value={`Total: ${data?.status?.global.total_global}`}
+                      position="center"
+                      style={{ textAnchor: "middle", fontSize: "16px", fontWeight: "bold" }}
+                    />
                   </Pie>
+                  <Legend layout="vertical" verticalAlign="middle" align="right" />
                 </PieChart>
-                <div className="absolute inset-0 flex items-center justify-center z-20">
-                  <div className="text-gray-500 text-sm font-bold">Total SIMS 1238</div>
-                </div>
               </div>
             </div>
           </div>
+        </>
+      ) : (
+        <div className="w-full h-full flex justify-center items-center">
+          <CircularProgress />
         </div>
-      </>
+      )}
     </div>
   );
 };

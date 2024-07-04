@@ -7,45 +7,38 @@ import { Button, MenuItem, TextField } from "@mui/material";
 import { SvgArrowRigth } from "@/utils/svgList";
 import dayjs, { Dayjs } from "dayjs";
 
-const SmsSmartFilter = () => {
-  const [date, setDate] = useState<Dayjs | null>(dayjs());
+interface RangeFiltersProps {
+  setFrom: (value: Dayjs | null) => void;
+  from: Dayjs | null;
+  setTo: (value: Dayjs | null) => void;
+  to: Dayjs | null;
+  callback: (params: { from: Dayjs | null; to: Dayjs | null }) => void;
+}
+
+const SmsSmartFilter = ({ setFrom, from, setTo, to, callback }: RangeFiltersProps) => {
+  const handleCallback = () => {
+    callback({ from, to });
+  };
   return (
     <div className="flex gap-2">
-      <div>
-        <LocalizationProvider dateAdapter={AdapterDayjs}>
-          <DatePicker
-            label="Desde"
-            format="DD-MM-YYYY"
-            value={date}
-            onChange={(newValue) => setDate(newValue)}
-            slotProps={{ textField: { size: "small" } }}
-          />
-        </LocalizationProvider>
-      </div>
-      <div>
-        <LocalizationProvider dateAdapter={AdapterDayjs}>
-          <DatePicker
-            label="Hasta"
-            format="DD-MM-YYYY"
-            value={date}
-            onChange={(newValue) => setDate(newValue)}
-            slotProps={{ textField: { size: "small" } }}
-          />
-        </LocalizationProvider>
-      </div>
-      <TextField select label="Enviado a" size="small" sx={{ width: "200px" }}>
-        <MenuItem value={"days"}>opcion 1</MenuItem>
-        <MenuItem value={"days1"}>opcion 2</MenuItem>
-      </TextField>
-      <TextField select label="Enviado el" size="small" sx={{ width: "200px" }}>
-        <MenuItem value={"days"}>opcion 1</MenuItem>
-        <MenuItem value={"days1"}>opcion 2</MenuItem>
-      </TextField>
-      <TextField select label="Enviado por" size="small" sx={{ width: "200px" }}>
-        <MenuItem value={"days"}>opcion 1</MenuItem>
-        <MenuItem value={"days1"}>opcion 2</MenuItem>
-      </TextField>
+      <LocalizationProvider dateAdapter={AdapterDayjs}>
+        <DatePicker
+          label="Desde"
+          format="DD-MM-YYYY"
+          value={from}
+          onChange={(newValue) => setFrom(newValue)}
+          slotProps={{ textField: { size: "small" } }}
+        />
+        <DatePicker
+          label="Hasta"
+          format="DD-MM-YYYY"
+          value={to}
+          onChange={(newValue) => setTo(newValue)}
+          slotProps={{ textField: { size: "small" } }}
+        />
+      </LocalizationProvider>
       <Button
+        onClick={handleCallback}
         variant="outlined"
         sx={{
           borderRadius: "8px",
@@ -53,6 +46,7 @@ const SmsSmartFilter = () => {
           border: "2px solid #1454a4",
           color: "#FFFFFF",
           bgcolor: "#1454a4",
+          ":hover": { bgcolor: "#1454a4" },
         }}
         endIcon={<SvgArrowRigth fill="#24A2CE" />}
       >

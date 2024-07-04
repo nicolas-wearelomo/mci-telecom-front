@@ -40,12 +40,12 @@ const OrderContainer = () => {
   };
 
   return (
-    <>
+    <div className="container">
       {/* <OrderFilters /> */}
       {/* <CustomTable dataTable={smsTableData} /> */}
       <div className="flex justify-between">
         <h3>Listado de pedidos</h3>
-        <Button variant="outlined" sx={{ marginRight: 10 }}>
+        <Button variant="outlined">
           <Link href="/orders/new-orders">Nuevo Pedido</Link>
         </Button>
       </div>
@@ -185,7 +185,7 @@ const OrderContainer = () => {
           )}
         </div>
       </div>
-    </>
+    </div>
   );
 };
 

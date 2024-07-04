@@ -1,7 +1,5 @@
-import SmartSmsContainer from "@/containers/Sims/Sms/SmartSmsContainer";
-
 const Page = () => {
-  return <SmartSmsContainer />;
+  return <></>;
 };
 
 export default Page;

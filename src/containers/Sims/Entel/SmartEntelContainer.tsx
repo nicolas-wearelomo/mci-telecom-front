@@ -7,6 +7,7 @@ import { RootState } from "@/redux/types";
 import useGetAllMovistarSims from "@/services/sims/movistar/useGetAllMovistarSims";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
+import CircularProgress from "@mui/material/CircularProgress";
 
 const SmartEntelContainer = () => {
   const { currentUser } = useSelector((state: RootState) => state.auth);
@@ -27,10 +28,16 @@ const SmartEntelContainer = () => {
 
   return (
     <div className="container">
-      <div className="mr-20">
-        <SmartMovistarFilters title="SIMs Entel" data={data} setData={setDataToRender} />
-      </div>
-      <SmartTable columns={columns} rows={data} />
+      {loading ? (
+        <div className="w-full h-full flex justify-center items-center">
+          <CircularProgress />
+        </div>
+      ) : (
+        <>
+          <SmartMovistarFilters title="SIMs Entel" data={data} setData={setDataToRender} />
+          <SmartTable columns={columns} rows={data} />
+        </>
+      )}
     </div>
   );
 };

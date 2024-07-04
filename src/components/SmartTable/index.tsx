@@ -79,8 +79,8 @@ export default function SmartTable({ columns, rows }: CustomTableOrderProps) {
   };
 
   return (
-    <div className="w-[95%]">
-      <div className={`max-h-[70vh] min-h-[70vh] overflow-auto`}>
+    <div className="w-full">
+      <div className={`max-h-[70vh] overflow-auto`}>
         <div className="flex">
           {columns?.orderColumns?.map((el: any, index: any) => (
             <div
@@ -136,7 +136,7 @@ export default function SmartTable({ columns, rows }: CustomTableOrderProps) {
           </div>
         ))}
       </div>
-      <div className="flex justify-center">
+      <div className="flex justify-center mt-5">
         <Pagination
           count={Math.ceil(orderRows.length / rowsPerPage)}
           page={page}

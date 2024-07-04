@@ -1,6 +1,6 @@
 "use client";
 import { usePathname } from "next/navigation";
-import { SvgHome, SvgSims, SvgBilling, SvgReports, SvgRecords, SvgHelp } from "../../utils/svgList";
+import { SvgHome, SvgSims, SvgBilling, SvgReports, SvgRecords, SvgHelp, SvgSms } from "../../utils/svgList";
 import * as React from "react";
 import MenuSidebar from "./components/MenuSidebar";
 
@@ -30,6 +30,9 @@ export default function SideBar() {
       </div>
       <MenuSidebar links={simsMenu} menuName="SIMs" />
 
+      <div className={`mt-7 rounded-full p-3 ${pathname === "/sms-smart" && "bg-[#8BD4E8]"}`}>
+        <SvgSms fill={`${pathname === "/sms-smart" ? "#000000" : "#24A2CE"} `} href="/sms-smart" />
+      </div>
       <div className={`mt-7 rounded-full p-3 ${pathname === "/billing" && "bg-[#8BD4E8]"}`}>
         <SvgBilling fill={`${pathname === "/billing" ? "#000000" : "#24A2CE"} `} href="/billing" />
       </div>

@@ -7,6 +7,7 @@ import { RootState } from "@/redux/types";
 import useGetAllMovistarSims from "@/services/sims/movistar/useGetAllMovistarSims";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
+import CircularProgress from "@mui/material/CircularProgress";
 
 const SmartMovistarContainer = () => {
   const { currentUser } = useSelector((state: RootState) => state.auth);
@@ -26,11 +27,17 @@ const SmartMovistarContainer = () => {
   }, [data]);
 
   return (
-    <div className="container">
-      <div className="mr-20">
-        <SmartMovistarFilters title="SIMs Movistar" data={data} setData={setDataToRender} />
-      </div>
-      <SmartTable columns={columns} rows={dataToRender} />
+    <div className="containerSmart">
+      {loading ? (
+        <div className="w-full h-full flex justify-center items-center">
+          <CircularProgress />
+        </div>
+      ) : (
+        <>
+          <SmartMovistarFilters title="SIMs Movistar" data={data} setData={setDataToRender} />
+          <SmartTable columns={columns} rows={dataToRender} />
+        </>
+      )}
       {/* <div className="">
         <SmartTable columns={columns} rows={dataToRender} />
       </div> */}

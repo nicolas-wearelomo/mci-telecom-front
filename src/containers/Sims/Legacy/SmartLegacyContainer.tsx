@@ -6,6 +6,7 @@ import useSmartMovistarColumn from "@/components/SmartTable/columns/useSmartMovi
 import { RootState } from "@/redux/types";
 import useGetAllMovistarSims from "@/services/sims/movistar/useGetAllMovistarSims";
 import useGetAllLegacySims from "@/services/sims/useGetAllLegacySims";
+import { CircularProgress } from "@mui/material";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 
@@ -27,10 +28,16 @@ const SmartLegacyContainer = () => {
   }, [data]);
   return (
     <div className="container">
-      <div className="mr-20">
-        <SmartMovistarFilters title="SIMs Movistar" data={data} setData={setDataToRender} />
-      </div>
-      <SmartTable columns={columns} rows={data} />
+      {loading ? (
+        <div className="w-full h-full flex justify-center items-center">
+          <CircularProgress />
+        </div>
+      ) : (
+        <>
+          <SmartMovistarFilters title="SIMs Movistar" data={data} setData={setDataToRender} />
+          <SmartTable columns={columns} rows={data} />
+        </>
+      )}
     </div>
   );
 };

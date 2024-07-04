@@ -5,6 +5,8 @@ import dayjs, { Dayjs } from "dayjs";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import DataGraphic from "./Charts/DataGraphic";
+import { CircularProgress } from "@mui/material";
+import MciMessageInfo from "@/components/MciMessage/MciMessageInfo";
 
 const SimsDetailContainer = () => {
   const pathName = usePathname();
@@ -19,8 +21,9 @@ const SimsDetailContainer = () => {
     }
   }, [callback]);
 
+  console.log(loading);
   return (
-    <div>
+    <div className="container">
       <RangeFilters
         setFrom={setFrom}
         setTo={setTo}
@@ -28,19 +31,33 @@ const SimsDetailContainer = () => {
         to={to}
         callback={({ from, to }) => callback({ serial_number, from, to })}
       />
-      <div className="mt-10 h-[calc(85vh-35px)] overflow-auto">
-        <div className="mt-2">
-          <h3 className="mb-10">Consumo de datos</h3>
-          <DataGraphic data={data} dataKey={"consumption_daily_data_val"} />
+      {loading ? (
+        <div className="w-full h-full flex justify-center items-center">
+          <CircularProgress />
         </div>
-        <div className="mt-10">
-          <h3 className="mb-10">Consumo de SMS</h3>
-          <DataGraphic data={data} dataKey={"consumption_daily_sms_val"} />
-        </div>
-        <div className="mt-10">
-          <h3 className="mb-10">Ciclo de vida</h3>
-        </div>
-      </div>
+      ) : (
+        <>
+          {data.length ? (
+            <div className="mt-10">
+              <div className="mt-2">
+                <h3 className="mb-10">Consumo de datos</h3>
+                <DataGraphic data={data} dataKey={"consumption_daily_data_val"} />
+              </div>
+              <div className="mt-10">
+                <h3 className="mb-10">Consumo de SMS</h3>
+                <DataGraphic data={data} dataKey={"consumption_daily_sms_val"} />
+              </div>
+              <div className="mt-10">
+                <h3 className="mb-10">Ciclo de vida</h3>
+              </div>
+            </div>
+          ) : (
+            <div className="w-full h-full flex justify-center items-center">
+              <MciMessageInfo message="No hay consumos para el período seleccionado" />
+            </div>
+          )}
+        </>
+      )}
     </div>
   );
 };

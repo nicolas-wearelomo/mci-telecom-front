@@ -3,26 +3,28 @@ import { useCallback, useState } from "react";
 import axiosInstance from "../../utils/axiosInstance";
 import { useSelector } from "react-redux";
 import { RootState } from "@/redux/types";
-import { ModelSimsDetail } from "@/models/sims/modelSims";
+import { ModelSmsSmart } from "@/models/sms/modelSms";
 
-const useGetSimsDetails = () => {
+const useGetSmsSmart = () => {
   const { isAuth } = useSelector((state: RootState) => state.auth);
 
   const [loading, setLoading] = useState<boolean>(true);
   const [data, setData] = useState<any>([]);
 
-  const getSimsDetail = useCallback(
-    async ({ serial_number, from, to }: ModelSimsDetail) => {
+  const getSmsSmart = useCallback(
+    async ({ sent_by, from, to }: ModelSmsSmart) => {
       if (!isAuth) return;
       setLoading(true);
       try {
-        const response = await axiosInstance.get(`/sims/detail`, {
+        console.log(from, to);
+        const response = await axiosInstance.get(`/sms/smart`, {
           params: {
-            serial_number,
+            // sent_by,
             from,
             to,
           },
         });
+        console.log(response);
         setData(response.data);
       } catch (error) {
         console.log(error);
@@ -36,8 +38,8 @@ const useGetSimsDetails = () => {
   return {
     loading,
     data,
-    callback: getSimsDetail,
+    callback: getSmsSmart,
   };
 };
 
-export default useGetSimsDetails;
+export default useGetSmsSmart;
