@@ -27,12 +27,12 @@ export default function BasicModal({
   step2,
   step3,
 }: {
-  open: boolean;
-  setOpen: any;
-  data: any;
-  step1: boolean;
-  step2: boolean;
-  step3: boolean;
+  open?: boolean;
+  setOpen?: any;
+  data?: any;
+  step1?: boolean;
+  step2?: boolean;
+  step3?: boolean;
 }) {
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
