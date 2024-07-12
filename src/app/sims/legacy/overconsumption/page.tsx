@@ -84,7 +84,7 @@ export default function Page() {
         <TextField label="Buscar por número de ICC o alias" fullWidth InputProps={{ endAdornment: <SearchIcon /> }} />
       </div>
       <div className="mt-5">
-        <CustomTableOrder cols={6} columns={columns} title="Configuraciones" rows={rows} />
+        {/* <CustomTableOrder cols={6} columns={columns} title="Configuraciones" rows={rows} /> */}
       </div>
       <div className="mt-5">
         <p className="mb-5">Configuración en caso de sobre consumo</p>
