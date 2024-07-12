@@ -27,8 +27,8 @@ export default function BasicModal({
   step2,
   step3,
 }: {
-  open?: boolean;
-  setOpen?: any;
+  open: boolean;
+  setOpen: any;
   data?: any;
   step1?: boolean;
   step2?: boolean;
