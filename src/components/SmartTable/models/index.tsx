@@ -1,8 +1,10 @@
 export interface CustomTableOrderProps {
   columns: any;
   rows: any[];
-  cols?: any; //BORRAR
-  title?: any; //BORRAR
+  step1?: boolean;
+  step2?: boolean;
+  step3?: boolean;
+  settings?: boolean;
 }
 
 export interface ColumnsTableGrid {

@@ -30,8 +30,8 @@ const OrderContainer = () => {
 
   const smsTableData: ModelTableOrders<HomeTable> = {
     columns: [
-      { header: "N°", field: "id", width: 100 },
-      { header: "Tipo", field: "shipping_type", width: 100 },
+      { header: "N°", field: "id", width: 50 },
+      { header: "Tipo", field: "shipping_type", width: 200 },
       { header: "Estado", field: "stage", width: 100 },
       { header: "Fecha Ingreso", field: "created_on", width: 200 },
       { header: "Fecha Actualización", field: "modified_on", width: 200 },
@@ -43,7 +43,7 @@ const OrderContainer = () => {
     <div className="container">
       {/* <OrderFilters /> */}
       {/* <CustomTable dataTable={smsTableData} /> */}
-      <div className="flex justify-between">
+      <div className="flex justify-between mb-5">
         <h3>Listado de pedidos</h3>
         <Button variant="outlined">
           <Link href="/orders/new-orders">Nuevo Pedido</Link>
@@ -95,7 +95,8 @@ const OrderContainer = () => {
                   <div>
                     <div>
                       <p className="font-bold">Solicitante</p>
-                      <p className="text-red-600 font-bold">De donde sale este dato?</p>
+                      {/* <p className="text-red-600 font-bold">De donde sale este dato?</p> */}
+                      <p className="text-red-600 font-bold">-</p>
                     </div>
                     <div>
                       <p className="font-bold">Fecha de solicitud</p>
@@ -122,7 +123,7 @@ const OrderContainer = () => {
                                 {el.opertor_sim} de {el.name}
                               </div>
                               <div>{el.quantity}</div>
-                              <div>{el.sim_size}</div>
+                              <div>{el.sim_size === 1 ? "Estándar" : el.sim_size === 2 ? "Micro" : "Nano"}</div>
                             </div>
                           ))}
                         </p>

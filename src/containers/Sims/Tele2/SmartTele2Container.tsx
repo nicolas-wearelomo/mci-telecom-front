@@ -10,6 +10,7 @@ import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 
 const SmartTele2Container = () => {
+  const [subscriptionGruop, setSubscriptionGruop] = useState([]);
   const { currentUser } = useSelector((state: RootState) => state.auth);
   const [dataToRender, setDataToRender] = useState([]);
   const { callback, data, loading } = useGetAllMovistarSims({
@@ -24,18 +25,30 @@ const SmartTele2Container = () => {
 
   useEffect(() => {
     setDataToRender(data);
+
+    let sub = data
+      .map((item: any) => item.commercial_group)
+      .filter((value: any, index: any, self: any) => self.indexOf(value) === index);
+
+    setSubscriptionGruop(sub);
   }, [data]);
 
   return (
-    <div className="container">
+    <div className="containerSmart">
       {loading ? (
         <div className="w-full h-full flex justify-center items-center">
           <CircularProgress />
         </div>
       ) : (
         <>
-          <SmartMovistarFilters title="SIMs Tele2" data={data} setData={setDataToRender} />
-          <SmartTable columns={columns} rows={data} />
+          <SmartMovistarFilters
+            title="SIMs Tele2"
+            data={data}
+            setData={setDataToRender}
+            redirect="smart-tele2"
+            sub={subscriptionGruop}
+          />
+          <SmartTable columns={columns} rows={dataToRender} step1 />
         </>
       )}
     </div>

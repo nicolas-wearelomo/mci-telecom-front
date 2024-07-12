@@ -12,13 +12,11 @@ const useGetSimsConsumptions = () => {
   const [data, setData] = useState<any>([]);
 
   const getSimsConsumptions = useCallback(
-    async ({ month, year }: ModelSimsConsumptions) => {
-      console.log(month);
+    async ({ month, year, company }: ModelSimsConsumptions) => {
       if (!isAuth) return;
       setLoading(true);
       try {
-        const response = await axiosInstance.get(`/sims/consumption?month=${month}&year=${year}`);
-        console.log(response);
+        const response = await axiosInstance.get(`/sims/consumption?month=${month}&year=${year}&company=${company}`);
         setData(response.data);
       } catch (error) {
         console.log(error);

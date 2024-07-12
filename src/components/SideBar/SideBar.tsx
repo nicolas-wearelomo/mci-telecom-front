@@ -9,7 +9,7 @@ export default function SideBar() {
     { name: "Smart Movistar", path: "/sims/smart-movistar" },
     { name: "Smart Entel", path: "/sims/smart-entel" },
     { name: "Smart Tele2", path: "/sims/smart-tele2" },
-    { name: "Legacy", path: "/sims/legacy" },
+    { name: "Legacy Movistar", path: "/sims/legacy" },
   ];
 
   const pathname = usePathname();

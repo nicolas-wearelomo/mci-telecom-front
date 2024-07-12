@@ -40,7 +40,7 @@ export default function MenuSidebar({ links, menuName }: MenuSidebarProps) {
         <SvgSims fill={`${pathname === "/sims" ? "#000000" : "#24A2CE"} `} />
       </button>
       {open && (
-        <div className="absolute top-0 left-14 z-20 bg-white rounded-[8px] min-w-[185px] py-[6px]">
+        <div className="absolute top-0 left-14 z-20 bg-white rounded-[8px] min-w-[200px] py-[6px]">
           {links.map((el) => (
             <div
               key={el.name}

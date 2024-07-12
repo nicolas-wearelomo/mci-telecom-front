@@ -12,6 +12,7 @@ import CircularProgress from "@mui/material/CircularProgress";
 const SmartMovistarContainer = () => {
   const { currentUser } = useSelector((state: RootState) => state.auth);
   const [dataToRender, setDataToRender] = useState([]);
+  const [subscriptionGruop, setSubscriptionGruop] = useState([]);
   const { callback, data, loading } = useGetAllMovistarSims({
     company: currentUser?.company,
     service_provider: "Movistar",
@@ -24,6 +25,12 @@ const SmartMovistarContainer = () => {
 
   useEffect(() => {
     setDataToRender(data);
+
+    let sub = data
+      .map((item: any) => item.commercial_group)
+      .filter((value: any, index: any, self: any) => self.indexOf(value) === index);
+
+    setSubscriptionGruop(sub);
   }, [data]);
 
   return (
@@ -34,13 +41,16 @@ const SmartMovistarContainer = () => {
         </div>
       ) : (
         <>
-          <SmartMovistarFilters title="SIMs Movistar" data={data} setData={setDataToRender} />
-          <SmartTable columns={columns} rows={dataToRender} />
+          <SmartMovistarFilters
+            title="SIMs Movistar"
+            data={data}
+            setData={setDataToRender}
+            redirect="smart-movistar"
+            sub={subscriptionGruop}
+          />
+          <SmartTable columns={columns} rows={dataToRender} step1 step2 step3 />
         </>
       )}
-      {/* <div className="">
-        <SmartTable columns={columns} rows={dataToRender} />
-      </div> */}
     </div>
   );
 };

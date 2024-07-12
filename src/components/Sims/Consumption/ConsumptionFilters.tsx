@@ -8,10 +8,18 @@ interface ConsumptionFiltersProps {
   setMonth: (month: string) => void;
   year: string;
   setYear: (year: string) => void;
-  callback: (params: { month: string; year: string }) => void;
+  company: string;
+  callback: (params: { month: string; year: string; company: string }) => void;
 }
 
-export default function ConsumptionFilters({ month, setMonth, year, setYear, callback }: ConsumptionFiltersProps) {
+export default function ConsumptionFilters({
+  month,
+  setMonth,
+  year,
+  setYear,
+  callback,
+  company,
+}: ConsumptionFiltersProps) {
   const mesOption = [
     { value: "01", label: "Enero" },
     { value: "02", label: "Febrero" },
@@ -44,12 +52,6 @@ export default function ConsumptionFilters({ month, setMonth, year, setYear, cal
     { value: "mas100", label: "Consumo > 100%" },
   ];
 
-  const operatorFilter = [
-    { value: "movistar", label: "Movistar" },
-    { value: "entel", label: "Entel" },
-    { value: "tele2", label: "Tele2" },
-  ];
-
   return (
     <div>
       <div className="flex justify-between mb-5 pr-5">
@@ -75,13 +77,7 @@ export default function ConsumptionFilters({ month, setMonth, year, setYear, cal
               </MenuItem>
             ))}
           </TextField>
-          <TextField select label="Filtrar por operador" size="small" sx={{ width: "200px" }} defaultValue={"movistar"}>
-            {operatorFilter.map((operator) => (
-              <MenuItem key={operator.value} value={operator.value}>
-                {operator.label}
-              </MenuItem>
-            ))}
-          </TextField>
+
           <Button
             variant="outlined"
             sx={{
@@ -91,7 +87,7 @@ export default function ConsumptionFilters({ month, setMonth, year, setYear, cal
               color: "#FFFFFF",
               bgcolor: "#1454a4",
             }}
-            onClick={() => callback({ month, year })}
+            onClick={() => callback({ month, year, company })}
             endIcon={<SvgArrowRigth fill="#24A2CE" />}
           >
             CONSULTAR
