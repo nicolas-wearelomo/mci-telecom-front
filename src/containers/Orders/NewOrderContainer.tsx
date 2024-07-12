@@ -258,7 +258,9 @@ const NewOrderContainer = () => {
                         SelectProps={{ MenuProps: { PaperProps: { style: { maxHeight: 400 } } } }}
                       >
                         {data.communes.map((el: any) => (
-                          <MenuItem value={el.name}>{el.name}</MenuItem>
+                          <MenuItem value={el.name} key={el.id}>
+                            {el.name}
+                          </MenuItem>
                         ))}
                       </TextField>
                     </div>

@@ -104,7 +104,9 @@ const SmartMovistarFilters = ({
                   onChange={(e) => setSubscriptionGruop(e.target.value)}
                 >
                   {sub?.map((el: any) => (
-                    <MenuItem value={el}>{el}</MenuItem>
+                    <MenuItem value={el} key={el}>
+                      {el}
+                    </MenuItem>
                   ))}
                 </TextField>
               </div>
