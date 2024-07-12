@@ -5,6 +5,8 @@ export interface CustomTableOrderProps {
   step2?: boolean;
   step3?: boolean;
   settings?: boolean;
+  cols?: any; //BORRAR
+  title?: any; //BORRAR
 }
 
 export interface ColumnsTableGrid {
