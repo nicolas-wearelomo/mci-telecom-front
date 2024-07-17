@@ -24,8 +24,6 @@ const BillingContainter = () => {
     callback({ month: month, year: year, provider: provider });
   }, [callback]);
 
-  console.log(data);
-
   interface HomeTable {
     id: number;
     number: number;
@@ -88,8 +86,8 @@ const BillingContainter = () => {
                 <div className=" text-[#24A2CE] font-bold w-[10%]">Cargo por Voz</div>
                 <div className=" text-[#24A2CE] font-bold w-[10%]">Total Neto</div>
               </div>
-              {data.map((sim: any) => (
-                <div className="flex py-1 text-[#777777] px-2">
+              {data.map((sim: any, index: any) => (
+                <div className="flex py-1 text-[#777777] px-2" key={index}>
                   <div className="w-[20%]">{sim.plan_name}</div>
                   <div className="w-[20%]">{sim.commercial_group}</div>
                   <div className="w-[15%]">{sim.total_value}</div>
@@ -102,8 +100,8 @@ const BillingContainter = () => {
             </div>
           </div>
           <div>
-            {data?.map((el: any) => (
-              <div className="mb-20">
+            {data?.map((el: any, index: any) => (
+              <div className="mb-20" key={index}>
                 <p className="text-[#24A2CE] font-bold mb-5">{el.data_plan}</p>
                 <p className="font-bold mb-2">Resumen del plan</p>
                 <div className="grid grid-cols-2 gap-20">
@@ -162,8 +160,8 @@ const BillingContainter = () => {
                       <div className="w-full text-[#24A2CE] font-bold">SMS Consumidos</div>
                       <div className="w-full text-[#24A2CE] font-bold">Minutos Consumidos</div>
                     </div>
-                    {el.sims.map((sim: any) => (
-                      <div className="flex px-2 py-1 text-[#777777]">
+                    {el.sims.map((sim: any, index: any) => (
+                      <div className="flex px-2 py-1 text-[#777777]" key={index}>
                         <div className="w-full">{sim.summary_icc}</div>
                         <div className="w-full">{sim.status}</div>
                         <div className="w-full">{sim.consumption_monthly_data_val}</div>
