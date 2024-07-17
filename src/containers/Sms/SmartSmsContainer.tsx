@@ -25,7 +25,6 @@ const SmartSmsContainer = () => {
     sucess: string;
     date: string;
   }
-  console.log(data);
 
   const homeTableData: ModelTable<HomeTable> = {
     columns: [
