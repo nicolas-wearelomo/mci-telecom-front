@@ -29,7 +29,6 @@ const SimsConsumptionContainer = () => {
   const columns = useConsumptionColumn();
   const params = usePathname();
   useEffect(() => {
-    console.log(params);
     callback({
       month,
       year,

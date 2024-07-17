@@ -17,5 +17,5 @@ export interface ModelSimsConsumptions {
   company?: string | null;
   month: string | null;
   year: string | null;
-  provider: string | null;
+  provider?: string | null;
 }

@@ -1,14 +1,7 @@
 "use client";
 import BillingFilters from "@/components/Billing/BillingFilters";
-import CustomTable from "@/components/CustomTable";
-import SmartMovistarFilters from "@/components/Sims/SmartMovistar/SmartMovistarFilters";
-import SmartMovistarTable from "@/components/Sims/SmartMovistar/SmartMovistartable";
-import SmartTable from "@/components/SmartTable";
-import useSmartMovistarColumn from "@/components/SmartTable/columns/useSmartMovistarColumns";
-import { ModelTable } from "@/models/modelTable";
 import { RootState } from "@/redux/types";
 import useGetBillings from "@/services/billing/useGetBillings";
-import useGetAllMovistarSims from "@/services/sims/movistar/useGetAllMovistarSims";
 import { CircularProgress } from "@mui/material";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
@@ -23,40 +16,6 @@ const BillingContainter = () => {
   useEffect(() => {
     callback({ month: month, year: year, provider: provider });
   }, [callback]);
-
-  interface HomeTable {
-    id: number;
-    number: number;
-    user: string;
-    sucess: string;
-    date: string;
-  }
-
-  const homeTableData: ModelTable<HomeTable> = {
-    columns: [
-      { header: "Plan", field: "plan_name" },
-      { header: "Grupo de Suscripción", field: "commercial_group" },
-      { header: "Cargo fijo Mensual", field: "total_value" },
-      { header: "Exceso de Tráfico", field: "sent_by" },
-      { header: "Cargo por SMS", field: "sms_total" },
-      { header: "Cargo por Voz", field: "sent_by" },
-      { header: "Total Neto", field: "sent_by" },
-    ],
-    rows: data || [],
-  };
-
-  const detail: ModelTable<HomeTable> = {
-    columns: [
-      { header: "Plan", field: "plan_name" },
-      { header: "Grupo de Suscripción", field: "commercial_group" },
-      { header: "Cargo fijo Mensual", field: "total_value" },
-      { header: "Exceso de Tráfico", field: "sent_by" },
-      { header: "Cargo por SMS", field: "sms_total" },
-      { header: "Cargo por Voz", field: "sent_by" },
-      { header: "Total Neto", field: "sent_by" },
-    ],
-    rows: data || [],
-  };
 
   return (
     <div className="container">
