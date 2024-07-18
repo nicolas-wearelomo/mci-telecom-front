@@ -1,3 +1,9 @@
+import ReportContainer from "@/containers/Report/ReportContainer";
+
 export default function Page() {
-  return <div>Página en construccion</div>;
+  return (
+    <>
+      <ReportContainer />
+    </>
+  );
 }
