@@ -93,15 +93,6 @@ export default function ConsumptionFilters({
             CONSULTAR
           </Button>
         </div>
-        <div>
-          <Button
-            variant="outlined"
-            sx={{ borderRadius: "8px", fontWeight: "bold", border: "2px solid #24A2CE", color: "#24A2CE" }}
-            endIcon={<SvgDelete fill="#24A2CE" />}
-          >
-            BORRAR FILTROS
-          </Button>
-        </div>
       </div>
     </div>
   );

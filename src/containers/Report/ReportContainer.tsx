@@ -30,21 +30,30 @@ const ReportContainer = () => {
   const [month, setMonth] = useState<string>("06");
   const [year, setYear] = useState<string>("2024");
   const [dataToRender, setDataToRender] = useState([]);
+  const [graph1, setGraph1] = useState<any>([]);
+  const [graph2, setGraph2] = useState<any>([]);
+  const [graph3, setGraph3] = useState<any>([]);
+  const [graph4, setGraph4] = useState<any>([]);
+  const [graph5, setGraph5] = useState<any>([]);
+  const [graph6, setGraph6] = useState<any>([]);
+
+  const COLORS = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042"];
   const { currentUser } = useSelector((state: RootState) => state.auth);
 
   const { callback, data, loading } = useGetGeneralReports();
   const columns = useReportsColumn();
+
   useEffect(() => {
     callback({
       month,
       year,
       company: currentUser?.company,
     });
-  }, [callback]);
+  }, [callback, month, year, currentUser]);
 
   useEffect(() => {
-    if (data.length) {
-      const parsedData = data.map((el: any) => ({
+    if (data?.data?.length) {
+      const parsedData = data.data.map((el: any) => ({
         ...el,
         cantidad_sims_activas: `${el.cantidad_sims_activas}`,
         mb_plan: `${el.mb_plan * el.cantidad_sims_activas} MB`,
@@ -63,51 +72,29 @@ const ReportContainer = () => {
     }
   }, [data]);
 
-  const graph1 = [
-    { name: "Desactivado", value: data?.status?.local.inactive_local },
-    { name: "Activado", value: data?.status?.local.active_local },
-    { name: "Lista para activación", value: data?.status?.local.activation_ready_local },
-    { name: "Test", value: data?.status?.local.test_local },
-  ];
-  const graph2 = [
-    { name: "Desactivado", value: data?.status?.global.inactive_global },
-    { name: "Activado", value: data?.status?.global.active_global },
-    { name: "Lista para activación", value: data?.status?.global.activation_ready_global },
-    { name: "Test", value: data?.status?.global.test_global },
-  ];
+  useEffect(() => {
+    if (data?.acumulado) {
+      setGraph1([
+        { name: "Desactivado", value: data.acumulado[0].cantidad_sims - data.acumulado[0].cantidad_sims_activas },
+        { name: "Activado", value: data.acumulado[0].cantidad_sims_activas },
+      ]);
+      setGraph2([
+        { name: "Desactivado", value: data.acumulado[1].cantidad_sims - data.acumulado[1].cantidad_sims_activas },
+        { name: "Activado", value: data.acumulado[1].cantidad_sims_activas },
+      ]);
+      setGraph3([
+        { name: "Desactivado", value: data.acumulado[2].cantidad_sims - data.acumulado[2].cantidad_sims_activas },
+        { name: "Activado", value: data.acumulado[2].cantidad_sims_activas },
+      ]);
+      setGraph4([
+        { name: "Desactivado", value: data.acumulado[3].cantidad_sims - data.acumulado[3].cantidad_sims_activas },
+        { name: "Activado", value: data.acumulado[3].cantidad_sims_activas },
+      ]);
 
-  const graph3 = [
-    { name: "0", MB: data?.history?.data[0] },
-    { name: "1", MB: data?.history?.data[1] },
-    { name: "2", MB: data?.history?.data[2] },
-    { name: "3", MB: data?.history?.data[3] },
-    { name: "4", MB: data?.history?.data[4] },
-    { name: "5", MB: data?.history?.data[5] },
-    { name: "6", MB: data?.history?.data[6] },
-    { name: "7", MB: data?.history?.data[7] },
-    { name: "8", MB: data?.history?.data[8] },
-    { name: "9", MB: data?.history?.data[9] },
-    { name: "10", MB: data?.history?.data[10] },
-    { name: "11", MB: data?.history?.data[11] },
-  ];
-  const graph4 = [
-    { name: "0", sms: data?.history?.sms[0] },
-    { name: "1", sms: data?.history?.sms[1] },
-    { name: "2", sms: data?.history?.sms[2] },
-    { name: "3", sms: data?.history?.sms[3] },
-    { name: "4", sms: data?.history?.sms[4] },
-    { name: "5", sms: data?.history?.sms[5] },
-    { name: "6", sms: data?.history?.sms[6] },
-    { name: "7", sms: data?.history?.sms[7] },
-    { name: "8", sms: data?.history?.sms[8] },
-    { name: "9", sms: data?.history?.sms[9] },
-    { name: "10", sms: data?.history?.sms[10] },
-    { name: "11", sms: data?.history?.sms[11] },
-  ];
-
-  const COLORS = ["#f05c5c", "#24A2CE", "#82ca9d", "#ffbb28"];
-
-  console.log(data);
+      setGraph5(data.history?.data.map((value: number, index: number) => ({ name: `${index}`, MB: value })) || []);
+      setGraph6(data.history?.sms.map((value: number, index: number) => ({ name: `${index}`, sms: value })) || []);
+    }
+  }, [data]);
 
   return (
     <div className="containerSmart">
@@ -123,68 +110,126 @@ const ReportContainer = () => {
       {!loading ? (
         <>
           <ConsumptionTable columns={columns} rows={dataToRender} />
-          {/* <div className="mt-10 flex w-full justify-around">
-            <div className="flex flex-col items-center">
-              <div>Distribución SIMs locales</div>
-              <div>
-                <PieChart width={400} height={250}>
-                  <Pie
-                    data={graph1}
-                    cx="40%"
-                    cy="50%"
-                    innerRadius={60}
-                    outerRadius={90}
-                    fill="#8884d8"
-                    paddingAngle={5}
-                    dataKey="value"
-                  >
-                    {graph1.map((entry, index) => (
-                      <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
-                    ))}
-                    <Label
-                      value={`Total: ${data?.status?.local.total_local}`}
-                      position="center"
-                      style={{ textAnchor: "middle", fontSize: "16px", fontWeight: "bold" }}
-                    />
-                  </Pie>
-                  <Legend layout="vertical" verticalAlign="middle" align="right" />
-                </PieChart>
+          <div className="mt-10 flex w-full justify-around">
+            <div>
+              <div className="flex flex-col justify-center">
+                <div className="text-center font-bold text-xl">Movistar Locales</div>
+                <div>
+                  <PieChart width={400} height={250}>
+                    <Pie
+                      data={graph1}
+                      cx="40%"
+                      cy="50%"
+                      innerRadius={60}
+                      outerRadius={90}
+                      fill="#8884d8"
+                      paddingAngle={5}
+                      dataKey="value"
+                    >
+                      {graph1.map((entry: any, index: any) => (
+                        <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+                      ))}
+                      <Label
+                        value={`Total: ${data.acumulado[0].cantidad_sims}`}
+                        position="center"
+                        style={{ textAnchor: "middle", fontSize: "16px", fontWeight: "bold" }}
+                      />
+                    </Pie>
+                    <Legend layout="vertical" verticalAlign="middle" align="right" />
+                  </PieChart>
+                </div>
+              </div>
+              <div className="flex flex-col justify-center">
+                <div className="text-center font-bold text-xl">Movistar Globales</div>
+                <div>
+                  <PieChart width={400} height={250}>
+                    <Pie
+                      data={graph2}
+                      cx="40%"
+                      cy="50%"
+                      innerRadius={60}
+                      outerRadius={90}
+                      fill="#8884d8"
+                      paddingAngle={5}
+                      dataKey="value"
+                    >
+                      {graph2.map((entry: any, index: any) => (
+                        <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+                      ))}
+                      <Label
+                        value={`Total: ${data.acumulado[1].cantidad_sims}`}
+                        position="center"
+                        style={{ textAnchor: "middle", fontSize: "16px", fontWeight: "bold" }}
+                      />
+                    </Pie>
+                    <Legend layout="vertical" verticalAlign="middle" align="right" />
+                  </PieChart>
+                </div>
               </div>
             </div>
-            <div className="flex flex-col items-center">
-              <div>Distribución SIMs globales</div>
-              <div>
-                <PieChart width={400} height={250}>
-                  <Pie
-                    data={graph2}
-                    cx="40%"
-                    cy="50%"
-                    innerRadius={60}
-                    outerRadius={90}
-                    fill="#8884d8"
-                    paddingAngle={5}
-                    dataKey="value"
-                  >
-                    {graph2.map((entry, index) => (
-                      <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
-                    ))}
-                    <Label
-                      value={`Total: ${data?.status?.global.total_global}`}
-                      position="center"
-                      style={{ textAnchor: "middle", fontSize: "16px", fontWeight: "bold" }}
-                    />
-                  </Pie>
-                  <Legend layout="vertical" verticalAlign="middle" align="right" />
-                </PieChart>
+            <div>
+              <div className="flex flex-col justify-center">
+                <div className="text-center font-bold text-xl">Entel</div>
+                <div>
+                  <PieChart width={400} height={250}>
+                    <Pie
+                      data={graph3}
+                      cx="40%"
+                      cy="50%"
+                      innerRadius={60}
+                      outerRadius={90}
+                      fill="#8884d8"
+                      paddingAngle={5}
+                      dataKey="value"
+                    >
+                      {graph2.map((entry: any, index: any) => (
+                        <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+                      ))}
+                      <Label
+                        value={`Total: ${data.acumulado[2].cantidad_sims}`}
+                        position="center"
+                        style={{ textAnchor: "middle", fontSize: "16px", fontWeight: "bold" }}
+                      />
+                    </Pie>
+                    <Legend layout="vertical" verticalAlign="middle" align="right" />
+                  </PieChart>
+                </div>
+              </div>
+              <div className="flex flex-col justify-center">
+                <div className="text-center font-bold text-xl">Tele2</div>
+                <div>
+                  <PieChart width={400} height={250}>
+                    <Pie
+                      data={graph4}
+                      cx="40%"
+                      cy="50%"
+                      innerRadius={60}
+                      outerRadius={90}
+                      fill="#8884d8"
+                      paddingAngle={5}
+                      dataKey="value"
+                    >
+                      {graph2.map((entry: any, index: any) => (
+                        <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+                      ))}
+                      <Label
+                        value={`Total: ${data.acumulado[3].cantidad_sims}`}
+                        position="center"
+                        style={{ textAnchor: "middle", fontSize: "16px", fontWeight: "bold" }}
+                      />
+                    </Pie>
+                    <Legend layout="vertical" verticalAlign="middle" align="right" />
+                  </PieChart>
+                </div>
               </div>
             </div>
           </div>
-          <div className="h-[400px]">
+          {/* <div className="h-[400px]">
             <ResponsiveContainer width="100%" height="100%">
               <BarChart
                 width={500}
                 height={300}
-                data={graph3}
+                data={graph5}
                 margin={{
                   top: 5,
                   right: 30,
@@ -206,7 +251,7 @@ const ReportContainer = () => {
               <BarChart
                 width={500}
                 height={300}
-                data={graph4}
+                data={graph6}
                 margin={{
                   top: 5,
                   right: 30,

@@ -14,6 +14,7 @@ export interface ModelSimsDetail {
   to: Dayjs | null;
 }
 export interface ModelSimsConsumptions {
+  icc?: string | null;
   company?: string | null;
   month: string | null;
   year: string | null;

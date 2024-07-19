@@ -21,7 +21,6 @@ const SimsDetailContainer = () => {
     }
   }, [callback]);
 
-  console.log(loading);
   return (
     <div className="container">
       <RangeFilters
