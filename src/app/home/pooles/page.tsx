@@ -1,12 +1,25 @@
 "use client";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { PieChart, Pie, Cell } from "recharts";
 import FiberManualRecordIcon from "@mui/icons-material/FiberManualRecord";
 import SelectButton from "@/components/SelectButton";
 import Link from "next/link";
+import useGetCommercialGroup from "@/services/dashboard/useGetCommercialGroup";
+import { useSelector } from "react-redux";
+import { RootState } from "@/redux/types";
+import { MenuItem, TextField } from "@mui/material";
 
 export default function Page() {
-  const data = [
+  const { callback, data, loading } = useGetCommercialGroup();
+  const [commercialGroup, setCommercialGroup] = useState<string>("");
+  const { currentUser } = useSelector((state: RootState) => state.auth);
+  const [sims, setSims] = useState<any>([]);
+  const [poolSize, setPoolSize] = useState("");
+  const [poolCant, setPoolCant] = useState("");
+  const [consumptionData, setConsumptionData] = useState("");
+  const [totalPool, setTotalPool] = useState("");
+
+  const datas = [
     { name: "Group A", value: 500 },
     { name: "Group B", value: 500 },
   ];
@@ -15,6 +28,34 @@ export default function Page() {
     { value: "movistar", label: "loremimpsumloremimpsumloremimp..." },
     { value: "entel", label: "loremimpsumloremimpsumloremimp..." },
   ];
+
+  useEffect(() => {
+    if (currentUser && currentUser.company) {
+      callback({ company: currentUser.company });
+    }
+  }, [currentUser, callback]);
+
+  useEffect(() => {
+    if (data?.commercial_group?.length) {
+      setTotalPool(data.commercial_group.length);
+      setCommercialGroup(data.commercial_group[0]);
+    }
+  }, [data]);
+
+  useEffect(() => {
+    if (data?.consumptions?.length) {
+      let simsFiltered = data.consumptions.filter((el: any) => el.commercial_group === commercialGroup);
+      let calcPoolSize = simsFiltered[0].plan.mb_plan * simsFiltered.length;
+      let calcConsumption = 0;
+      simsFiltered.forEach((el: any) => {
+        calcConsumption += el.consumption_monthly_data_val;
+      });
+      setSims(simsFiltered);
+      setPoolSize(`${calcPoolSize} MB`);
+      setPoolCant(`${simsFiltered.length} SIMs`);
+      setConsumptionData(`${calcConsumption.toFixed(2)} MB`);
+    }
+  }, [commercialGroup]);
 
   return (
     <div className="overflow-y-auto h-[85vh]">
@@ -28,7 +69,7 @@ export default function Page() {
         <Link className="bg-[#24A2CE] text-white py-2 px-5 flex rounded-[16px]" href="/home/business">
           Negocio
         </Link>
-        <Link className="bg-[#24A2CE] text-white py-2 px-5 flex rounded-[16px]" href="/home/business">
+        <Link className="bg-[#24A2CE] text-white py-2 px-5 flex rounded-[16px]" href="/home/information">
           INFORMACIÓN
         </Link>
       </div>
@@ -38,7 +79,7 @@ export default function Page() {
             <div className=" min-h-[220px] flex flex-col justify-between p-5 border-solid border-2 border-[#d6d6d6] rounded-[32px]">
               <h3 className="text-xl ">Resumen del estado de los pooles de datos</h3>
               <div className="text-[#ffbc4c] font-bold">
-                <span className="text-4xl pr-3">23</span>
+                <span className="text-4xl pr-3">{totalPool}</span>
                 <span className="text-xl">Pooles en total</span>
               </div>
               <div className="text-gray-500 font-bold">
@@ -88,7 +129,7 @@ export default function Page() {
                 <div className="relative z-20 w-[250px]">
                   <PieChart width={250} height={250}>
                     <Pie
-                      data={data}
+                      data={datas}
                       cx={120}
                       cy={120}
                       innerRadius={70}
@@ -114,23 +155,38 @@ export default function Page() {
               </div>
               <div className="col-span-2">
                 <p className="text-[#24A2CE] font-bold mb-5">Grupo de subscripción</p>
-                <div className="w-[50%] h-16">
+                {/* <div className="w-[50%] h-16">
                   <SelectButton
                     label={"Seleccionar Grupo de Subscripción"}
                     options={cofiguration}
                     color={"secondary"}
                     fullWidth
                   />
+                </div> */}
+                <div className="w-[50%]">
+                  <TextField
+                    select
+                    fullWidth
+                    label="Grupo de subscripción"
+                    value={commercialGroup}
+                    onChange={(e) => setCommercialGroup(e.target.value)}
+                  >
+                    {data?.commercial_group?.map((el: any) => (
+                      <MenuItem key={el} value={el}>
+                        {el}
+                      </MenuItem>
+                    ))}
+                  </TextField>
                 </div>
 
                 <div className="flex gap-5">
                   <div className="bg-[#24A2CE] text-white px-5 py-2 rounded-[16px] mt-5">
                     <p className="text-base">Tamaño en la pool</p>
-                    <p className="font-bold text-center">501 MB</p>
+                    <p className="font-bold text-center">{poolSize}</p>
                   </div>
                   <div className="bg-[#24A2CE] text-white px-5 py-2 rounded-[16px] mt-5">
                     <p className="text-base">SIMs en el pool</p>
-                    <p className="font-bold text-center">58 SIMs</p>
+                    <p className="font-bold text-center">{poolCant}</p>
                   </div>
                 </div>
               </div>
@@ -138,15 +194,15 @@ export default function Page() {
             <div className="flex gap-10 justify-center mt-20">
               <div className="bg-[#24A2CE] text-white px-10 py-2 rounded-[16px] mt-5">
                 <p className="text-base">Consumo de bono</p>
-                <p className="font-bold text-center">110,9 MB</p>
+                <p className="font-bold text-center">{consumptionData}</p>
               </div>
               <div className="bg-[#24A2CE] text-white px-10 py-2 rounded-[16px] mt-5">
                 <p className="text-base">Excedente traficado</p>
                 <p className="font-bold text-center">0 SIMs</p>
               </div>
               <div className="bg-red-500 text-white px-10 py-2 rounded-[16px] mt-5">
-                <p className="text-base">Consumo toal</p>
-                <p className="font-bold text-center">110 MB</p>
+                <p className="text-base">Consumo total</p>
+                <p className="font-bold text-center">{consumptionData}</p>
               </div>
             </div>
           </div>

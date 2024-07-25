@@ -1,15 +1,72 @@
 "use client";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { PieChart, Pie, Cell } from "recharts";
 import FiberManualRecordIcon from "@mui/icons-material/FiberManualRecord";
 import Link from "next/link";
+import { RootState } from "@/redux/types";
+import { useSelector } from "react-redux";
+import useGetOperationDashboard from "@/services/dashboard/useGetOperationDashboard";
 
 export default function Page() {
-  const data = [
-    { name: "Group A", value: 25 },
-    { name: "Group B", value: 25 },
-    { name: "Group C", value: 37 },
-    { name: "Group D", value: 13 },
+  const { callback, data, loading } = useGetOperationDashboard();
+  const { currentUser } = useSelector((state: RootState) => state.auth);
+  const [totalSims, setTotalSims] = useState(1);
+  const [iniciativeNew, setIniciativeNew] = useState(1);
+  const [readyActivation, setReadyActivation] = useState(1);
+  const [test, setTest] = useState(0);
+  const [desactivated, setDesactivated] = useState(0);
+  const [suspended, setSuspended] = useState(0);
+  const [pending, setPending] = useState(0);
+  const [actived, setActived] = useState(0);
+
+  useEffect(() => {
+    if (currentUser && currentUser.company) {
+      callback({ company: currentUser.company });
+    }
+  }, [currentUser, callback]);
+
+  useEffect(() => {
+    if (data.length) {
+      let inicitativeNewCant = 0;
+      let testCant = 0;
+      let readyActivationCant = 0;
+      let desactivatedCant = 0;
+      let suspendedCant = 0;
+      let pendingCant = 0;
+      let activedCant = 0;
+      data.forEach((el: any) => {
+        if (el.status === "INACTIVE_NEW") {
+          inicitativeNewCant += 1;
+        } else if (el.status === "TEST") {
+          testCant += 1;
+        } else if (el.status === "ACTIVATION_READY") {
+          readyActivationCant += 1;
+        } else if (el.status === "DEACTIVATED") {
+          desactivatedCant += 1;
+        } else if (el.status === "SUSPENDED") {
+          suspendedCant += 1;
+        } else if (el.status === "ACTIVE") {
+          activedCant += 1;
+        } else {
+          pendingCant += 1;
+        }
+      });
+      setTotalSims(data.length);
+      setIniciativeNew(inicitativeNewCant);
+      setTest(testCant);
+      setReadyActivation(readyActivationCant);
+      setDesactivated(desactivatedCant);
+      setSuspended(suspendedCant);
+      setPending(pendingCant);
+      setActived(activedCant);
+    }
+  }, [data]);
+
+  const datas = [
+    { name: "Group A", value: Math.round(actived * 100) / totalSims },
+    // { name: "Group B", value: Math.round(test * 100) / totalSims },
+    { name: "Group C", value: Math.round(readyActivation * 100) / totalSims },
+    { name: "Group D", value: Math.round(desactivated * 100) / totalSims },
   ];
 
   const renderCustomizedLabel = ({
@@ -50,7 +107,7 @@ export default function Page() {
         <Link className="bg-[#24A2CE] text-white py-2 px-5 flex rounded-[16px]" href="/home/business">
           Negocio
         </Link>
-        <Link className="bg-[#24A2CE] text-white py-2 px-5 flex rounded-[16px]" href="/home/business">
+        <Link className="bg-[#24A2CE] text-white py-2 px-5 flex rounded-[16px]" href="/home/information">
           INFORMACIÓN
         </Link>
       </div>
@@ -60,7 +117,7 @@ export default function Page() {
             <div className="relative z-20 w-[320px]">
               <PieChart width={320} height={320}>
                 <Pie
-                  data={data}
+                  data={datas}
                   cx={155}
                   cy={155}
                   innerRadius={100}
@@ -72,15 +129,15 @@ export default function Page() {
                   labelLine={false}
                 >
                   <Cell key={`data1`} fill={"#ffbc4c"} />
-                  <Cell key={`data2`} fill={"#f05c5c"} />
-                  <Cell key={`data3`} fill={"#28a4cc"} />
-                  <Cell key={`data4`} fill={"#28041c"} />
+                  <Cell key={`data2`} fill={"#8bd4e8"} />
+                  <Cell key={`data3`} fill={"#28041c"} />
+                  <Cell key={`data4`} fill={"#8bd4e8"} />
                 </Pie>
               </PieChart>
               <div className="absolute inset-0 flex items-center justify-center z-20">
                 <div className="text-gray-500">
                   <div className="text-2xl">Total de SIMs</div>
-                  <div className="text-4xl text-center font-bold">8.171</div>
+                  <div className="text-4xl text-center font-bold">{data.length}</div>
                 </div>
               </div>
             </div>
@@ -91,32 +148,32 @@ export default function Page() {
                 <FiberManualRecordIcon sx={{ color: "#ffbc4c", width: 25, marginRight: 2 }} />
                 <div>
                   <p className="text-xl">Activada</p>
-                  <p className="text-sm">Cantidad de SIMS: 100</p>
-                  <p className="text-sm">Porcentaje: 25%</p>
+                  <p className="text-sm">Cantidad de SIMS: {actived}</p>
+                  <p className="text-sm"> {Math.ceil((actived * 100) / totalSims)} %</p>
                 </div>
               </div>
               <div className="flex items-center">
                 <FiberManualRecordIcon sx={{ color: "#f05c5c", width: 25, marginRight: 2 }} />
                 <div>
                   <p className="text-xl">Inactiva nueva</p>
-                  <p className="text-sm">Cantidad de SIMS: 100</p>
-                  <p className="text-sm">Porcentaje: 25%</p>
+                  <p className="text-sm">Cantidad de SIMS: {iniciativeNew}</p>
+                  <p className="text-sm">Porcentaje: {Math.ceil((iniciativeNew * 100) / totalSims)} %</p>
                 </div>
               </div>
               <div className="flex items-center">
                 <FiberManualRecordIcon sx={{ color: "#28041c", width: 25, marginRight: 2 }} />
                 <div>
                   <p className="text-xl">Desactivada</p>
-                  <p className="text-sm">Cantidad de SIMS: 100</p>
-                  <p className="text-sm">Porcentaje: 13%</p>
+                  <p className="text-sm">Cantidad de SIMS: {desactivated}</p>
+                  <p className="text-sm">Porcentaje: {Math.ceil((desactivated * 100) / totalSims)} %%</p>
                 </div>
               </div>
               <div className="flex items-center">
                 <FiberManualRecordIcon sx={{ color: "#28a4cc", width: 25, marginRight: 2 }} />
                 <div>
                   <p className="text-xl">Inactiva</p>
-                  <p className="text-sm">Cantidad de SIMS: 100</p>
-                  <p className="text-sm">Porcentaje: 37%</p>
+                  <p className="text-sm">Cantidad de SIMS: 0</p>
+                  <p className="text-sm">Porcentaje: 0 %</p>
                 </div>
               </div>
             </div>
@@ -125,24 +182,24 @@ export default function Page() {
                 <FiberManualRecordIcon sx={{ color: "#808285", width: 25, marginRight: 2 }} />
                 <div>
                   <p className="text-xl">Suspendida</p>
-                  <p className="text-sm">Cantidad de SIMS: 0</p>
-                  <p className="text-sm">Porcentaje: 0%</p>
+                  <p className="text-sm">Cantidad de SIMS: {suspended}</p>
+                  <p className="text-sm">Porcentaje: {Math.ceil((suspended * 100) / totalSims)} %</p>
                 </div>
               </div>
               <div className="flex items-center">
                 <FiberManualRecordIcon sx={{ color: "#8bd4e8", width: 25, marginRight: 2 }} />
                 <div>
                   <p className="text-xl">Lista para activación</p>
-                  <p className="text-sm">Cantidad de SIMS: 0</p>
-                  <p className="text-sm">Porcentaje: 0%</p>
+                  <p className="text-sm">Cantidad de SIMS: {readyActivation}</p>
+                  <p className="text-sm">Porcentaje: {Math.ceil((readyActivation * 100) / totalSims)} %</p>
                 </div>
               </div>
               <div className="flex items-center">
                 <FiberManualRecordIcon sx={{ color: "#a89700", width: 25, marginRight: 2 }} />
                 <div>
                   <p className="text-xl">Test</p>
-                  <p className="text-sm">Cantidad de SIMS: 0</p>
-                  <p className="text-sm">Porcentaje: 0%</p>
+                  <p className="text-sm">Cantidad de SIMS: {test}</p>
+                  <p className="text-sm">Porcentaje: {Math.ceil((test * 100) / totalSims)} %</p>
                 </div>
               </div>
 

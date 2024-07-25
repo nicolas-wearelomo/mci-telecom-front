@@ -37,7 +37,7 @@ export default function BasicModal({
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
   const [step, setStep] = React.useState(1);
-
+  console.log(data);
   return (
     <div>
       <Modal
