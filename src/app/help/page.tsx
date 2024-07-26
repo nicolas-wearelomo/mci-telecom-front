@@ -227,7 +227,7 @@ export default function Page() {
                   </p>
                   <p className="pl-5 mt-2">
                     La API Key es proporcioanda por MCI Telecom, las solicitudes pueden realizarse a través de esta
-                    misma plataforma accediendo al menú 'SIMs' y opción 'Orders'.
+                    misma plataforma accediendo al menú &quot;SIMs&quot; y opción &quot;Orders&quot;.
                   </p>
 
                   <h5 className="font-bold mt-5">Recursos</h5>
@@ -328,8 +328,8 @@ export default function Page() {
                   <p className="font-mono pl-10"> "https://sim.mcitelecom.com/init/services/v1/sim?page=1"</p>
                   <h5 className="font-bold mt-5">Ejemplo mensaje respuesta</h5>
                   <p className="pl-5 mt-2">
-                    Los mensajes de respuesta incluyen el parámetro 'result' (true o false), que indica si la consulta
-                    fue exitosa.
+                    Los mensajes de respuesta incluyen el parámetro &quot;result&quot; (true o false), que indica si la
+                    consulta fue exitosa.
                   </p>
                   <JSONBox
                     jsonText={`
@@ -434,7 +434,9 @@ export default function Page() {
                   <div className="flex mt-2 text-gray-600">
                     <div className="w-[15%]">gpr_status</div>
                     <div className="w-[15%]">int</div>
-                    <div className="w-[70%]">0: 'Sin Datos' 1: 'Activa' 2: 'Desactivada'</div>
+                    <div className="w-[70%]">
+                      0: &quot;Sin Datos&quot; 1: &quot;Activa&quot; 2: &quot;Desactivada&quot;
+                    </div>
                   </div>
                   <div className="flex mt-2 text-gray-600">
                     <div className="w-[15%]">rat_type</div>
@@ -445,8 +447,8 @@ export default function Page() {
                   </div>
                   <h5 className="font-bold mt-5">Ejemplo mensaje respuesta</h5>
                   <p className="pl-5 mt-2">
-                    Los mensajes de respuesta incluyen el parámetro 'result' (true o false), que indica si la consulta
-                    fue exitosa.
+                    Los mensajes de respuesta incluyen el parámetro &quot;result&quot; (true o false), que indica si la
+                    consulta fue exitosa.
                   </p>
                   <p className="pl-5 mt-2">Respuesta para consulta SIM Movistar:</p>
                   <JSONBox
@@ -604,7 +606,9 @@ export default function Page() {
                   <div className="flex mt-2 text-gray-600">
                     <div className="w-[15%]">gpr_status</div>
                     <div className="w-[15%]">int</div>
-                    <div className="w-[70%]">0: 'Sin Datos' 1: 'Activa' 2: 'Desactivada'</div>
+                    <div className="w-[70%]">
+                      0: &quot;Sin Datos&quot; 1: &quot;Activa&quot; 2: &quot;Desactivada&quot;
+                    </div>
                   </div>
                   <div className="flex mt-2 text-gray-600">
                     <div className="w-[15%]">rat_type</div>
@@ -615,8 +619,8 @@ export default function Page() {
                   </div>
                   <h5 className="font-bold mt-5">Ejemplo mensaje respuesta</h5>
                   <p className="pl-5 mt-2">
-                    Los mensajes de respuesta incluyen el parámetro 'result' (true o false), que indica si la consulta
-                    fue exitosa.
+                    Los mensajes de respuesta incluyen el parámetro &quot;result&quot; (true o false), que indica si la
+                    consulta fue exitosa.
                   </p>
                   <p className="pl-5 mt-2">Respuesta para consulta SIM Movistar:</p>
                   <JSONBox
@@ -772,8 +776,8 @@ export default function Page() {
 
                   <h5 className="font-bold mt-5">Ejemplo mensaje respuesta</h5>
                   <p className="pl-5 mt-2">
-                    Los mensajes de respuesta incluyen el parámetro 'result' (true o false), que indica si la consulta
-                    fue exitosa.
+                    Los mensajes de respuesta incluyen el parámetro &quot;result&quot; (true o false), que indica si la
+                    consulta fue exitosa.
                   </p>
                   <p className="pl-5 mt-2">Respuesta para consulta SIM Movistar:</p>
                   <JSONBox
@@ -843,8 +847,8 @@ export default function Page() {
 
                   <h5 className="font-bold mt-5">Ejemplo mensaje respuesta</h5>
                   <p className="pl-5 mt-2">
-                    Los mensajes de respuesta incluyen el parámetro 'result' (true o false), que indica si la consulta
-                    fue exitosa.
+                    Los mensajes de respuesta incluyen el parámetro &quot;result&quot; (true o false), que indica si la
+                    consulta fue exitosa.
                   </p>
                   <p className="pl-5 mt-2">Respuesta para consulta SIM Movistar:</p>
                   <JSONBox
@@ -910,8 +914,8 @@ export default function Page() {
 
                   <h5 className="font-bold mt-5">Ejemplo mensaje respuesta</h5>
                   <p className="pl-5 mt-2">
-                    Los mensajes de respuesta incluyen el parámetro 'result' (true o false), que indica si la consulta
-                    fue exitosa.
+                    Los mensajes de respuesta incluyen el parámetro &quot;result&quot; (true o false), que indica si la
+                    consulta fue exitosa.
                   </p>
                   <p className="pl-5 mt-2">Respuesta para consulta SIM Movistar:</p>
                   <JSONBox
@@ -1010,8 +1014,8 @@ export default function Page() {
 
                   <h5 className="font-bold mt-5">Ejemplo mensaje respuesta</h5>
                   <p className="pl-5 mt-2">
-                    Los mensajes de respuesta incluyen el parámetro 'result' (true o false), que indica si la consulta
-                    fue exitosa.
+                    Los mensajes de respuesta incluyen el parámetro &quot;result&quot; (true o false), que indica si la
+                    consulta fue exitosa.
                   </p>
                   <p className="pl-5 mt-2">Respuesta para consulta SIM Movistar:</p>
                   <JSONBox
@@ -1078,8 +1082,8 @@ export default function Page() {
 
                   <h5 className="font-bold mt-5">Ejemplo mensaje respuesta</h5>
                   <p className="pl-5 mt-2">
-                    Los mensajes de respuesta incluyen el parámetro 'result' (true o false), que indica si la consulta
-                    fue exitosa.
+                    Los mensajes de respuesta incluyen el parámetro &quot;result&quot; (true o false), que indica si la
+                    consulta fue exitosa.
                   </p>
                   <JSONBox
                     jsonText={`{
@@ -1179,8 +1183,8 @@ export default function Page() {
 
                   <h5 className="font-bold mt-5">Ejemplo mensaje respuesta</h5>
                   <p className="pl-5 mt-2">
-                    Los mensajes de respuesta incluyen el parámetro 'result' (true o false), que indica si la consulta
-                    fue exitosa.
+                    Los mensajes de respuesta incluyen el parámetro &quot;result&quot; (true o false), que indica si la
+                    consulta fue exitosa.
                   </p>
                   <p className="pl-5 mt-2">Respuesta para consulta SIM Movistar:</p>
                   <JSONBox
