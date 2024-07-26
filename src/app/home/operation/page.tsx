@@ -69,7 +69,7 @@ export default function Page() {
     <div className="overflow-y-auto h-[85vh]">
       <div className="p-5 flex justify-around border-solid border-2 border-[#d6d6d6] rounded-[32px] mb-7">
         {currentUser?.client_type === 1 ? (
-          <Link className="bg-[#467a15] text-white py-2 px-5 flex rounded-[16px]" href="/home/pooles">
+          <Link className="bg-[#24A2CE] text-white py-2 px-5 flex rounded-[16px]" href="/home/pooles">
             Pooles
           </Link>
         ) : null}
