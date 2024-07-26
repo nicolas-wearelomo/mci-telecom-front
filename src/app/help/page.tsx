@@ -220,10 +220,11 @@ export default function Page() {
 
                   <h5 className="font-bold mt-5">Autenticación</h5>
                   <p className="pl-5 mt-2">
-                    Todas las llamadas de API pueden autenticarse a través del esquema de autenticación HTTP "Basic".
-                    Para ello, se utiliza el encabezado "Authorization" para envíar la API Key como parte del mensaje en
-                    las solicitudes a la API. El valor definido en "Authorization" debe corresponder al texto "Basic " +
-                    la API Key (con solo un espacio entre ambos).
+                    Todas las llamadas de API pueden autenticarse a través del esquema de autenticación HTTP
+                    &quot;Basic&quot;. Para ello, se utiliza el encabezado &quot;Authorization&quot; para envíar la API
+                    Key como parte del mensaje en las solicitudes a la API. El valor definido en
+                    &quot;Authorization&quot; debe corresponder al texto &quot;Basic &quot; + la API Key (con solo un
+                    espacio entre ambos).
                   </p>
                   <p className="pl-5 mt-2">
                     La API Key es proporcioanda por MCI Telecom, las solicitudes pueden realizarse a través de esta
@@ -319,13 +320,14 @@ export default function Page() {
                   <p className="font-mono pl-10">Host: sim.mcitelecom.com</p>
                   <h5 className="font-bold mt-5">Ejemplo de invocación</h5>
                   <p className="font-mono pl-10 mt-2">
-                    curl -X GET --header &quot;Content-Type: application/json" --header "Accept: application/json&quot;
+                    curl -X GET --header &quot;Content-Type: application/json&quot; --header &quot;Accept:
+                    application/json&quot;
                   </p>
                   <p className="font-mono pl-10">
-                    --header "Authorization: Basic
-                    c2lsdmlvLTIxQGxvY2FsaG9zdDpkMzBiMDQxZi01YjJhLTQ5Y2QtODcxOS01MjU0NGJmNmQwODI="
+                    --header &quot;Authorization: Basic
+                    c2lsdmlvLTIxQGxvY2FsaG9zdDpkMzBiMDQxZi01YjJhLTQ5Y2QtODcxOS01MjU0NGJmNmQwODI=&quot;
                   </p>
-                  <p className="font-mono pl-10"> "https://sim.mcitelecom.com/init/services/v1/sim?page=1"</p>
+                  <p className="font-mono pl-10"> &quot;https://sim.mcitelecom.com/init/services/v1/sim?page=1&quot;</p>
                   <h5 className="font-bold mt-5">Ejemplo mensaje respuesta</h5>
                   <p className="pl-5 mt-2">
                     Los mensajes de respuesta incluyen el parámetro &quot;result&quot; (true o false), que indica si la
@@ -407,11 +409,12 @@ export default function Page() {
 
                   <h5 className="font-bold mt-5">Ejemplo de invocación</h5>
                   <p className="font-mono pl-10 mt-2">
-                    curl -X GET --header &quot;Content-Type: application/json" --header "Accept: application/json&quot;
+                    curl -X GET --header &quot;Content-Type: application/json&quot; --header &quot;Accept:
+                    application/json&quot;
                   </p>
                   <p className="font-mono pl-10 mt-2">
-                    --header "Authorization: Basic
-                    c2lsdmlvLTIxQGxvY2FsaG9zdDpkMzBiMDQxZi01YjJhLTQ5Y2QtODcxOS01MjU0NGJmNmQwODI="
+                    --header &quot;Authorization: Basic
+                    c2lsdmlvLTIxQGxvY2FsaG9zdDpkMzBiMDQxZi01YjJhLTQ5Y2QtODcxOS01MjU0NGJmNmQwODI=&quot;
                   </p>
                   <p className="font-mono pl-10 mt-2">
                     https://sim.mcitelecom.com/init/services/v1/sim/icc/8912345678900001234
@@ -579,11 +582,12 @@ export default function Page() {
 
                   <h5 className="font-bold mt-5">Ejemplo de invocación</h5>
                   <p className="font-mono pl-10 mt-2">
-                    curl -X GET --header &quot;Content-Type: application/json" --header "Accept: application/json&quot;
+                    curl -X GET --header &quot;Content-Type: application/json&quot; --header &quot;Accept:
+                    application/json&quot;
                   </p>
                   <p className="font-mono pl-10 mt-2">
-                    --header "Authorization: Basic
-                    c2lsdmlvLTIxQGxvY2FsaG9zdDpkMzBiMDQxZi01YjJhLTQ5Y2QtODcxOS01MjU0NGJmNmQwODI="
+                    --header &quot;Authorization: Basic
+                    c2lsdmlvLTIxQGxvY2FsaG9zdDpkMzBiMDQxZi01YjJhLTQ5Y2QtODcxOS01MjU0NGJmNmQwODI=&quot;
                   </p>
                   <p className="font-mono pl-10 mt-2">
                     https://sim.mcitelecom.com/init/services/v1/sim/imei/864180076543210
@@ -767,8 +771,8 @@ export default function Page() {
                     curl -X GET --header &quot;Content-Type: application/json" --header "Accept: application/json&quot;
                   </p>
                   <p className="font-mono pl-10 mt-2">
-                    --header "Authorization: Basic
-                    c2lsdmlvLTIxQGxvY2FsaG9zdDpkMzBiMDQxZi01YjJhLTQ5Y2QtODcxOS01MjU0NGJmNmQwODI="
+                    --header &quot;Authorization: Basic
+                    c2lsdmlvLTIxQGxvY2FsaG9zdDpkMzBiMDQxZi01YjJhLTQ5Y2QtODcxOS01MjU0NGJmNmQwODI=&quot;
                   </p>
                   <p className="font-mono pl-10 mt-2">
                     https://sim.mcitelecom.com/init/services/v1/sim/reset/icc/8912345678900001234
@@ -835,11 +839,12 @@ export default function Page() {
 
                   <h5 className="font-bold mt-5">Ejemplo de invocación</h5>
                   <p className="font-mono pl-10 mt-2">
-                    curl -X GET --header &quot;Content-Type: application/json" --header "Accept: application/json&quot;
+                    curl -X GET --header &quot;Content-Type: application/json&quot; --header &quot;Accept:
+                    application/json&quot;
                   </p>
                   <p className="font-mono pl-10 mt-2">
-                    --header "Authorization: Basic
-                    c2lsdmlvLTIxQGxvY2FsaG9zdDpkMzBiMDQxZi01YjJhLTQ5Y2QtODcxOS01MjU0NGJmNmQwODI="
+                    --header &quot;Authorization: Basic
+                    c2lsdmlvLTIxQGxvY2FsaG9zdDpkMzBiMDQxZi01YjJhLTQ5Y2QtODcxOS01MjU0NGJmNmQwODI=&quot;
                   </p>
                   <p className="font-mono pl-10 mt-2">
                     https://sim.mcitelecom.com/init/services/v1/sim/status/icc/8912345678900001234
@@ -902,11 +907,12 @@ export default function Page() {
 
                   <h5 className="font-bold mt-5">Ejemplo de invocación</h5>
                   <p className="font-mono pl-10 mt-2">
-                    curl -X GET --header &quot;Content-Type: application/json" --header "Accept: application/json&quot;
+                    curl -X GET --header &quot;Content-Type: application/json&quot; --header &quot;Accept:
+                    application/json&quot;
                   </p>
                   <p className="font-mono pl-10 mt-2">
-                    --header "Authorization: Basic
-                    c2lsdmlvLTIxQGxvY2FsaG9zdDpkMzBiMDQxZi01YjJhLTQ5Y2QtODcxOS01MjU0NGJmNmQwODI="
+                    --header &quot;Authorization: Basic
+                    c2lsdmlvLTIxQGxvY2FsaG9zdDpkMzBiMDQxZi01YjJhLTQ5Y2QtODcxOS01MjU0NGJmNmQwODI=&quot;
                   </p>
                   <p className="font-mono pl-10 mt-2">
                     https://sim.mcitelecom.com/init/services/v1/sim/status/imei/864180076543210
@@ -982,8 +988,8 @@ export default function Page() {
                     <div className="w-[15%]">texto</div>
                     <div className="w-[15%]">no</div>
                     <div className="w-[55%]">
-                      Se admiten solo los valores "ACTIVE" y "DEACTIVATED" para Activar o Desactivar SIM
-                      respectivamente.
+                      Se admiten solo los valores &quot;ACTIVE&quot; y &quot;DEACTIVATED&quot; para Activar o Desactivar
+                      SIM respectivamente.
                     </div>
                   </div>
 
@@ -1002,11 +1008,12 @@ export default function Page() {
 
                   <h5 className="font-bold mt-5">Ejemplo de invocación</h5>
                   <p className="font-mono pl-10 mt-2">
-                    curl -X PUT --header &quot;Content-Type: application/json" --header "Accept: application/json&quot;
+                    curl -X PUT --header &quot;Content-Type: application/json&quot; --header &quot;Accept:
+                    application/json&quot;
                   </p>
                   <p className="font-mono pl-10 mt-2">
-                    --header "Authorization: Basic
-                    c2lsdmlvLTIxQGxvY2FsaG9zdDpkMzBiMDQxZi01YjJhLTQ5Y2QtODcxOS01MjU0NGJmNmQwODI="
+                    --header &quot;Authorization: Basic
+                    c2lsdmlvLTIxQGxvY2FsaG9zdDpkMzBiMDQxZi01YjJhLTQ5Y2QtODcxOS01MjU0NGJmNmQwODI=&quot;
                   </p>
                   <p className="font-mono pl-10 mt-2">
                     {` -d "{ "status": "DEACTIVATED"}" https://sim.mcitelecom.com/init/services/v1/sim/status/icc/8912345678900001234`}
@@ -1070,7 +1077,8 @@ export default function Page() {
 
                   <h5 className="font-bold mt-5">Ejemplo de invocación</h5>
                   <p className="font-mono pl-10 mt-2">
-                    curl -X GET --header &quot;Content-Type: application/json" --header "Accept: application/json&quot;
+                    curl -X GET --header &quot;Content-Type: application/json&quot; --header &quot;Accept:
+                    application/json&quot;
                   </p>
                   <p className="font-mono pl-10 mt-2">
                     --header "Authorization: Basic
@@ -1170,7 +1178,8 @@ export default function Page() {
 
                   <h5 className="font-bold mt-5">Ejemplo de invocación</h5>
                   <p className="font-mono pl-10 mt-2">
-                    curl -X POST --header &quot;Content-Type: application/json" --header "Accept: application/json&quot;
+                    curl -X POST --header &quot;Content-Type: application/json&quot; --header &quot;Accept:
+                    application/json&quot;
                   </p>
                   <p className="font-mono pl-10 mt-2">
                     --header "Authorization: Basic
