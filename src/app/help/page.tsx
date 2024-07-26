@@ -319,7 +319,7 @@ export default function Page() {
                   <p className="font-mono pl-10">Host: sim.mcitelecom.com</p>
                   <h5 className="font-bold mt-5">Ejemplo de invocación</h5>
                   <p className="font-mono pl-10 mt-2">
-                    curl -X GET --header "Content-Type: application/json" --header "Accept: application/json"
+                    curl -X GET --header &quot;Content-Type: application/json" --header "Accept: application/json&quot;
                   </p>
                   <p className="font-mono pl-10">
                     --header "Authorization: Basic
@@ -407,7 +407,7 @@ export default function Page() {
 
                   <h5 className="font-bold mt-5">Ejemplo de invocación</h5>
                   <p className="font-mono pl-10 mt-2">
-                    curl -X GET --header "Content-Type: application/json" --header "Accept: application/json"
+                    curl -X GET --header &quot;Content-Type: application/json" --header "Accept: application/json&quot;
                   </p>
                   <p className="font-mono pl-10 mt-2">
                     --header "Authorization: Basic
@@ -577,7 +577,7 @@ export default function Page() {
 
                   <h5 className="font-bold mt-5">Ejemplo de invocación</h5>
                   <p className="font-mono pl-10 mt-2">
-                    curl -X GET --header "Content-Type: application/json" --header "Accept: application/json"
+                    curl -X GET --header &quot;Content-Type: application/json" --header "Accept: application/json&quot;
                   </p>
                   <p className="font-mono pl-10 mt-2">
                     --header "Authorization: Basic
@@ -760,7 +760,7 @@ export default function Page() {
 
                   <h5 className="font-bold mt-5">Ejemplo de invocación</h5>
                   <p className="font-mono pl-10 mt-2">
-                    curl -X GET --header "Content-Type: application/json" --header "Accept: application/json"
+                    curl -X GET --header &quot;Content-Type: application/json" --header "Accept: application/json&quot;
                   </p>
                   <p className="font-mono pl-10 mt-2">
                     --header "Authorization: Basic
@@ -831,7 +831,7 @@ export default function Page() {
 
                   <h5 className="font-bold mt-5">Ejemplo de invocación</h5>
                   <p className="font-mono pl-10 mt-2">
-                    curl -X GET --header "Content-Type: application/json" --header "Accept: application/json"
+                    curl -X GET --header &quot;Content-Type: application/json" --header "Accept: application/json&quot;
                   </p>
                   <p className="font-mono pl-10 mt-2">
                     --header "Authorization: Basic
@@ -898,7 +898,7 @@ export default function Page() {
 
                   <h5 className="font-bold mt-5">Ejemplo de invocación</h5>
                   <p className="font-mono pl-10 mt-2">
-                    curl -X GET --header "Content-Type: application/json" --header "Accept: application/json"
+                    curl -X GET --header &quot;Content-Type: application/json" --header "Accept: application/json&quot;
                   </p>
                   <p className="font-mono pl-10 mt-2">
                     --header "Authorization: Basic
@@ -998,7 +998,7 @@ export default function Page() {
 
                   <h5 className="font-bold mt-5">Ejemplo de invocación</h5>
                   <p className="font-mono pl-10 mt-2">
-                    curl -X PUT --header "Content-Type: application/json" --header "Accept: application/json"
+                    curl -X PUT --header &quot;Content-Type: application/json" --header "Accept: application/json&quot;
                   </p>
                   <p className="font-mono pl-10 mt-2">
                     --header "Authorization: Basic
@@ -1066,7 +1066,7 @@ export default function Page() {
 
                   <h5 className="font-bold mt-5">Ejemplo de invocación</h5>
                   <p className="font-mono pl-10 mt-2">
-                    curl -X GET --header "Content-Type: application/json" --header "Accept: application/json"
+                    curl -X GET --header &quot;Content-Type: application/json" --header "Accept: application/json&quot;
                   </p>
                   <p className="font-mono pl-10 mt-2">
                     --header "Authorization: Basic
@@ -1166,7 +1166,7 @@ export default function Page() {
 
                   <h5 className="font-bold mt-5">Ejemplo de invocación</h5>
                   <p className="font-mono pl-10 mt-2">
-                    curl -X POST --header "Content-Type: application/json" --header "Accept: application/json"
+                    curl -X POST --header &quot;Content-Type: application/json" --header "Accept: application/json&quot;
                   </p>
                   <p className="font-mono pl-10 mt-2">
                     --header "Authorization: Basic
