@@ -12,12 +12,8 @@ export default function PrivateRoute({ children }) {
   const router = useRouter();
   useEffect(() => {
     const verify = async () => {
-      if (
-        !accessToken &&
-        pathname !== "/login/forgot-password" &&
-        pathname !== "/login/reset-password" &&
-        pathname !== "/akslasdaasd/kajsdadadas"
-      ) {
+      if (!accessToken && pathname !== "/login/forgot-password" && pathname !== "/login/reset-password") {
+        await dispatch(setCurrentUser(null));
         router.push("/login");
       }
       try {

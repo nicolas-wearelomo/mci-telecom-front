@@ -9,6 +9,7 @@ export default function Page() {
   const { callback, data, loading } = useGetOperationDashboard();
   const { currentUser } = useSelector((state: RootState) => state.auth);
   const [totalSims, setTotalSims] = useState(1);
+  const [totalSimsEstancadas, setTotalSimsEstancadas] = useState(1);
   const [iniciativeNew, setIniciativeNew] = useState(1);
   const [readyActivation, setReadyActivation] = useState(1);
   const [test, setTest] = useState(0);
@@ -30,19 +31,26 @@ export default function Page() {
       let desactivatedCant = 0;
       let suspendedCant = 0;
       let pendingCant = 0;
+      let totalSimsEstancadasCount = 0;
       data.forEach((el: any) => {
         if (el.status === "INACTIVE_NEW") {
+          totalSimsEstancadasCount += 1;
           inicitativeNewCant += 1;
         } else if (el.status === "TEST") {
+          totalSimsEstancadasCount += 1;
           testCant += 1;
         } else if (el.status === "ACTIVATION_READY") {
+          totalSimsEstancadasCount += 1;
           readyActivationCant += 1;
         } else if (el.status === "DEACTIVATED") {
+          totalSimsEstancadasCount += 1;
           desactivatedCant += 1;
         } else if (el.status === "SUSPENDED") {
+          totalSimsEstancadasCount += 1;
           suspendedCant += 1;
         } else if (el.status === "ACTIVE") {
         } else {
+          totalSimsEstancadasCount += 1;
           pendingCant += 1;
         }
       });
@@ -53,23 +61,26 @@ export default function Page() {
       setDesactivated(desactivatedCant);
       setSuspended(suspendedCant);
       setPending(pendingCant);
+      setTotalSimsEstancadas(totalSimsEstancadasCount);
     }
   }, [data]);
 
   return (
     <div className="overflow-y-auto h-[85vh]">
       <div className="p-5 flex justify-around border-solid border-2 border-[#d6d6d6] rounded-[32px] mb-7">
-        <Link className="bg-[#24A2CE] text-white py-2 px-5 flex rounded-[16px]" href="/home/pooles">
-          Pooles
-        </Link>
-        <Link className="bg-[#24A2CE] text-white py-2 px-5 flex rounded-[16px]" href="/home/operation">
+        {currentUser?.client_type === 1 ? (
+          <Link className="bg-[#467a15] text-white py-2 px-5 flex rounded-[16px]" href="/home/pooles">
+            Pooles
+          </Link>
+        ) : null}
+        <Link className="bg-[#467a15] text-white py-2 px-5 flex rounded-[16px]" href="/home/operation">
           Operacion
         </Link>
         <Link className="bg-[#24A2CE] text-white py-2 px-5 flex rounded-[16px]" href="/home/business">
           Negocio
         </Link>
         <Link className="bg-[#24A2CE] text-white py-2 px-5 flex rounded-[16px]" href="/home/information">
-          INFORMACIÓN
+          Información
         </Link>
       </div>
       <div className="grid grid-cols-5 gap-5 h-[70%] pr-5">
@@ -105,10 +116,12 @@ export default function Page() {
         <div className="py-5 px-10 border-solid border-2 border-[#d6d6d6] rounded-[32px] h-ful col-span-3">
           <p>SIMs estancadas (Últimos 30 días consecutivos)</p>
           <div className="flex gap-5 mt-5">
-            <p className="text-5xl font-bold text-[#28a4cc]">52%</p>
+            <p className="text-5xl font-bold text-[#28a4cc]">
+              {((totalSimsEstancadas * 100) / totalSims).toFixed(2)} %{" "}
+            </p>
             <div>
               <p className="text-sm text-gray-500">Respecto total de SIMs</p>
-              <p>4.224 Sims Estancadas</p>
+              <p>{totalSimsEstancadas} Sims Estancadas</p>
             </div>
           </div>
           <div className="w-full grid grid-cols-7 mt-5">
@@ -142,13 +155,13 @@ export default function Page() {
             </div>
             <p className="pl-5">{readyActivation}</p>
           </div>
-          <div className="w-full grid grid-cols-7 mt-5">
+          {/* <div className="w-full grid grid-cols-7 mt-5">
             <p className="text-end pr-5 col-span-2">Pendiente activación</p>
             <div className="w-full bg-gray-300 rounded-full col-span-4 ">
               <div className="w-[10%] bg-[#ff4cf9] rounded-full text-white text-center">0 %</div>
             </div>
             <p className="pl-5">{pending}</p>
-          </div>
+          </div> */}
           <div className="w-full grid grid-cols-7 mt-5">
             <p className="text-end pr-5 col-span-2">Desactivada</p>
             <div className="w-full bg-gray-300 rounded-full col-span-4 ">

@@ -46,7 +46,7 @@ export default function Page() {
       setError(true);
     } else {
       dispatch(setAccessToken(response));
-      router.push("/home");
+      router.push("/home/business");
     }
 
     // localStorage.setItem("userAuth", "true");

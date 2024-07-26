@@ -26,7 +26,7 @@ export default function SideBar() {
       } bg-white`}
     >
       <div className={`mt-7 rounded-full p-3 ${pathname === "/home" && "bg-[#8BD4E8]"}`}>
-        <SvgHome fill={`${pathname === "/home" ? "#000000" : "#24A2CE"} `} href="/home" />
+        <SvgHome fill={`${pathname === "/home" ? "#000000" : "#24A2CE"} `} href="/home/pooles" />
       </div>
       <MenuSidebar links={simsMenu} menuName="SIMs" />
 
