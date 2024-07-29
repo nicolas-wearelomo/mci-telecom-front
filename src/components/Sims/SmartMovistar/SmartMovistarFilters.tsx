@@ -23,8 +23,8 @@ const SmartMovistarFilters = ({
   const [subscriptionGruop, setSubscriptionGruop] = useState("");
   const [search, setSearch] = useState("");
   const configOptions = [
-    { value: "overconsumption", label: "Sobreconsumo", link: "/sims/smart-movistar/overconsumption" },
-    { value: "imei", label: "Cambio de IMEI", link: "/sims/smart-movistar/change-imei" },
+    { value: "overconsumption", label: "Sobreconsumo", link: `/sims/${redirect}/overconsumption` },
+    { value: "imei", label: "Cambio de IMEI", link: `/sims/${redirect}/change-imei` },
   ];
 
   const handleSearch = () => {
@@ -76,7 +76,7 @@ const SmartMovistarFilters = ({
               >
                 DESCARGAR
               </Button>
-              <SelectButton label={"CONFIGURAR"} options={configOptions} />
+              {title !== "SIMs Legacy" ? <SelectButton label={"CONFIGURAR"} options={configOptions} /> : null}
             </div>
           </div>
           <div className="flex justify-between">

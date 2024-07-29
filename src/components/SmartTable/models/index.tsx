@@ -7,6 +7,7 @@ export interface CustomTableOrderProps {
   settings?: boolean;
   cols?: any; //BORRAR
   title?: any; //BORRAR
+  renderMap?: boolean;
 }
 
 export interface ColumnsTableGrid {

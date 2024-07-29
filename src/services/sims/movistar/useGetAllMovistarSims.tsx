@@ -29,6 +29,7 @@ const useGetAllMovistarSims = ({ company, service_provider }: ModelSmartSims) =>
     loading,
     data,
     callback: getAllMovistarSims,
+    setLoading,
   };
 };
 

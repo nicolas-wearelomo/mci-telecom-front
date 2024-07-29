@@ -14,6 +14,7 @@ export default function SmartTable({
   step2 = false,
   step3 = false,
   settings = true,
+  renderMap = false,
 }: CustomTableOrderProps) {
   interface FiltersProps {
     key: string;
@@ -85,7 +86,7 @@ export default function SmartTable({
           {columns.orderColumns.map((columnName: any, index: any) => (
             <div className="flex h-[40px] items-center bg-[#F2F2F2] my-2" key={index}>
               {columns[columnName.name].map((subColumnName: any, subIndex: any) => (
-                <div style={{ minWidth: subColumnName.width, paddingLeft: "35px" }} key={subIndex}>
+                <div style={{ minWidth: subColumnName.width, paddingLeft: settings ? "35px" : "0px" }} key={subIndex}>
                   {subColumnName?.label || "S/D"}
                 </div>
               ))}
@@ -104,7 +105,11 @@ export default function SmartTable({
             {columns.orderColumns.map((columnName: any, colIndex: any) =>
               columns[columnName.name].map((subColumnName: any, subIndex: any) => (
                 <div
-                  style={{ minWidth: subColumnName.width, paddingBottom: "16px", paddingLeft: "10px" }}
+                  style={{
+                    minWidth: subColumnName.width,
+                    paddingBottom: "16px",
+                    paddingLeft: settings ? "10px" : "0px",
+                  }}
                   key={subIndex}
                 >
                   {subColumnName.key === "alias_sim" ? (
@@ -136,7 +141,15 @@ export default function SmartTable({
           }}
         />
       </div>
-      <BasicModal setOpen={setOpen} open={open} data={rowData} step1={step1} step2={step2} step3={step3} />
+      <BasicModal
+        setOpen={setOpen}
+        open={open}
+        data={rowData}
+        step1={step1}
+        step2={step2}
+        step3={step3}
+        renderMap={renderMap}
+      />
       <AliasModal setOpen={setOpenAlias} open={openAlias} data={rowData} />
     </div>
   );

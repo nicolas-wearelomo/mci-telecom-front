@@ -1,10 +1,12 @@
+"use client";
 import * as React from "react";
 import Box from "@mui/material/Box";
-import FormControlLabel from "@mui/material/FormControlLabel";
 import Switch from "@mui/material/Switch";
 import Modal from "@mui/material/Modal";
 import { MenuItem, TextField } from "@mui/material";
 import Link from "next/link";
+import Map, { Marker } from "react-map-gl";
+import "mapbox-gl/dist/mapbox-gl.css";
 
 const style = {
   position: "absolute" as "absolute",
@@ -15,7 +17,6 @@ const style = {
   height: "70%",
   bgcolor: "background.paper",
   borderRadius: 4,
-
   p: 2,
 };
 
@@ -26,6 +27,7 @@ export default function BasicModal({
   step1,
   step2,
   step3,
+  renderMap,
 }: {
   open: boolean;
   setOpen: any;
@@ -33,11 +35,33 @@ export default function BasicModal({
   step1?: boolean;
   step2?: boolean;
   step3?: boolean;
+  renderMap?: boolean;
 }) {
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
   const [step, setStep] = React.useState(1);
-  console.log(data);
+
+  const [viewport, setViewport] = React.useState({
+    latitude: data.latitude,
+    longitude: data.longitude,
+    zoom: 13,
+  });
+
+  React.useEffect(() => {
+    if (open) {
+      setViewport({
+        latitude: data.latitude,
+        longitude: data.longitude,
+        zoom: 13,
+      });
+    }
+  }, [open, data]);
+
+  const location = {
+    latitude: data.latitude,
+    longitude: data.longitude,
+  };
+
   return (
     <div>
       <Modal
@@ -86,16 +110,16 @@ export default function BasicModal({
                   </div>
                   <div className="flex justify-between text-[#777777] text-xs mt-4">
                     <p>Realizar la activación o desactivación de la SIM</p>
-                    <Switch defaultChecked={data.activate_on_new_cicle === "T" ? true : false} size="small" />
+                    <Switch defaultChecked={data.activate_on_new_cicle === "T"} size="small" />
                   </div>
                   <div className="flex justify-between text-[#777777] text-xs mt-4">
                     <p>Envío de alerta de cambio de IMEI por correo</p>
-                    <Switch defaultChecked={data.send_alert_imei === "T" ? true : false} size="small" />
+                    <Switch defaultChecked={data.send_alert_imei === "T"} size="small" />
                   </div>
                   <div className="flex justify-between text-[#777777] text-xs mt-4">
                     <p>Configuración en caso de sobre consumo</p>
                     <div className="h-[10px]">
-                      <select name="select" className="max-w-[150px] ">
+                      <select name="select" className="max-w-[150px]">
                         <option value={1} selected={data.over_consumption_conf === 1}>
                           La Sim se desactiva y permanece desactivada hasta una activación manual 1
                         </option>
@@ -111,7 +135,7 @@ export default function BasicModal({
                   <div className="flex justify-between text-[#777777] text-xs mt-4">
                     <p>Configuración en caso de cambio de IMEI</p>
                     <div className="h-[10px]">
-                      <select name="select" className="max-w-[150px] ">
+                      <select name="select" className="max-w-[150px]">
                         <option value={1} selected={data.imei_change_conf}>
                           La Sim se desactiva y permanece desactivada hasta una activación manual 1
                         </option>
@@ -127,7 +151,7 @@ export default function BasicModal({
                       <input
                         name="email"
                         className="max-w-[148px] min-w-[148px]"
-                        placeholder="Ingesar email"
+                        placeholder="Ingresar email"
                         style={{ border: "1px solid #777777", borderRadius: "4px", paddingLeft: "10px" }}
                       />
                     </div>
@@ -137,9 +161,21 @@ export default function BasicModal({
                       Ver historial de consumo y ciclo de vida para esta SIM
                     </Link>
                   </div>
-                  <div className="flex justify-between text-[#777777] text-xs mt-4">
+                  <div className="flex justify-between text-[#777777] text-xs my-4">
                     <Link href={`/sims/send-sms/${data.serial_number}`}>Enviar SMS a esta SIM</Link>
                   </div>
+                  {renderMap ? (
+                    <Map
+                      initialViewState={viewport}
+                      style={{ width: "100%", height: "200px" }}
+                      mapStyle="mapbox://styles/mapbox/streets-v11"
+                      mapboxAccessToken={process.env.NEXT_PUBLIC_MAP_KEY}
+                    >
+                      <Marker latitude={location.latitude} longitude={location.longitude}>
+                        <div style={{ color: "red", background: "white", borderRadius: "50%", padding: "5px" }}>📍</div>
+                      </Marker>
+                    </Map>
+                  ) : null}
                 </>
               )
             : null}

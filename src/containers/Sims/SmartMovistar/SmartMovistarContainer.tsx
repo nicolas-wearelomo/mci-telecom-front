@@ -48,7 +48,7 @@ const SmartMovistarContainer = () => {
             redirect="smart-movistar"
             sub={subscriptionGruop}
           />
-          <SmartTable columns={columns} rows={dataToRender} step1 step2 step3 />
+          <SmartTable columns={columns} rows={dataToRender} step1 step2 step3 renderMap />
         </>
       )}
     </div>
