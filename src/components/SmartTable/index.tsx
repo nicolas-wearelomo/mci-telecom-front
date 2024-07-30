@@ -29,6 +29,7 @@ export default function SmartTable({
   const [rowData, setRowData] = useState({});
   const [page, setPage] = useState(1);
   const rowsPerPage = 25;
+  const [aliasChange, setAliasChange] = useState<any>();
 
   useEffect(() => {
     setOrderRows(rows);
@@ -65,6 +66,20 @@ export default function SmartTable({
   const handleChange = (event: React.ChangeEvent<unknown>, value: number) => {
     setPage(value);
   };
+
+  useEffect(() => {
+    if (aliasChange) {
+      let aliasFilter = orderRows.filter((el) => {
+        return el.id !== aliasChange.id;
+      });
+
+      aliasFilter.push({ ...aliasChange, status: aliasChange.status === "ACTIVE" ? "Activado" : "Desactivado" });
+
+      aliasFilter.sort((a, b) => a.id - b.id);
+
+      setOrderRows(aliasFilter);
+    }
+  }, [aliasChange]);
 
   return (
     <div className="w-full">
@@ -150,7 +165,7 @@ export default function SmartTable({
         step3={step3}
         renderMap={renderMap}
       />
-      <AliasModal setOpen={setOpenAlias} open={openAlias} data={rowData} />
+      <AliasModal setOpen={setOpenAlias} open={openAlias} data={rowData} setAliasChange={setAliasChange} />
     </div>
   );
 }

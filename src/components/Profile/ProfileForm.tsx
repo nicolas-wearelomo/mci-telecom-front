@@ -56,7 +56,7 @@ const ProfileForm = ({ loading, callback, currentUser }: ModelProfileFormProps) 
           </div>
           <div className="grid grid-cols-2 gap-4 ">
             <Button variant="outlined" sx={{ height: "56px", borderRadius: "15px" }}>
-              NO GURADAR
+              NO GUARDAR
             </Button>
             <Button variant="contained" sx={{ height: "56px", borderRadius: "15px", bgcolor: "#1152A1" }} type="submit">
               GUARDAR CAMBIOS
@@ -86,7 +86,7 @@ const ProfileForm = ({ loading, callback, currentUser }: ModelProfileFormProps) 
           </div>
           <div className="grid grid-cols-2 gap-4 ">
             <Button variant="outlined" sx={{ height: "56px", borderRadius: "15px" }}>
-              NO GURADAR
+              NO GUARDAR
             </Button>
             <Button variant="contained" sx={{ height: "56px", borderRadius: "15px", bgcolor: "#1152A1" }} disabled>
               GUARDAR CAMBIOS

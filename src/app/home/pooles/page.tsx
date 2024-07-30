@@ -25,8 +25,6 @@ export default function Page() {
     }
   }, [currentUser, callback]);
 
-  console.log(currentUser);
-
   useEffect(() => {
     if (data?.commercial_group?.length) {
       setTotalPool(data.commercial_group.length);

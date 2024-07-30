@@ -17,6 +17,9 @@ const BillingContainter = () => {
     callback({ month: month, year: year, provider: provider });
   }, [callback]);
 
+  let subTotal = 0;
+  let discounts = 0;
+
   return (
     <div className="container">
       {loading ? (
@@ -45,51 +48,77 @@ const BillingContainter = () => {
                 <div className=" text-[#24A2CE] font-bold w-[10%]">Cargo por Voz</div>
                 <div className=" text-[#24A2CE] font-bold w-[10%]">Total Neto</div>
               </div>
-              {data.map((sim: any, index: any) => (
-                <div className="flex py-1 text-[#777777] px-2" key={index}>
-                  <div className="w-[20%]">{sim.plan_name}</div>
-                  <div className="w-[20%]">{sim.commercial_group}</div>
-                  <div className="w-[15%]">{sim.total_value}</div>
-                  <div className="w-[15%]">0</div>
-                  <div className="w-[10%]">{sim.sms_total}</div>
-                  <div className="w-[10%]">{sim.voice_total.toFixed(2)}</div>
-                  <div className="w-[10%]">{(sim.total_value + sim.sms_total + sim.voice_total).toFixed(2)}</div>
-                </div>
-              ))}
+              {data.map((sim: any, index: any) => {
+                const totalNeto = sim.total_value + sim.sms_total + sim.voice_total;
+                // Incrementa el subtotal
+                subTotal += totalNeto;
+                discounts += sim?.discount?.dc_data || 0;
+                return (
+                  <div className="flex py-1 text-[#777777] px-2" key={index}>
+                    <div className="w-[20%]">{sim.plan_name}</div>
+                    <div className="w-[20%]">{sim.commercial_group}</div>
+                    <div className="w-[15%]">$ {sim.total_value}</div>
+                    <div className="w-[15%]">$ {sim.total_overConsumption}</div>
+                    <div className="w-[10%]">$ {sim.sms_total}</div>
+                    <div className="w-[10%]">$ {sim.voice_total.toFixed(0)}</div>
+                    <div className="w-[10%]">$ {totalNeto.toFixed(0)}</div>
+                  </div>
+                );
+              })}
+              <div className="flex px-2 font-bold">
+                <div className="w-[90%]">Sub Total </div>
+                <div className="w-[10%]">$ {subTotal.toFixed(0)}</div>
+              </div>
+              <div className="flex px-2 font-bold">
+                <div className="w-[90%]">Total descuentos datos</div>
+                <div className="w-[10%]">- $ {discounts.toFixed(0)}</div>
+              </div>
+              <div className="flex px-2 font-bold">
+                <div className="w-[90%]">Total Neto</div>
+                <div className="w-[10%]">$ {(subTotal - discounts).toFixed(0)}</div>
+              </div>
+              <div className="flex px-2 font-bold">
+                <div className="w-[90%]">Iva 19%</div>
+                <div className="w-[10%]">$ {((subTotal - discounts) * 0.19).toFixed(0)}</div>
+              </div>
+              <div className="flex px-2 font-bold">
+                <div className="w-[90%]">Total</div>
+                <div className="w-[10%]">$ {((subTotal - discounts) * 0.19 + (subTotal - discounts)).toFixed(0)}</div>
+              </div>
             </div>
           </div>
           <div>
             {data?.map((el: any, index: any) => (
               <div className="mb-20" key={index}>
-                <p className="text-[#24A2CE] font-bold mb-5">{el.data_plan}</p>
+                <p className="text-[#24A2CE] font-bold mb-5">{el.plan_name}</p>
                 <p className="font-bold mb-2">Resumen del plan</p>
                 <div className="grid grid-cols-2 gap-20">
                   <div>
                     <div className="flex justify-between">
                       <p>N° de SIMs</p>
-                      <p>{el.total_sims}</p>
+                      <p>{el.sims.length}</p>
                     </div>
                     <div className="flex justify-between">
                       <p>Nº de SIMs activas en el periodo</p>
-                      <p>{el.active_sims}</p>
+                      <p>{el.sims_active}</p>
                     </div>
                     <div className="flex justify-between">
                       <p>Nº de MB Contratados en el periodo</p>
-                      <p>{el.data_total}</p>
+                      <p>{el.mb_plan * el.sims_active} MB</p>
                     </div>
                     <div className="flex justify-between">
                       <p>Nº de MB consumidos en el periodo</p>
-                      <p>{el.consumption_monthly_data_val.toFixed(2)}</p>
+                      <p>{el.consumption_data.toFixed(2)} MB</p>
                     </div>
                     <div className="flex justify-between">
                       <p>Nº minutos en el periodo</p>
-                      <p>{el.consumption_monthly_voice_val.toFixed(2)}</p>
+                      <p>{el.consumption_voice.toFixed(2)} MIN</p>
                     </div>
                   </div>
                   <div>
                     <div className="flex justify-between">
                       <p>Nº de SMS enviados</p>
-                      <p>{el.consumption_monthly_sms_val}</p>
+                      <p>{el.consumption_sms} SMS</p>
                     </div>
                     <div className="flex justify-between">
                       <p>Valor Cargo Fijo</p>
@@ -97,15 +126,15 @@ const BillingContainter = () => {
                     </div>
                     <div className="flex justify-between">
                       <p>Valor SMS</p>
-                      <p>{el.sms_value}</p>
+                      <p>$ {el.value_sms}</p>
                     </div>
                     <div className="flex justify-between">
-                      <p>Valor SMS</p>
-                      <p>{el.mb_extra_value}</p>
+                      <p>Valor MB Exceso</p>
+                      <p>$ {el.value_data_extra}</p>
                     </div>
                     <div className="flex justify-between">
                       <p>Valor llamada por minuto</p>
-                      <p>{el.voice_value}</p>
+                      <p>$ {el.value_voice}</p>
                     </div>
                   </div>
                 </div>
@@ -121,11 +150,11 @@ const BillingContainter = () => {
                     </div>
                     {el.sims.map((sim: any, index: any) => (
                       <div className="flex px-2 py-1 text-[#777777]" key={index}>
-                        <div className="w-full">{sim.summary_icc}</div>
+                        <div className="w-full">{sim.sim_icc}</div>
                         <div className="w-full">{sim.status}</div>
-                        <div className="w-full">{sim.consumption_monthly_data_val}</div>
-                        <div className="w-full">{sim.consumption_monthly_sms_val}</div>
-                        <div className="w-full">{(sim.consumption_monthly_voice_val / 60).toFixed(2)}</div>
+                        <div className="w-full">{sim.monthly_data}</div>
+                        <div className="w-full">{sim.monthly_sms}</div>
+                        <div className="w-full">{sim.monthly_voice}</div>
                       </div>
                     ))}
                   </div>

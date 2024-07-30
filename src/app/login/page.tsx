@@ -46,7 +46,7 @@ export default function Page() {
       setError(true);
     } else {
       dispatch(setAccessToken(response));
-      router.push("/home/business");
+      router.push("/home/pooles");
     }
 
     // localStorage.setItem("userAuth", "true");

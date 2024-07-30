@@ -47,18 +47,12 @@ export default function BillingFilters({
     { value: "2024", label: "2024" },
   ];
 
-  const filter = [
-    { value: "todos", label: "Mostar todo" },
-    { value: "mas80", label: "Consumo < 80%" },
-    { value: "entre80100", label: "Consumo entre 80% y 100%" },
-    { value: "mas100", label: "Consumo > 100%" },
-  ];
-
   const providerSelect = [
     { value: "Sims Smart Movistar Globales", label: "Sims Smart Movistar Globales" },
     { value: "Sims Smart Movistar Locales", label: "Sims Smart Movistar Locales" },
     { value: "Sims Smart Entel", label: "Sims Smart Entel" },
     { value: "Sims Smart Tele2", label: "Sims Smart Tele2" },
+    // { value: "Legacy", label: "Sims Legacy" },
   ];
 
   return (

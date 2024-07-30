@@ -4,7 +4,8 @@ import SelectButton from "@/components/SelectButton";
 import { SvgDownload, SvgEye } from "@/utils/svgList";
 import { Button, InputAdornment, MenuItem, TextField } from "@mui/material";
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import downloadExcel from "@/utils/downloadsExcel/downloadRecords";
 
 const SmartMovistarFilters = ({
   title,
@@ -22,6 +23,7 @@ const SmartMovistarFilters = ({
   const [status, setStatus] = useState("");
   const [subscriptionGruop, setSubscriptionGruop] = useState("");
   const [search, setSearch] = useState("");
+  const [downloadsExcel, setDownloadsExcel] = useState([]);
   const configOptions = [
     { value: "overconsumption", label: "Sobreconsumo", link: `/sims/${redirect}/overconsumption` },
     { value: "imei", label: "Cambio de IMEI", link: `/sims/${redirect}/change-imei` },
@@ -49,6 +51,48 @@ const SmartMovistarFilters = ({
     setData(filtered);
   };
 
+  useEffect(() => {
+    if (data) {
+      let parsedExcel = data.map((el: any) => ({
+        "Estado SIM": el.status,
+        Alias: el.alias_sim,
+        "ICC SIM": el.serial_number,
+        "N° MSISDN": el.msisdn,
+        "Grupo de suscripción": el.commercial_group,
+        "Modelo de SIM": el.sim_model,
+        Estado: el.status,
+        "Inicio última conexión": el.gpr_last_conn_start,
+        "Termino última conexión": el.gpr_last_conn_stop,
+        "Tráfico voz": el.consumption_monthly_voice_val,
+        "Tráfico sms": el.consumption_monthly_sms_val,
+        IMEI: el.imei,
+        APN: el.sim_apn,
+        Operador: el.operator_sim,
+        Pais: el.country,
+        "Fabricante Módulo comunicaciones": el.comm_module_manufacturer,
+        "Modelo módulo comunicaciones": el.comm_module_model,
+        "IMEI Último cambio": el.imei_last_change,
+        IP: el.ip,
+        "IP Estática": el.static_ip,
+        Latitud: el.latitude,
+        Longitud: el.longitude,
+        voiceOriginatedHome: el.voiceoriginatedhome,
+        voiceOriginatedRoaming: el.voiceoriginatedroaming,
+        voiceTerminatedHome: el.voiceterminatedhome,
+        voiceTerminatedRoaming: el.voiceterminatedroaming,
+        smsOriginatedHome: el.smsoriginatedhome,
+        smsOriginatedRoaming: el.smsoriginatedroaming,
+        smsTerminatedHome: el.smsterminatedhome,
+        smsTerminatedRoaming: el.smsterminatedroaming,
+        dataHome: el.datahome,
+        dataRoaming: el.dataroaming,
+        "Activación de la SIM": el.activation_date,
+        "Última conexión": el.last_con,
+      }));
+      setDownloadsExcel(parsedExcel);
+    }
+  }, [data]);
+
   return (
     <div className="">
       <div className="flex justify-between">
@@ -67,12 +111,8 @@ const SmartMovistarFilters = ({
               <Button
                 variant="outlined"
                 sx={{ borderRadius: "8px", fontWeight: "bold", border: "2px solid #24A2CE", color: "#24A2CE" }}
-                startIcon={
-                  <SvgDownload
-                    fill="#24A2CE
-     "
-                  />
-                }
+                onClick={() => downloadExcel({ data: downloadsExcel, title: "Sims" })}
+                startIcon={<SvgDownload fill="#24A2CE" />}
               >
                 DESCARGAR
               </Button>

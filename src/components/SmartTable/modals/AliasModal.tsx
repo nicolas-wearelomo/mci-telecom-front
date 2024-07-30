@@ -18,7 +18,17 @@ const style = {
   p: 2,
 };
 
-export default function AliasModal({ open, setOpen, data }: { open: boolean; setOpen: any; data: any }) {
+export default function AliasModal({
+  open,
+  setOpen,
+  data,
+  setAliasChange,
+}: {
+  open: boolean;
+  setOpen: any;
+  data: any;
+  setAliasChange: any;
+}) {
   const handleClose = () => setOpen(false);
 
   const {
@@ -31,6 +41,8 @@ export default function AliasModal({ open, setOpen, data }: { open: boolean; set
   const submitForm = async (values: any) => {
     // const response = await axiosInstance.get(`/sims/manufactures`);
     const response = await axiosInstance.put(`/sims/updateAlias?id=${data.id}`, values);
+    setAliasChange(response.data);
+    setOpen(false);
   };
 
   React.useEffect(() => {

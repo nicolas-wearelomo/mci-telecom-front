@@ -44,7 +44,7 @@ const NewOrderContainer = () => {
 
     router.push("/orders");
   };
-  console.log(currentUser);
+
   useEffect(() => {
     if (currentUser) {
       callback({
