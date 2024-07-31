@@ -5,6 +5,7 @@ export default function useSmartMovistarColumn() {
       // { key: "status", label: "Alias", width: 100 },
     ],
     SIMs: [
+      { key: "expired_at", label: "Fecha de Expiración", width: 250 },
       { key: "alias_sim", label: "Alias", width: 200 },
       { key: "serial_number", label: "ICC SIM", width: 250 },
       { key: "msisdn", label: "N° MSISDN", width: 250 },
@@ -62,7 +63,7 @@ export default function useSmartMovistarColumn() {
     ],
     orderColumns: [
       { name: "Opciones", width: 120 },
-      { name: "SIMs", width: 950 },
+      { name: "SIMs", width: 1200 },
       { name: "Estado_GPRS", width: 750 },
       { name: "Consumo_Diario", width: 250 },
       { name: "Consumo_Mensual", width: 250 },

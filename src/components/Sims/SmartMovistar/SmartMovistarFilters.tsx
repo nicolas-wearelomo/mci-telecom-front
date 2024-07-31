@@ -44,8 +44,14 @@ const SmartMovistarFilters = ({
 
   const handleFilter = () => {
     const filtered = data.filter((el: any) => {
-      const statusMatch = status ? el.status === status : true;
-      const subscriptionGroupMatch = subscriptionGruop ? el.commercial_group === subscriptionGruop : true;
+      let statusMatch = true;
+      let subscriptionGroupMatch = true;
+      if (status !== "all") {
+        statusMatch = status ? el.status === status : true;
+      }
+      if (subscriptionGruop !== "all") {
+        subscriptionGroupMatch = subscriptionGruop ? el.commercial_group === subscriptionGruop : true;
+      }
       return statusMatch && subscriptionGroupMatch;
     });
     setData(filtered);
@@ -130,6 +136,7 @@ const SmartMovistarFilters = ({
                   value={status}
                   onChange={(e) => setStatus(e.target.value)}
                 >
+                  <MenuItem value="all">Todos</MenuItem>
                   <MenuItem value="Activado">Activado</MenuItem>
                   <MenuItem value="Desactivado">Desactivado</MenuItem>
                   <MenuItem value="Listo para activar">Listo para activar</MenuItem>
@@ -143,6 +150,7 @@ const SmartMovistarFilters = ({
                   fullWidth
                   onChange={(e) => setSubscriptionGruop(e.target.value)}
                 >
+                  <MenuItem value="all">Todos</MenuItem>
                   {sub?.map((el: any) => (
                     <MenuItem value={el} key={el}>
                       {el}

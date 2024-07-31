@@ -17,6 +17,8 @@ const useGetOperationDashboard = () => {
       setLoading(true);
       try {
         const response = await axiosInstance.get(`/dashboard/operation?company=${company}`);
+        // const billingsRespose = await axiosInstance.get(`/billing/getByCompany?company=${company}`);
+        // console.log(billingsRespose);
         setData(response.data);
       } catch (error) {
         console.error(error);

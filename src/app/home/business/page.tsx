@@ -7,6 +7,8 @@ import { RootState } from "@/redux/types";
 import { useSelector } from "react-redux";
 import useGetOperationDashboard from "@/services/dashboard/useGetOperationDashboard";
 import { MenuItem, TextField } from "@mui/material";
+import axiosInstance from "@/utils/axiosInstance";
+import dayjs from "dayjs";
 
 export default function Page() {
   const { callback, data, loading } = useGetOperationDashboard();
@@ -20,6 +22,9 @@ export default function Page() {
   const [pending, setPending] = useState(0);
   const [actived, setActived] = useState(0);
   const [serviceProvider, setServiceProvider] = useState("");
+  const [total, setTotal] = useState(0);
+  const [valorProm, setValorProm] = useState(0);
+  const [expiredDate, setExpiredDate] = useState();
 
   useEffect(() => {
     if (currentUser && currentUser.company) {
@@ -28,43 +33,83 @@ export default function Page() {
   }, [currentUser, callback]);
 
   useEffect(() => {
-    if (data.length) {
-      let inicitativeNewCant = 0;
-      let testCant = 0;
-      let readyActivationCant = 0;
-      let desactivatedCant = 0;
-      let suspendedCant = 0;
-      let pendingCant = 0;
-      let activedCant = 0;
-      let simsTotal = 0;
-      let filteredSims = data.filter((el: any) => el.service_provider === serviceProvider);
-      filteredSims.forEach((el: any) => {
-        simsTotal += 1;
-        if (el.status === "INACTIVE_NEW") {
-          inicitativeNewCant += 1;
-        } else if (el.status === "TEST") {
-          testCant += 1;
-        } else if (el.status === "ACTIVATION_READY") {
-          readyActivationCant += 1;
-        } else if (el.status === "DEACTIVATED") {
-          desactivatedCant += 1;
-        } else if (el.status === "SUSPENDED") {
-          suspendedCant += 1;
-        } else if (el.status === "ACTIVE") {
-          activedCant += 1;
+    const handleFilters = async () => {
+      if (data.length) {
+        let inicitativeNewCant = 0;
+        let testCant = 0;
+        let readyActivationCant = 0;
+        let desactivatedCant = 0;
+        let suspendedCant = 0;
+        let pendingCant = 0;
+        let activedCant = 0;
+        let simsTotal = 0;
+        let filteredSims = [];
+        let expired_date: any = null;
+        if (serviceProvider.includes("Movistar")) {
+          if (serviceProvider.includes("Locales")) {
+            filteredSims = data.filter((el: any) => el.service_provider === "Movistar" && el.sim_global === "F");
+          } else {
+            filteredSims = data.filter((el: any) => el.service_provider === "Movistar" && el.sim_global === "T");
+          }
         } else {
-          pendingCant += 1;
+          filteredSims = data.filter((el: any) => el.service_provider === serviceProvider);
         }
-      });
-      setTotalSims(simsTotal);
-      setIniciativeNew(inicitativeNewCant);
-      setTest(testCant);
-      setReadyActivation(readyActivationCant);
-      setDesactivated(desactivatedCant);
-      setSuspended(suspendedCant);
-      setPending(pendingCant);
-      setActived(activedCant);
-    }
+        filteredSims.forEach((el: any) => {
+          if (el.until_date) {
+            if (!expired_date) {
+              expired_date = dayjs(el.until_date);
+            } else {
+              if (expired_date > dayjs(el.until_date)) {
+                expired_date = dayjs(el.until_date);
+              }
+            }
+          }
+          simsTotal += 1;
+          if (el.status === "INACTIVE_NEW") {
+            inicitativeNewCant += 1;
+          } else if (el.status === "TEST") {
+            testCant += 1;
+          } else if (el.status === "ACTIVATION_READY") {
+            readyActivationCant += 1;
+          } else if (el.status === "DEACTIVATED") {
+            desactivatedCant += 1;
+          } else if (el.status === "SUSPENDED") {
+            suspendedCant += 1;
+          } else if (el.status === "ACTIVE") {
+            activedCant += 1;
+          } else {
+            pendingCant += 1;
+          }
+        });
+        if (serviceProvider) {
+          let subTotal = 0;
+          let discounts = 0;
+          const billingsRespose = await axiosInstance.get(
+            `/billing/getByCompany?month=${dayjs().month() + 1}&year=${dayjs().year()}&company=${
+              currentUser.company
+            }&provider=${serviceProvider}`
+          );
+          billingsRespose.data.forEach((sim: any) => {
+            const totalNeto = sim.total_value + sim.sms_total + sim.voice_total;
+            // Incrementa el subtotal
+            subTotal += totalNeto;
+            discounts += sim?.discount?.dc_data || 0;
+            setTotal((subTotal - discounts) * 0.19 + (subTotal - discounts));
+            setValorProm(((subTotal - discounts) * 0.19 + (subTotal - discounts)) / activedCant);
+          });
+        }
+        setExpiredDate(expired_date);
+        setTotalSims(simsTotal);
+        setIniciativeNew(inicitativeNewCant);
+        setTest(testCant);
+        setReadyActivation(readyActivationCant);
+        setDesactivated(desactivatedCant);
+        setSuspended(suspendedCant);
+        setPending(pendingCant);
+        setActived(activedCant);
+      }
+    };
+    handleFilters();
   }, [data, serviceProvider]);
 
   const datas = [
@@ -132,8 +177,11 @@ export default function Page() {
                 value={serviceProvider}
                 onChange={(e) => setServiceProvider(e.target.value)}
               >
-                <MenuItem key={"Movistar"} value={"Movistar"}>
-                  Movistar
+                <MenuItem key={"Movistar Local"} value={"Movistar Locales"}>
+                  Movistar Local
+                </MenuItem>
+                <MenuItem key={"Movistar Global"} value={"Movistar Globales"}>
+                  Movistar Global
                 </MenuItem>
                 <MenuItem key={"Entel"} value={"Entel"}>
                   Entel
@@ -244,21 +292,25 @@ export default function Page() {
           </div>
         </div>
         <div className="flex gap-5 mt-[50px] justify-around">
-          <div className="bg-[#c8e4f4] p-5">
+          {/* <div className="bg-[#c8e4f4] p-5">
             <p>Periodo Últimos 30 días:</p>
             <p>$3.143</p>
-          </div>
+          </div> */}
           <div className="bg-[#c8e4f4] p-5">
             <p>Monto facturado:</p>
-            <p>$3.143</p>
+            <p>$ {total.toFixed(0)}</p>
           </div>
           <div className="bg-[#c8e4f4] p-5">
             <p>Próxima facturación:</p>
-            <p>01/09/2023</p>
+            <p>{`01/0${dayjs().month() + 2}/${dayjs().year()}`}</p>
           </div>
           <div className="bg-[#c8e4f4] p-5">
             <p>Valor promedio SIM:</p>
-            <p>$1.010</p>
+            <p>$ {valorProm.toFixed(0)}</p>
+          </div>
+          <div className="bg-[#c8e4f4] p-5">
+            <p>Próximo vencimiento:</p>
+            <p>{expiredDate ? dayjs(expiredDate).add(1, "day").format("DD/MM/YYYY") : "Sin Especificar"}</p>
           </div>
         </div>
       </div>

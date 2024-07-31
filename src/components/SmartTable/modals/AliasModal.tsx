@@ -5,6 +5,7 @@ import { Controller, useForm } from "react-hook-form";
 import Input from "@/components/Input";
 import { Button } from "@mui/material";
 import axiosInstance from "@/utils/axiosInstance";
+import HighlightOffIcon from "@mui/icons-material/HighlightOff";
 
 const style = {
   position: "absolute" as "absolute",
@@ -63,7 +64,10 @@ export default function AliasModal({
       >
         <Box sx={style}>
           <form onSubmit={handleSubmit(submitForm)} action="">
-            <div className="text-[#24A2CE] font-bold">Alias para ICC</div>
+            <div className="flex justify-between">
+              <div className="text-[#24A2CE] font-bold">Alias para ICC</div>
+              <HighlightOffIcon sx={{ cursor: "pointer" }} onClick={handleClose} />
+            </div>
             <div className="text-[#777777] ">
               ICC SIM: <span>{data.serial_number}</span>
             </div>
