@@ -19,6 +19,7 @@ interface GeoProperties {
 export default function Page() {
   const { currentUser } = useSelector((state: RootState) => state.auth);
   const [hoveredCountry, setHoveredCountry] = useState<string | null>(null);
+  const [dataToRender, setDataToRender] = useState<any>({});
 
   const { callback, data, loading } = useGetInformationDashboard();
   const countryColors: CountryColors = {
@@ -278,6 +279,18 @@ export default function Page() {
     }
   }, [currentUser, callback]);
 
+  useEffect(() => {
+    if (hoveredCountry) {
+      let find = data?.countriesData?.find((el: any) => el.country === hoveredCountry);
+      console.log(find);
+      if (find) {
+        setDataToRender(find);
+      } else {
+        setDataToRender({});
+      }
+    }
+  }, [hoveredCountry]);
+
   return (
     <div>
       <div className="p-5 flex justify-around border-solid border-2 border-[#d6d6d6] rounded-[32px] mb-7">
@@ -297,7 +310,7 @@ export default function Page() {
         </Link>
       </div>
       <div className="flex min-h-[70%] min-w-[80%]">
-        <div className="ml-2 min-w-[250px]">
+        <div className="ml-2 min-w-[350px]">
           <div className="text-2xl text-[#777777]">Presencia de SIMs</div>
           {/* {data?.map((el: any) => (
             <p className="text-xl pl-2" key={el}>
@@ -306,7 +319,18 @@ export default function Page() {
           ))} */}
           {hoveredCountry && (
             <div className="text-xl pl-2 mt-4">
-              <strong>Pais:</strong> {hoveredCountry}
+              <p>
+                <strong>Pais:</strong> {hoveredCountry}
+              </p>
+              <p>
+                <strong>Datos Totales:</strong> {dataToRender?.data?.toFixed(0) || 0} MB
+              </p>
+              <p>
+                <strong>SMS enviados:</strong> {dataToRender?.sms?.toFixed(0) || 0} sms
+              </p>
+              <p>
+                <strong>Llamadas de voz:</strong> {dataToRender?.voice?.toFixed(0) || 0} Min
+              </p>
             </div>
           )}
         </div>
@@ -320,7 +344,7 @@ export default function Page() {
                 {({ geographies }) =>
                   geographies.map((geo) => {
                     const countryName = (geo.properties as GeoProperties).admin;
-                    const isHighlighted = data.includes(countryName);
+                    const isHighlighted = data?.countries?.includes(countryName);
                     return (
                       <Geography
                         key={geo.rsmKey}
