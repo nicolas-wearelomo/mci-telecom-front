@@ -60,7 +60,7 @@ const RecordsContainter = () => {
 
   return (
     <div className="container">
-      <h2 className="text-[#24A2CE] text-3xl mb-5">Detalle planes contratados</h2>
+      <h2 className="text-[#24A2CE] text-3xl mb-5">Registros del Sistema</h2>
       <RecordsFilters
         setFrom={setFrom}
         from={from}

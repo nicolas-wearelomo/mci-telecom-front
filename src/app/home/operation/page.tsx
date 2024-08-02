@@ -125,7 +125,7 @@ export default function Page() {
             </div>
           </div>
           <div className="w-full grid grid-cols-7 mt-5">
-            <p className="text-end pr-5 col-span-2">Iniciativa Nueva</p>
+            <p className="text-end pr-5 col-span-2">Inactiva Nueva</p>
             <div className="w-full bg-gray-300 rounded-full col-span-4 ">
               <div
                 className={`w-[${

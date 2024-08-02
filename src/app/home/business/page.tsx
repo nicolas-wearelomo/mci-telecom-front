@@ -173,7 +173,7 @@ export default function Page() {
                 select
                 size="small"
                 sx={{ width: "50%", marginBottom: 2 }}
-                label="Seleccionar Proveedor"
+                label="Seleccionar Operador"
                 value={serviceProvider}
                 onChange={(e) => setServiceProvider(e.target.value)}
               >
@@ -308,10 +308,12 @@ export default function Page() {
             <p>Valor promedio SIM:</p>
             <p>$ {valorProm.toFixed(0)}</p>
           </div>
-          <div className="bg-[#c8e4f4] p-5">
-            <p>Próximo vencimiento:</p>
-            <p>{expiredDate ? dayjs(expiredDate).add(1, "day").format("DD/MM/YYYY") : "Sin Especificar"}</p>
-          </div>
+          {currentUser?.client_type === 2 ? (
+            <div className="bg-[#c8e4f4] p-5">
+              <p>Próximo vencimiento:</p>
+              <p>{expiredDate ? dayjs(expiredDate).add(1, "day").format("DD/MM/YYYY") : "Sin Especificar"}</p>
+            </div>
+          ) : null}
         </div>
       </div>
     </div>

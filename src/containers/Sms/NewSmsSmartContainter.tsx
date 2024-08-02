@@ -38,8 +38,10 @@ const NewSmsSmartContainter = () => {
   }, [data]);
 
   const handleSimSelection = (event: any, newValue: Sim | null) => {
-    if (newValue && !simsSelected.some((sim) => sim.id === newValue.id)) {
-      setSimsSelected([...simsSelected, newValue]);
+    if (simsSelected.length < 50) {
+      if (newValue && !simsSelected.some((sim) => sim.id === newValue.id)) {
+        setSimsSelected([...simsSelected, newValue]);
+      }
     }
   };
 
@@ -57,7 +59,8 @@ const NewSmsSmartContainter = () => {
   return (
     <div className="container">
       <h3>Nuevo SMS</h3>
-      <p className="text-[#24A2CE] mt-10 mb-5">Enviar a</p>
+      <p className="text-[#24A2CE] mt-10 mb-2">Enviar a</p>
+      <p className="text-[#777777] text-sm mb-2">Máximo 50 SIMs</p>
       <div className="w-[50%]">
         <Autocomplete
           disablePortal

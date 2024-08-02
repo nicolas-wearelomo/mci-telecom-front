@@ -157,18 +157,24 @@ const SimsConsumptionContainer = () => {
                 height={300}
                 data={graph3}
                 margin={{
-                  top: 5,
+                  top: 20,
                   right: 30,
-                  left: 20,
-                  bottom: 5,
+                  left: 60,
+                  bottom: 30,
                 }}
               >
                 <CartesianGrid strokeDasharray="3 3" />
+                {/* <XAxis dataKey="name">
+                  <Label value="MB Consumidos" offset={-20} position="insideBottomRight" />
+                </XAxis> */}
+                <YAxis>
+                  <Label value="MB Consumidos" angle={-90} position="insideLeft" offset={-30} />
+                </YAxis>
                 <XAxis dataKey="name" />
                 <YAxis />
                 <Tooltip />
                 <Legend />
-                <Bar dataKey="MB" fill="#8884d8" activeBar={<Rectangle fill="pink" stroke="blue" />} />
+                <Bar dataKey="MB" fill="#24A2CE" activeBar={<Rectangle fill="#24A2CE" stroke="blue" />} />{" "}
               </BarChart>
             </ResponsiveContainer>
           </div>
@@ -179,18 +185,20 @@ const SimsConsumptionContainer = () => {
                 height={300}
                 data={graph4}
                 margin={{
-                  top: 5,
+                  top: 20,
                   right: 30,
-                  left: 20,
-                  bottom: 5,
+                  left: 60,
+                  bottom: 30,
                 }}
               >
                 <CartesianGrid strokeDasharray="3 3" />
-                <XAxis dataKey="name" />
-                <YAxis />
-                <Tooltip />
+                <XAxis dataKey="name"></XAxis>
+                <YAxis tickFormatter={(value) => `${value} SMS`}>
+                  <Label value="SMS Consumidos" angle={-90} position="insideLeft" offset={-30} />
+                </YAxis>
+                <Tooltip formatter={(value) => `${value} SMS`} />
                 <Legend />
-                <Bar dataKey="sms" fill="#8884d8" activeBar={<Rectangle fill="pink" stroke="blue" />} />
+                <Bar dataKey="sms" fill="#24A2CE" activeBar={<Rectangle fill="#24A2CE" stroke="blue" />} />
               </BarChart>
             </ResponsiveContainer>
           </div>

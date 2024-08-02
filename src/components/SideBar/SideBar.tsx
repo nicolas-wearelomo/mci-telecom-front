@@ -1,6 +1,7 @@
 "use client";
 import { usePathname } from "next/navigation";
 import { SvgHome, SvgSims, SvgBilling, SvgReports, SvgRecords, SvgHelp, SvgSms } from "../../utils/svgList";
+import Tooltip from "@mui/material/Tooltip";
 import * as React from "react";
 import MenuSidebar from "./components/MenuSidebar";
 
@@ -25,26 +26,37 @@ export default function SideBar() {
         "hidden"
       } bg-white`}
     >
-      <div className={`mt-7 rounded-full p-3 ${pathname === "/home" && "bg-[#8BD4E8]"}`}>
-        <SvgHome fill={`${pathname === "/home" ? "#000000" : "#24A2CE"} `} href="/home/pooles" />
-      </div>
+      <Tooltip title="Dashboard" placement="right">
+        <div className={`mt-7 rounded-full p-3 ${pathname.includes("home") && "bg-[#8BD4E8]"}`}>
+          <SvgHome fill={`${pathname === "/home" ? "#000000" : "#24A2CE"} `} href="/home/pooles" />
+        </div>
+      </Tooltip>
       <MenuSidebar links={simsMenu} menuName="SIMs" />
-
-      <div className={`mt-7 rounded-full p-3 ${pathname === "/sms-smart" && "bg-[#8BD4E8]"}`}>
-        <SvgSms fill={`${pathname === "/sms-smart" ? "#000000" : "#24A2CE"} `} href="/sms-smart" />
-      </div>
-      <div className={`mt-7 rounded-full p-3 ${pathname === "/billing" && "bg-[#8BD4E8]"}`}>
-        <SvgBilling fill={`${pathname === "/billing" ? "#000000" : "#24A2CE"} `} href="/billing" />
-      </div>
-      <div className={`mt-7 rounded-full p-3 ${pathname === "/reports" && "bg-[#8BD4E8]"}`}>
-        <SvgReports fill={`${pathname === "/reports" ? "#000000" : "#24A2CE"} `} href="/reports" />
-      </div>
-      <div className={`mt-7 rounded-full p-3 ${pathname === "/records" && "bg-[#8BD4E8]"}`}>
-        <SvgRecords fill={`${pathname === "/records" ? "#000000" : "#24A2CE"} `} href="/records" />
-      </div>
-      <div className={`mt-7 rounded-full p-3 ${pathname === "/help" && "bg-[#8BD4E8]"}`}>
-        <SvgHelp fill={`${pathname === "/help" ? "#000000" : "#24A2CE"} `} href="/help" />
-      </div>
+      <Tooltip title="Mensajes" placement="right">
+        <div className={`mt-7 rounded-full p-3 ${pathname === "/sms-smart" && "bg-[#8BD4E8]"}`}>
+          <SvgSms fill={`${pathname === "/sms-smart" ? "#000000" : "#24A2CE"} `} href="/sms-smart" />
+        </div>
+      </Tooltip>
+      <Tooltip title="Facturación" placement="right">
+        <div className={`mt-7 rounded-full p-3 ${pathname === "/billing" && "bg-[#8BD4E8]"}`}>
+          <SvgBilling fill={`${pathname === "/billing" ? "#000000" : "#24A2CE"} `} href="/billing" />
+        </div>
+      </Tooltip>
+      <Tooltip title="Reportes" placement="right">
+        <div className={`mt-7 rounded-full p-3 ${pathname === "/reports" && "bg-[#8BD4E8]"}`}>
+          <SvgReports fill={`${pathname === "/reports" ? "#000000" : "#24A2CE"} `} href="/reports" />
+        </div>
+      </Tooltip>
+      <Tooltip title="Registros" placement="right">
+        <div className={`mt-7 rounded-full p-3 ${pathname === "/records" && "bg-[#8BD4E8]"} mx-5`}>
+          <SvgRecords fill={`${pathname === "/records" ? "#000000" : "#24A2CE"} `} href="/records" />
+        </div>
+      </Tooltip>
+      <Tooltip title="Ayuda" placement="right">
+        <div className={`mt-7 rounded-full p-3 ${pathname === "/help" && "bg-[#8BD4E8]"}`}>
+          <SvgHelp fill={`${pathname === "/help" ? "#000000" : "#24A2CE"} `} href="/help" />
+        </div>
+      </Tooltip>
     </div>
   );
 }

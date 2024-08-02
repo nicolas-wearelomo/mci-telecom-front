@@ -53,16 +53,9 @@ export const SvgSims = ({ fill, href, size = 30 }: { fill: string; href?: string
 
 export const SvgBilling = ({ fill, href }: { fill: string; href: string }) => (
   <Link href={href}>
-    <svg
-      width="30"
-      height="30"
-      viewBox="0 0 24 24"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-      className="cursor-pointer"
-    >
+    <svg width="30" height="30" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path
-        d="M15 4H5V20H19V8H15V4ZM3 2.9918C3 2.44405 3.44749 2 3.9985 2H16L20.9997 7L21 20.9925C21 21.5489 20.5551 22 20.0066 22H3.9934C3.44476 22 3 21.5447 3 21.0082V2.9918Z"
+        d="M12.0078 22C6.48497 22 2.00781 17.5229 2.00781 12C2.00781 6.47715 6.48497 2 12.0078 2C17.5306 2 22.0078 6.47715 22.0078 12C22.0078 17.5229 17.5306 22 12.0078 22ZM12.0078 20C16.4261 20 20.0078 16.4183 20.0078 12C20.0078 7.58172 16.4261 4 12.0078 4C7.58953 4 4.00781 7.58172 4.00781 12C4.00781 16.4183 7.58953 20 12.0078 20ZM8.50781 14H14.0078C14.2839 14 14.5078 13.7762 14.5078 13.5C14.5078 13.2239 14.2839 13 14.0078 13H10.0078C8.6271 13 7.50781 11.8808 7.50781 10.5C7.50781 9.11928 8.6271 8 10.0078 8H11.0078V6H13.0078V8H15.5078V9.99995H10.0078C9.73167 9.99995 9.50781 10.2239 9.50781 10.5C9.50781 10.7762 9.73167 11 10.0078 11H14.0078C15.3885 11 16.5078 12.1193 16.5078 13.5C16.5078 14.8808 15.3885 16 14.0078 16H13.0078V18H11.0078V16H8.50781V14Z"
         fill={fill}
       />
     </svg>
@@ -71,14 +64,7 @@ export const SvgBilling = ({ fill, href }: { fill: string; href: string }) => (
 
 export const SvgReports = ({ fill, href }: { fill: string; href: string }) => (
   <Link href={href}>
-    <svg
-      width="30"
-      height="30"
-      viewBox="0 0 24 24"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-      className="cursor-pointer"
-    >
+    <svg width="30" height="30" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path
         d="M12.4142 5H21C21.5523 5 22 5.44772 22 6V20C22 20.5523 21.5523 21 21 21H3C2.44772 21 2 20.5523 2 20V4C2 3.44772 2.44772 3 3 3H10.4142L12.4142 5ZM4 5V19H20V7H11.5858L9.58579 5H4ZM11 9H13V17H11V9ZM15 12H17V17H15V12ZM7 14H9V17H7V14Z"
         fill={fill}

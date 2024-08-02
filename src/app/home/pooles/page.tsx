@@ -155,8 +155,8 @@ export default function Page() {
 
                 <div className="flex gap-5">
                   <div className="bg-[#24A2CE] text-white px-5 py-2 rounded-[16px] mt-5">
-                    <p className="text-base">Tamaño en la pool</p>
-                    <p className="font-bold text-center">{poolSize} mb</p>
+                    <p className="text-base">Tamaño del pool</p>
+                    <p className="font-bold text-center">{poolSize} MB</p>
                   </div>
                   <div className="bg-[#24A2CE] text-white px-5 py-2 rounded-[16px] mt-5">
                     <p className="text-base">SIMs en el pool</p>
