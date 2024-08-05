@@ -65,24 +65,24 @@ const BillingContainter = () => {
                   </div>
                 );
               })}
-              <div className="flex px-2 font-bold">
-                <div className="w-[90%]">Sub Total </div>
+              <div className="flex px-2 font-bold gap-7">
+                <div className="w-[90%] flex justify-end">Sub Total </div>
                 <div className="w-[10%]">$ {subTotal.toFixed(0)}</div>
               </div>
-              <div className="flex px-2 font-bold">
-                <div className="w-[90%]">Total descuentos datos</div>
+              <div className="flex px-2 font-bold gap-7">
+                <div className="w-[90%] flex justify-end">Total descuentos datos</div>
                 <div className="w-[10%]">- $ {discounts.toFixed(0)}</div>
               </div>
-              <div className="flex px-2 font-bold">
-                <div className="w-[90%]">Total Neto</div>
+              <div className="flex px-2 font-bold gap-7">
+                <div className="w-[90%] flex justify-end">Total Neto</div>
                 <div className="w-[10%]">$ {(subTotal - discounts).toFixed(0)}</div>
               </div>
-              <div className="flex px-2 font-bold">
-                <div className="w-[90%]">Iva 19%</div>
+              <div className="flex px-2 font-bold gap-7">
+                <div className="w-[90%] flex justify-end">Iva 19%</div>
                 <div className="w-[10%]">$ {((subTotal - discounts) * 0.19).toFixed(0)}</div>
               </div>
-              <div className="flex px-2 font-bold">
-                <div className="w-[90%]">Total</div>
+              <div className="flex px-2 font-bold gap-7">
+                <div className="w-[90%] flex justify-end">Total</div>
                 <div className="w-[10%]">$ {((subTotal - discounts) * 0.19 + (subTotal - discounts)).toFixed(0)}</div>
               </div>
             </div>

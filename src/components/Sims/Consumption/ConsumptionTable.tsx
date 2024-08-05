@@ -49,14 +49,11 @@ export default function ConsumptionTable({ columns, rows }: CustomTableOrderProp
   return (
     <div className="w-full">
       <div className={`max-h-[70vh] overflow-auto`}>
-        <div className="flex">
+        <div className="inline-flex">
           {columns.orderColumns.map((columnName: any, index: any) => (
-            <div className="flex h-[40px] items-center bg-[#F2F2F2]" key={index}>
+            <div className="inline-flex h-[40px] items-center bg-[#C3F2FE]" key={index}>
               {columns[columnName.name].map((subColumnName: any, subIndex: any) => (
-                <div
-                  style={{ minWidth: subColumnName.width, paddingLeft: "10px", paddingBottom: "10px" }}
-                  key={subIndex}
-                >
+                <div style={{ minWidth: subColumnName.width, paddingLeft: "10px" }} key={subIndex}>
                   {subColumnName?.label || "S/D"}
                 </div>
               ))}
@@ -64,11 +61,21 @@ export default function ConsumptionTable({ columns, rows }: CustomTableOrderProp
           ))}
         </div>
         {orderRowsPagination.map((row: any, rowIndex: any) => (
-          <div className="flex text-[#333333]" key={rowIndex}>
+          <div
+            className={`inline-flex text-[#333333] ${
+              rowIndex % 2 ? "bg-[#F8F9FA]" : "bg-[#FFFFFF]"
+            } border-b-solid border-b-[1px] border-[#cdcdcd]`}
+            key={rowIndex}
+          >
             {columns.orderColumns.map((columnName: any, colIndex: any) =>
               columns[columnName.name].map((subColumnName: any, subIndex: any) => (
                 <div
-                  style={{ minWidth: subColumnName.width, paddingBottom: "16px", paddingLeft: "10px" }}
+                  style={{
+                    minWidth: subColumnName.width,
+                    paddingTop: "8px",
+                    paddingLeft: "10px",
+                    paddingBottom: "8px",
+                  }}
                   key={subIndex}
                 >
                   {row[subColumnName.key] || "S/D"}

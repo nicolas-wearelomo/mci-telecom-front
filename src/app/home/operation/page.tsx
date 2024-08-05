@@ -67,25 +67,28 @@ export default function Page() {
 
   return (
     <div className="overflow-y-auto h-[85vh]">
-      <div className="p-5 flex justify-around border-solid border-2 border-[#d6d6d6] rounded-[32px] mb-7">
+      <div className="p-2 flex justify-around border-solid border-2 border-[#d6d6d6] rounded-[32px] mb-2 mr-5">
         {currentUser?.client_type === 1 ? (
-          <Link className="bg-[#24A2CE] text-white py-2 px-5 flex rounded-[16px]" href="/home/pooles">
+          <Link className="text-black w-full justify-center py-2 flex rounded-[16px]" href="/home/pooles">
             Pooles
           </Link>
         ) : null}
-        <Link className="bg-[#467a15] text-white py-2 px-5 flex rounded-[16px]" href="/home/operation">
+        <Link
+          className="bg-[#E7FAFF] text-[#24A2CE] font-bold w-full justify-center py-2 flex rounded-[16px]"
+          href="/home/operation"
+        >
           Operacion
         </Link>
-        <Link className="bg-[#24A2CE] text-white py-2 px-5 flex rounded-[16px]" href="/home/business">
+        <Link className="text-black w-full justify-center py-2 flex rounded-[16px]" href="/home/business">
           Negocio
         </Link>
-        <Link className="bg-[#24A2CE] text-white py-2 px-5 flex rounded-[16px]" href="/home/information">
+        <Link className="text-black w-full justify-center py-2 flex rounded-[16px]" href="/home/information">
           Información
         </Link>
       </div>
       <div className="grid grid-cols-5 gap-5 h-[70%] pr-5">
         <div className="p-5 border-solid border-2 border-[#d6d6d6] rounded-[32px] h-full col-span-2">
-          <p className="text-2xl text-[#24A2CE] font-bold">SIMs Activas sin tráfico durante ...</p>
+          <p className="text-2xl text-[#24A2CE] font-bold text-center">SIMs Activas sin tráfico durante ...</p>
           <div className="grid grid-cols-3 h-full">
             <div className="flex flex-col items-center h-full justify-end pb-5">
               <div>
@@ -165,7 +168,7 @@ export default function Page() {
           <div className="w-full grid grid-cols-7 mt-5">
             <p className="text-end pr-5 col-span-2">Desactivada</p>
             <div className="w-full bg-gray-300 rounded-full col-span-4 ">
-              <div className="w-[48%] bg-[#28041c] rounded-full text-white text-center">
+              <div className="w-[48%] bg-[#00C17A] rounded-full text-white text-center">
                 {Math.ceil((desactivated * 100) / totalSims)} %
               </div>
             </div>

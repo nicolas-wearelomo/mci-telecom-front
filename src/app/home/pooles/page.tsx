@@ -52,19 +52,22 @@ export default function Page() {
 
   return (
     <div className="overflow-y-auto h-[85vh]">
-      <div className="p-5 flex justify-around border-solid border-2 border-[#d6d6d6] rounded-[32px] mb-7 mr-5">
+      <div className="p-2 flex justify-around border-solid border-2 border-[#d6d6d6] rounded-[32px] mb-2 mr-5">
         {currentUser?.client_type === 1 ? (
-          <Link className="bg-[#467a15] text-white py-2 px-5 flex rounded-[16px]" href="/home/pooles">
+          <Link
+            className="bg-[#E7FAFF] text-[#24A2CE] font-bold w-full justify-center py-2 flex rounded-[16px]"
+            href="/home/pooles"
+          >
             Pooles
           </Link>
         ) : null}
-        <Link className="bg-[#24A2CE] text-white py-2 px-5 flex rounded-[16px]" href="/home/operation">
+        <Link className="text-black w-full justify-center py-2 flex rounded-[16px]" href="/home/operation">
           Operacion
         </Link>
-        <Link className="bg-[#24A2CE] text-white py-2 px-5 flex rounded-[16px]" href="/home/business">
+        <Link className="text-black w-full justify-center py-2 flex rounded-[16px]" href="/home/business">
           Negocio
         </Link>
-        <Link className="bg-[#24A2CE] text-white py-2 px-5 flex rounded-[16px]" href="/home/information">
+        <Link className="text-black w-full justify-center py-2 flex rounded-[16px]" href="/home/information">
           Información
         </Link>
       </div>
@@ -88,7 +91,7 @@ export default function Page() {
             </div>
           </div>
           <div className="col-span-2 bg-white p-5 text-lg border-solid border-2 border-[#d6d6d6] rounded-[32px]">
-            <h3>Detalle del pool de datos</h3>
+            <h3 className="mb-2">Detalle del pool de datos</h3>
             <div className="grid grid-cols-3">
               <div className="">
                 <div className="relative z-20 w-[250px]">
@@ -154,25 +157,28 @@ export default function Page() {
                 </div>
 
                 <div className="flex gap-5">
-                  <div className="bg-[#24A2CE] text-white px-5 py-2 rounded-[16px] mt-5">
+                  <div className="bg-[#F2F3F4] text-[#24A2CE] px-5 py-2 mt-5">
                     <p className="text-base">Tamaño del pool</p>
                     <p className="font-bold text-center">{poolSize} MB</p>
                   </div>
-                  <div className="bg-[#24A2CE] text-white px-5 py-2 rounded-[16px] mt-5">
+                  <div className="bg-[#F2F3F4] text-[#24A2CE] px-5 py-2 mt-5">
                     <p className="text-base">SIMs en el pool</p>
                     <p className="font-bold text-center">{poolCant}</p>
                   </div>
                 </div>
               </div>
             </div>
-            <div className="flex gap-10 justify-center mt-20">
-              <div className="bg-[#24A2CE] text-white px-10 py-2 rounded-[16px] mt-5">
-                <p className="text-base">Consumo total</p>
-                <p className="font-bold text-center">{consumptionData.toFixed(2)} MB</p>
-              </div>
-              <div className="bg-[#24A2CE] text-white px-10 py-2 rounded-[16px] mt-5">
-                <p className="text-base">Excedente traficado</p>
-                <p className="font-bold text-center">0 MB</p>
+            <div className="grid grid-cols-3 gap-5 pr-5">
+              <div></div>
+              <div className="flex mt-10 col-span-2 gap-5">
+                <div className="bg-[#F2F3F4] text-[#24A2CE] px-10 py-2 mt-5">
+                  <p className="text-base">Consumo total</p>
+                  <p className="font-bold text-center">{consumptionData.toFixed(2)} MB</p>
+                </div>
+                <div className="bg-[#F2F3F4] text-[#24A2CE] px-10 py-2 mt-5">
+                  <p className="text-base">Excedente traficado</p>
+                  <p className="font-bold text-center">0 MB</p>
+                </div>
               </div>
             </div>
           </div>

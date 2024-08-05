@@ -149,19 +149,22 @@ export default function Page() {
 
   return (
     <div className="overflow-y-auto h-[85vh]">
-      <div className="p-5 flex justify-around border-solid border-2 border-[#d6d6d6] rounded-[32px] mb-7 mr-5">
+      <div className="p-2 flex justify-around border-solid border-2 border-[#d6d6d6] rounded-[32px] mb-2 mr-5">
         {currentUser?.client_type === 1 ? (
-          <Link className="bg-[#24A2CE] text-white py-2 px-5 flex rounded-[16px]" href="/home/pooles">
+          <Link className="text-black w-full justify-center py-2 flex rounded-[16px]" href="/home/pooles">
             Pooles
           </Link>
         ) : null}
-        <Link className="bg-[#24A2CE] text-white py-2 px-5 flex rounded-[16px]" href="/home/operation">
+        <Link className="text-black w-full justify-center py-2 flex rounded-[16px]" href="/home/operation">
           Operacion
         </Link>
-        <Link className="bg-[#467a15] text-white py-2 px-5 flex rounded-[16px]" href="/home/business">
+        <Link
+          className="bg-[#E7FAFF] text-[#24A2CE] font-bold w-full justify-center py-2 flex rounded-[16px]"
+          href="/home/business"
+        >
           Negocio
         </Link>
-        <Link className="bg-[#24A2CE] text-white py-2 px-5 flex rounded-[16px]" href="/home/information">
+        <Link className="text-black w-full justify-center py-2 flex rounded-[16px]" href="/home/information">
           Información
         </Link>
       </div>{" "}

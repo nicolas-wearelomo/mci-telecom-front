@@ -288,14 +288,14 @@ export default function Page() {
                   <URLBox url={"GET https://sim.mcitelecom.com/init/services/v1/sim?page=1"} />
                   <URLBox url={"GET https://sim.mcitelecom.com/init/services/v1/sim?page=1&sp=1"} />
                   <URLBox url={"GET https://sim.mcitelecom.com/init/services/v1/sim?page=1&sp=2"} />
-                  <h5 className="font-bold mt-5">Parámetros de entrada</h5>
-                  <div className="flex font-semibold mt-2">
+                  <h5 className="font-bold mt-5 border-solid">Parámetros de entrada</h5>
+                  <div className="flex font-semibold p-2 border-[#c3c3c3] border-[1px] mr-5">
                     <div className="w-[15%]">Parámetro</div>
                     <div className="w-[10%]">Tipo</div>
                     <div className="w-[15%]">Opcional</div>
                     <div className="w-[60%]">Descripción</div>
                   </div>
-                  <div className="flex mt-2 text-gray-600">
+                  <div className="flex text-gray-600 p-2 border-[#c3c3c3] border-b-[1px] border-x-[1px] mr-5">
                     <div className="w-[15%]">page</div>
                     <div className="w-[10%]">int</div>
                     <div className="w-[15%]">si</div>
@@ -303,7 +303,7 @@ export default function Page() {
                       Permite indicar el número de página requerido, el valor predeterminado es 1
                     </div>
                   </div>
-                  <div className="flex mt-2 text-gray-600">
+                  <div className="flex text-gray-600 p-2 border-[#c3c3c3] border-b-[1px] border-x-[1px] mr-5  mr-5">
                     <div className="w-[15%]">sp</div>
                     <div className="w-[10%]">int</div>
                     <div className="w-[15%]">si</div>
@@ -421,12 +421,12 @@ export default function Page() {
                   </p>
 
                   <h5 className="font-bold mt-5">Parámetros de entrada</h5>
-                  <div className="flex font-semibold mt-2">
+                  <div className="flex font-semibold p-2 border-[#c3c3c3] border-[1px] mr-5">
                     <div className="w-[15%]">Parámetro</div>
                     <div className="w-[15%]">Tipo</div>
                     <div className="w-[70%]">Descripción</div>
                   </div>
-                  <div className="flex mt-2 text-gray-600">
+                  <div className="flex text-gray-600 p-2 border-[#c3c3c3] border-b-[1px] border-x-[1px] mr-5 ">
                     <div className="w-[15%]">status</div>
                     <div className="w-[15%]">texto</div>
                     <div className="w-[70%]">
@@ -434,14 +434,14 @@ export default function Page() {
                       “DEACTIVATED”, “ACTIVE”, “SUSPENDED”, “RETIRED”, “RESTORE”
                     </div>
                   </div>
-                  <div className="flex mt-2 text-gray-600">
+                  <div className="flex text-gray-600 p-2 border-[#c3c3c3] border-b-[1px] border-x-[1px] mr-5 ">
                     <div className="w-[15%]">gpr_status</div>
                     <div className="w-[15%]">int</div>
                     <div className="w-[70%]">
                       0: &quot;Sin Datos&quot; 1: &quot;Activa&quot; 2: &quot;Desactivada&quot;
                     </div>
                   </div>
-                  <div className="flex mt-2 text-gray-600">
+                  <div className="flex text-gray-600 p-2 border-[#c3c3c3] border-b-[1px] border-x-[1px] mr-5 ">
                     <div className="w-[15%]">rat_type</div>
                     <div className="w-[15%]">int</div>
                     <div className="w-[70%]">
@@ -594,12 +594,12 @@ export default function Page() {
                   </p>
 
                   <h5 className="font-bold mt-5">Detalles mensaje de respuesta</h5>
-                  <div className="flex font-semibold mt-2">
+                  <div className="flex font-semibold p-2 border-[#c3c3c3] border-[1px] mr-5 ">
                     <div className="w-[15%]">Parámetro</div>
                     <div className="w-[15%]">Tipo</div>
                     <div className="w-[70%]">Descripción</div>
                   </div>
-                  <div className="flex mt-2 text-gray-600">
+                  <div className="flex p-2 border-[#c3c3c3] border-b-[1px] border-x-[1px] mr-5  text-gray-600">
                     <div className="w-[15%]">status</div>
                     <div className="w-[15%]">texto</div>
                     <div className="w-[70%]">
@@ -607,14 +607,14 @@ export default function Page() {
                       “DEACTIVATED”, “ACTIVE”, “SUSPENDED”, “RETIRED”, “RESTORE”
                     </div>
                   </div>
-                  <div className="flex mt-2 text-gray-600">
+                  <div className="flex p-2 border-[#c3c3c3] border-b-[1px] border-x-[1px] mr-5  text-gray-600">
                     <div className="w-[15%]">gpr_status</div>
                     <div className="w-[15%]">int</div>
                     <div className="w-[70%]">
                       0: &quot;Sin Datos&quot; 1: &quot;Activa&quot; 2: &quot;Desactivada&quot;
                     </div>
                   </div>
-                  <div className="flex mt-2 text-gray-600">
+                  <div className="flex p-2 border-[#c3c3c3] border-b-[1px] border-x-[1px] mr-5  text-gray-600">
                     <div className="w-[15%]">rat_type</div>
                     <div className="w-[15%]">int</div>
                     <div className="w-[70%]">
@@ -978,13 +978,13 @@ export default function Page() {
                   </p>
 
                   <h5 className="font-bold mt-5">Parámetros de entrada</h5>
-                  <div className="flex font-semibold mt-2">
+                  <div className="flex font-semibold p-2 border-[#c3c3c3] border-[1px] mr-5 ">
                     <div className="w-[15%]">Parámetro</div>
                     <div className="w-[15%]">Tipo</div>
                     <div className="w-[15%]">Opcional</div>
                     <div className="w-[55%]">Descripción</div>
                   </div>
-                  <div className="flex mt-2 text-gray-600">
+                  <div className="flex p-2 border-[#c3c3c3] border-b-[1px] border-x-[1px] mr-5  text-gray-600">
                     <div className="w-[15%]">status</div>
                     <div className="w-[15%]">texto</div>
                     <div className="w-[15%]">no</div>
@@ -1151,13 +1151,13 @@ export default function Page() {
                   </p>
 
                   <h5 className="font-bold mt-5">Parámetros de entrada</h5>
-                  <div className="flex font-semibold mt-2">
+                  <div className="flex font-semibold p-2 border-[#c3c3c3] border-[1px] mr-5 ">
                     <div className="w-[15%]">Parámetro</div>
                     <div className="w-[15%]">Tipo</div>
                     <div className="w-[15%]">Opcional</div>
                     <div className="w-[55%]">Descripción</div>
                   </div>
-                  <div className="flex mt-2 text-gray-600">
+                  <div className="flex p-2 border-[#c3c3c3] border-b-[1px] border-x-[1px] mr-5  text-gray-600">
                     <div className="w-[15%]">messageText</div>
                     <div className="w-[15%]">texto</div>
                     <div className="w-[15%]">no</div>

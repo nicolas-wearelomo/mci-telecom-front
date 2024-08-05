@@ -2,7 +2,6 @@
 import { useEffect, useState } from "react";
 import { CustomTableOrderProps } from "./models";
 import BasicModal from "../BasicModal";
-import { TextField } from "@mui/material";
 import SettingsIcon from "@mui/icons-material/Settings";
 import Pagination from "@mui/material/Pagination";
 import AliasModal from "./modals/AliasModal";
@@ -82,53 +81,59 @@ export default function SmartTable({
   }, [aliasChange]);
 
   return (
-    <div className="w-full">
-      <div className={`max-h-[70vh] overflow-auto`}>
-        <div className="flex">
+    <div style={{ width: "100%", overflowX: "auto" }}>
+      <div style={{ maxHeight: "70vh", overflowY: "auto" }}>
+        {/* Header Row */}
+        <div style={{ display: "flex", backgroundColor: "#C3F2FE" }}>
           {columns?.orderColumns?.map((el: any, index: any) => (
             <div
-              className={`${index % 2 === 0 ? "bg-[#C3F2FE]" : "bg-[#E7FAFF]"} ${index === 0 && "rounded-tl-xl"} ${
-                columns.orderColumns.length === index - 1 && "rounded-tl-xl"
-              } text-center py-2`}
-              style={{ minWidth: el.width }}
+              style={{
+                minWidth: el.width,
+                textAlign: "center",
+                padding: "8px",
+                backgroundColor: index % 2 === 0 ? "#C3F2FE" : "#E7FAFF",
+              }}
               key={index}
             >
               {el.name.replaceAll("_", " ")}
             </div>
           ))}
         </div>
-        <div className="flex">
-          {columns.orderColumns.map((columnName: any, index: any) => (
-            <div className="flex h-[40px] items-center bg-[#F2F2F2] my-2" key={index}>
-              {columns[columnName.name].map((subColumnName: any, subIndex: any) => (
-                <div style={{ minWidth: subColumnName.width, paddingLeft: settings ? "35px" : "0px" }} key={subIndex}>
-                  {subColumnName?.label || "S/D"}
-                </div>
-              ))}
-            </div>
-          ))}
-        </div>
+
+        {/* Data Rows */}
         {orderRowsPagination.map((row: any, rowIndex: any) => (
-          <div className="flex text-[#333333]" key={rowIndex}>
-            {settings ? (
-              <SettingsIcon
-                sx={{ marginBottom: "16px", padding: "2px" }}
-                className="cursor-pointer"
+          <div
+            style={{
+              display: "inline-flex",
+              backgroundColor: rowIndex % 2 ? "#F8F9FA" : "#FFFFFF",
+              borderBottom: "1px solid #cdcdcd",
+              alignItems: "center",
+            }}
+            key={rowIndex} // Ensure unique keys for each row
+          >
+            {settings && (
+              <div
+                style={{
+                  padding: "8px",
+                  cursor: "pointer",
+                }}
                 onClick={() => handleModalOpen(row)}
-              />
-            ) : null}
-            {columns.orderColumns.map((columnName: any, colIndex: any) =>
+              >
+                <SettingsIcon />
+              </div>
+            )}
+            {columns.orderColumns.map((columnName: any) =>
               columns[columnName.name].map((subColumnName: any, subIndex: any) => (
                 <div
                   style={{
                     minWidth: subColumnName.width,
-                    paddingBottom: "16px",
+                    padding: "8px",
                     paddingLeft: settings ? "10px" : "0px",
                   }}
-                  key={subIndex}
+                  key={subColumnName.key || subIndex}
                 >
                   {subColumnName.key === "alias_sim" ? (
-                    <span onClick={() => handleAliasModalOpen(row)} className="cursor-pointer text-[#24A2CE]">
+                    <span onClick={() => handleAliasModalOpen(row)} style={{ color: "#24A2CE", cursor: "pointer" }}>
                       {row[subColumnName.key] || "Sin alias"}
                     </span>
                   ) : (
@@ -140,22 +145,26 @@ export default function SmartTable({
           </div>
         ))}
       </div>
-      <div className="flex justify-center mt-5">
+
+      {/* Pagination */}
+      <div style={{ display: "flex", justifyContent: "center", marginTop: "20px" }}>
         <Pagination
           count={Math.ceil(orderRows.length / rowsPerPage)}
           page={page}
           onChange={handleChange}
           color="primary"
           sx={{
-            "& .css-19micn4-MuiButtonBase-root-MuiPaginationItem-root.Mui-selected": {
+            "& .Mui-selected": {
               backgroundColor: "#24A2CE",
             },
-            "& .css-19micn4-MuiButtonBase-root-MuiPaginationItem-root.Mui-selected:hover": {
+            "& .Mui-selected:hover": {
               backgroundColor: "#24A2CE",
             },
           }}
         />
       </div>
+
+      {/* Modals */}
       <BasicModal
         setOpen={setOpen}
         open={open}

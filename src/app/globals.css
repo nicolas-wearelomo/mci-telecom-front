@@ -105,3 +105,42 @@ h3 {
 ::-webkit-scrollbar-corner {
   background: transparent;
 }
+
+
+.table-container {
+  width: 100%;
+  overflow-x: auto;
+}
+
+.table-header {
+  display: flex;
+  background-color: #C3F2FE;
+}
+
+.table-header div {
+  min-width: 150px; /* Ajusta el ancho según sea necesario */
+  text-align: center;
+  padding: 8px;
+}
+
+.table-row {
+  display: flex;
+  align-items: center;
+  background-color: #FFFFFF;
+  border-bottom: 1px solid #cdcdcd;
+}
+
+.table-row:nth-child(odd) {
+  background-color: #F8F9FA;
+}
+
+.table-cell {
+  min-width: 150px; /* Ajusta el ancho según sea necesario */
+  padding: 8px;
+  cursor: pointer;
+  color: #24A2CE;
+}
+
+.table-cell:hover {
+  background-color: #E0F7FA; /* Cambio de color al hacer hover */
+}
