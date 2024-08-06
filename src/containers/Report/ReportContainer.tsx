@@ -1,4 +1,5 @@
 "use client";
+import StackedBar from "@/components/Reports/StackedBar";
 import useReportsColumn from "@/components/Reports/useReportsColumns";
 import ConsumptionFilters from "@/components/Sims/Consumption/ConsumptionFilters";
 import ConsumptionTable from "@/components/Sims/Consumption/ConsumptionTable";
@@ -34,8 +35,9 @@ const ReportContainer = () => {
   const [graph2, setGraph2] = useState<any>([]);
   const [graph3, setGraph3] = useState<any>([]);
   const [graph4, setGraph4] = useState<any>([]);
-  const [graph5, setGraph5] = useState<any>([]);
-  const [graph6, setGraph6] = useState<any>([]);
+  const [billings, setBillings] = useState<any>([]);
+  // const [graph5, setGraph5] = useState<any>([]);
+  // const [graph6, setGraph6] = useState<any>([]);
 
   const COLORS = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042"];
   const { currentUser } = useSelector((state: RootState) => state.auth);
@@ -75,24 +77,45 @@ const ReportContainer = () => {
   useEffect(() => {
     if (data?.acumulado) {
       setGraph1([
-        { name: "Desactivado", value: data.acumulado[0].cantidad_sims - data.acumulado[0].cantidad_sims_activas },
-        { name: "Activado", value: data.acumulado[0].cantidad_sims_activas },
+        {
+          name: "Desactivado",
+          value: (data.acumulado[0]?.cantidad_sims || 0) - (data.acumulado[0]?.cantidad_sims_activas || 0),
+        },
+        { name: "Activado", value: data.acumulado[0]?.cantidad_sims_activas || 0 },
       ]);
       setGraph2([
-        { name: "Desactivado", value: data.acumulado[1].cantidad_sims - data.acumulado[1].cantidad_sims_activas },
-        { name: "Activado", value: data.acumulado[1].cantidad_sims_activas },
+        {
+          name: "Desactivado",
+          value: (data.acumulado[1]?.cantidad_sims || 0) - (data.acumulado[1]?.cantidad_sims_activas || 0),
+        },
+        { name: "Activado", value: data.acumulado[1]?.cantidad_sims_activas || 0 },
       ]);
       setGraph3([
-        { name: "Desactivado", value: data.acumulado[2].cantidad_sims - data.acumulado[2].cantidad_sims_activas },
-        { name: "Activado", value: data.acumulado[2].cantidad_sims_activas },
+        {
+          name: "Desactivado",
+          value: (data.acumulado[2]?.cantidad_sims || 0) - (data.acumulado[2]?.cantidad_sims_activas || 0),
+        },
+        { name: "Activado", value: data.acumulado[2]?.cantidad_sims_activas || 0 },
       ]);
       setGraph4([
-        { name: "Desactivado", value: data.acumulado[3].cantidad_sims - data.acumulado[3].cantidad_sims_activas },
-        { name: "Activado", value: data.acumulado[3].cantidad_sims_activas },
+        {
+          name: "Desactivado",
+          value: (data.acumulado[3]?.cantidad_sims || 0) - (data.acumulado[3]?.cantidad_sims_activas || 0),
+        },
+        { name: "Activado", value: data.acumulado[3]?.cantidad_sims_activas || 0 },
       ]);
 
-      setGraph5(data.history?.data.map((value: number, index: number) => ({ name: `${index}`, MB: value })) || []);
-      setGraph6(data.history?.sms.map((value: number, index: number) => ({ name: `${index}`, sms: value })) || []);
+      // setGraph5(data.history?.data.map((value: number, index: number) => ({ name: `${index}`, MB: value })) || []);
+      // setGraph6(data.history?.sms.map((value: number, index: number) => ({ name: `${index}`, sms: value })) || []);
+    }
+    if (data?.billings) {
+      let parseBillings = data.billings.map((el: any) => ({
+        date: el.date,
+        Datos: el.consumption_data.toFixed(0),
+        SMS: el.consumption_sms.toFixed(0),
+        Voz: el.consumption_voice.toFixed(0),
+      }));
+      setBillings(parseBillings);
     }
   }, [data]);
 
@@ -130,7 +153,7 @@ const ReportContainer = () => {
                         <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
                       ))}
                       <Label
-                        value={`Total: ${data.acumulado[0].cantidad_sims}`}
+                        value={`Total: ${data.acumulado[0]?.cantidad_sims || 0}`}
                         position="center"
                         style={{ textAnchor: "middle", fontSize: "16px", fontWeight: "bold" }}
                       />
@@ -157,7 +180,7 @@ const ReportContainer = () => {
                         <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
                       ))}
                       <Label
-                        value={`Total: ${data.acumulado[1].cantidad_sims}`}
+                        value={`Total: ${data.acumulado[1]?.cantidad_sims || 0}`}
                         position="center"
                         style={{ textAnchor: "middle", fontSize: "16px", fontWeight: "bold" }}
                       />
@@ -186,7 +209,7 @@ const ReportContainer = () => {
                         <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
                       ))}
                       <Label
-                        value={`Total: ${data.acumulado[2].cantidad_sims}`}
+                        value={`Total: ${data.acumulado[2]?.cantidad_sims || 0}`}
                         position="center"
                         style={{ textAnchor: "middle", fontSize: "16px", fontWeight: "bold" }}
                       />
@@ -213,7 +236,7 @@ const ReportContainer = () => {
                         <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
                       ))}
                       <Label
-                        value={`Total: ${data.acumulado[3].cantidad_sims}`}
+                        value={`Total: ${data.acumulado[3]?.cantidad_sims || 0}`}
                         position="center"
                         style={{ textAnchor: "middle", fontSize: "16px", fontWeight: "bold" }}
                       />
@@ -223,6 +246,9 @@ const ReportContainer = () => {
                 </div>
               </div>
             </div>
+          </div>
+          <div className="w-full h-[500px]">
+            <StackedBar data={billings} />
           </div>
           {/* <div className="h-[400px]">
             <ResponsiveContainer width="100%" height="100%">
